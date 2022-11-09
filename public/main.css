@@ -1,3 +1,11 @@
+
+:root {
+    --orange: #ff6e14;
+    --shadow: rgba(26, 26, 26, 0.12);
+}
+
+
+
 * {
     box-sizing: border-box;
 }
@@ -7,16 +15,64 @@ html, body {
     margin: 0;
 }
 
+ul {
+    padding: 0;
+    margin: 0;
+}
+
 body {
     background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
-                url(img/homepage-screenshot.jpg) center center no-repeat;
+                url(img/mobile-homepage.jpg) center top / cover no-repeat;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
-h1 {
+
+/******************************** MOBILE ***********************************************/
+
+
+
+/*navbar*/
+
+.navbar {
+    position: relative;
+    height: 165px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: solid 1px transparent;
+    box-shadow: 0 0 40px var(--shadow);
+}
+
+.nav-left-item, .nav-right, .sub-nav {
+    display: none;
+}
+
+.nav-left .nav-logo {
+    display: block;
     text-align: center;
 }
+
+
+
+.nav-logo .i-logo {
+    width: 400px;
+    height: 100px;
+}
+
+.nav-logo .i-menu {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: calc(50% - 50px);
+    left: 35px;
+    color: var(--orange);
+}
+
+
+
+
+/***********************************RESPONSIVE**************************************************/
