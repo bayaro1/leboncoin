@@ -21,6 +21,10 @@
     <path fill="currentColor" stroke="currentColor" d="M6 36v-3h36v3Zm0-10.5v-3h36v3ZM6 15v-3h36v3Z"/>
   </symbol>
 
+  <symol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="close">
+    <path fill="currentColor" stroke="currentColor" d="m12.45 37.65-2.1-2.1L21.9 24 10.35 12.45l2.1-2.1L24 21.9l11.55-11.55 2.1 2.1L26.1 24l11.55 11.55-2.1 2.1L24 26.1Z"/>
+  </symol>
+
   <symbol
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -42,21 +46,4 @@
   <svg class="icon">
     <use xlink:href="/img/svg/sprite.svg#leboncoin"></use>
   </svg>
-  <svg class="icon">
-    <use xlink:href="/img/svg/sprite.svg#account_circle_FILL0_wght400_GRAD0_opsz48"></use>
-  </svg>
-  <svg class="icon">
-    <use xlink:href="/img/svg/sprite.svg#comment_FILL0_wght400_GRAD0_opsz48"></use>
-  </svg>
-  <svg class="icon">
-    <use xlink:href="/img/svg/sprite.svg#favorite_FILL0_wght400_GRAD0_opsz48"></use>
-  </svg>
-  <svg class="icon">
-    <use xlink:href="/img/svg/sprite.svg#notifications_FILL0_wght400_GRAD0_opsz48"></use>
-  </svg>
-  <svg class="icon">
-    <use xlink:href="/img/svg/sprite.svg#add_circle_FILL0_wght400_GRAD0_opsz48"></use>
-  </svg>
-  <svg class="icon">
-    <use xlink:href="/img/svg/sprite.svg#search_FILL0_wght400_GRAD0_opsz48 (1)"></use>
-  </svg> -->
+ -->

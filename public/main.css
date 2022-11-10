@@ -5,7 +5,17 @@
     --shadow: rgba(26, 26, 26, 0.12);
 }
 
+@keyframes hiddenNavOpening {
+    0% {
+        right: 100%;
+    }
+    100% {
+        right: 0;
+    }
+}
 
+
+/* general properties */
 
 * {
     box-sizing: border-box;
@@ -38,14 +48,100 @@ a {
     width: 2.7rem;
     height: 2.7rem;
 }
+.hidden-nav-closer {
+    display: none;
+}
 
 
 
-
-body {
+/* dev */ body {
     background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
                 url(design/mobile-homepage.jpg) center top no-repeat;
 }
+
+
+
+
+ /***************** HIDDEN NAV****************/
+ .hidden-nav {
+    display: none;
+}
+
+
+ .hidden-nav.visible {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 100%;
+    bottom: 0;
+    animation: hiddenNavOpening forwards 1s;
+    /*dev*/background-color: white;/* #ffffff2f;  /*a remplacer par white*/
+}
+
+/* dans .hidden-nav on supprime le bouton menu et on rétablit les nav-items normalement masqués */
+.hidden-nav .nav-logo .i-menu {
+    display: none;
+}
+.hidden-nav .nav-right, .hidden-nav .sub-nav {
+    display: block;
+}
+.hidden-nav .nav-left-item {
+    display: inline-block;
+}
+
+
+.hidden-nav .top-nav {
+    display: flex;
+    flex-direction: column;
+}
+.hidden-nav .nav-left, .hidden-nav .nav-right {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15px;
+}
+.hidden-nav .nav-right {
+    padding-top: 5px;
+    border-top: solid 1px rgba(51, 51, 51, 0.322);
+}
+.hidden-nav .nav-left-item, .hidden-nav .nav-right-item {
+    margin-left: 5%;
+    margin-top: 18px;
+    font-size: 1.4rem;
+}
+.hidden-nav .nav-left-item:nth-child(2), .hidden-nav .nav-right-item:first-child {
+    margin-top: 10px;
+}
+.hidden-nav .nav-left-item a, .hidden-nav .nav-right-item a {
+    display: flex;
+    align-items: center;
+}
+.hidden-nav .nav-left-item .icon, .hidden-nav .nav-right-item .icon {
+    margin-right: 12px;
+}
+.hidden-nav .nav-left .nav-logo {
+    margin-right: 0;
+    margin-top: 0;
+    margin-left: 0;
+    height: 65px;
+    box-shadow: 0 0 40px var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hidden-nav .hidden-nav-closer {
+    position: absolute;
+    display: block;
+    background-color: transparent;
+    border: none;
+    top: 17px;
+    right: 17px;
+    cursor: pointer;
+}
+
+
+
 
 /*******résolution < 180px  **********/
 
@@ -64,8 +160,6 @@ body {
 /******************************** MOBILE ***********************************************/
 
 @media only screen and (min-width: 280px) {
-
-
     /*navbar*/
 
     .navbar {
@@ -106,7 +200,6 @@ body {
         left: 10px;
         color: var(--orange);
     }
-
 }
 
 
@@ -114,7 +207,7 @@ body {
 
 
 @media only screen and (min-width: 580px) {
-    body {
+    /*dev*/ body {
         background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
                     url(design/tablet-homepage.jpg) center top -3px no-repeat;
     }
@@ -140,9 +233,14 @@ body {
 
 
 @media only screen and (min-width: 1050px) {
-    body {
+    /*dev */ body {
         background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
                     url(design/desktop-homepage.jpg) center top no-repeat;
+    }
+
+    /* la fonctionnalité hidden-nav ne peut pas être utilisée sur grande largeur */
+    .hidden-nav.visible {
+        display: none;
     }
 
     /*navbar*/
