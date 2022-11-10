@@ -1,6 +1,7 @@
 
 :root {
     --orange: #ff6e14;
+    --orange-active: #c0562a;
     --shadow: rgba(26, 26, 26, 0.12);
 }
 
@@ -13,66 +14,255 @@
 html, body {
     height: 100%;
     margin: 0;
+    font-size: 10px;
+    font-family: Open Sans, sans-serif, Arial;
 }
 
 ul {
     padding: 0;
     margin: 0;
+    list-style-type: none;
 }
 
-body {
-    background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
-                url(img/mobile-homepage.jpg) center top / cover no-repeat;
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1070px;
     margin: 0 auto;
 }
+
+.top-nav .icon {
+    width: 2.7rem;
+    height: 2.7rem;
+}
+
+
+
+
+body {
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+                url(design/mobile-homepage.jpg) center top no-repeat;
+}
+
+/*******résolution < 180px  **********/
+
+/*A FAIRE*/
+
+@media only screen and (max-width: 280px) {
+    .navbar::before {
+        content: 'à faire : css pour écrans de largeur < 280px';
+        color: red;
+        font-size: 50px;
+    }
+}
+
 
 
 /******************************** MOBILE ***********************************************/
 
+@media only screen and (min-width: 280px) {
 
 
-/*navbar*/
+    /*navbar*/
 
-.navbar {
-    position: relative;
-    height: 165px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: solid 1px transparent;
-    box-shadow: 0 0 40px var(--shadow);
+    .navbar {
+        position: relative;
+        height: 65px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: solid 1px transparent;
+        box-shadow: 0 0 40px var(--shadow);
+        color: #333;
+        font-size: 1.4rem;
+    }
+
+    .top-nav {
+        flex: none;
+    }
+
+    .nav-left-item, .nav-right, .sub-nav {
+        display: none;
+    }
+
+    .nav-left .nav-logo {
+        display: block;
+        text-align: center;
+    }
+
+    .nav-logo .i-logo {
+        width: 155px;
+        height: 40px;
+    }
+
+    .nav-logo .i-menu {
+        position: absolute;
+        width: 50px;
+        height: 40px;
+        top: calc(50% - 20px);
+        left: 10px;
+        color: var(--orange);
+    }
+
 }
-
-.nav-left-item, .nav-right, .sub-nav {
-    display: none;
-}
-
-.nav-left .nav-logo {
-    display: block;
-    text-align: center;
-}
-
-
-
-.nav-logo .i-logo {
-    width: 400px;
-    height: 100px;
-}
-
-.nav-logo .i-menu {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    top: calc(50% - 50px);
-    left: 35px;
-    color: var(--orange);
-}
-
-
 
 
 /***********************************RESPONSIVE**************************************************/
+
+
+@media only screen and (min-width: 580px) {
+    body {
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+                    url(design/tablet-homepage.jpg) center top -3px no-repeat;
+    }
+
+    .navbar {
+        height: 60px;
+        box-shadow: 0 0 15px var(--shadow);
+    }
+
+    .nav-logo .i-logo {
+        width: 158px;
+        height: 40px;
+    }
+    
+    .nav-logo .i-menu {
+        top: calc(50% - 15px);
+        width: 65px;
+        height: 35px;
+        left: 0;
+    }
+}
+
+
+
+@media only screen and (min-width: 1050px) {
+    body {
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+                    url(design/desktop-homepage.jpg) center top no-repeat;
+    }
+
+    /*navbar*/
+
+    /** on remet ce qui a été enlevé sur mobile */
+    .nav-logo .i-menu {
+        display: none;
+    }
+    .nav-right, .sub-nav {
+        display: block;
+    }
+    .nav-left-item {
+        display: inline-block;
+    }
+    /***/
+
+    .navbar {
+        padding-top: 5px;
+        height: 112px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .top-nav, .sub-nav {
+        display: flex;
+        height: 50%;
+        flex: none;
+    }
+    .top-nav {
+        align-items: stretch;
+        justify-content: space-between;
+        padding-right: 35px;
+        padding-left: 15px;
+    }
+
+    .nav-right {
+        display: flex;
+        align-items: center;
+    }
+    .nav-right-item {
+        margin-left: 16px;
+    }
+    .nav-right-item a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .nav-right-item span {
+        font-size: 1.2rem;
+        line-height: 1.7rem;
+    }
+
+    .nav-left {
+        display: flex;
+        align-items: center;
+    }
+    .nav-left .nav-logo {
+        display: inline-block;
+        text-align: left;
+        margin-right: 8px;
+    }
+    .nav-left-item {
+        font-weight: 600;
+        flex: none;
+    }
+    .nav-left-item a {
+        display: flex;
+        align-items: center;
+    }
+    .nav-left-item .icon {
+        margin-right: 4px;
+    }
+    .nav-left-item:nth-child(2) {
+        align-self: flex-end;
+        padding-bottom: 3px;
+        margin-right: 22px;
+    }
+    .nav-left-item:nth-child(2) a {
+        color: white;
+        background-color: var(--orange);
+        width: 195px;
+        height: 42px;
+        padding: 0 5px;
+        border-radius: 4px;
+        transition: background-color .3s;
+    }
+    .nav-left-item:nth-child(2) a:hover {
+        background-color: var(--orange-active);
+    }
+    .nav-left-item:nth-child(3) .icon {
+        margin-top: 3px;
+        width: 3.2rem;
+        height: 3.2rem;
+    }
+    
+    .nav-logo {
+        padding-top: 5px;
+    }
+    .nav-logo .i-logo {
+        width: 157px;
+        height: 40px;
+    }
+
+    .sub-nav {
+        justify-content: space-between;
+        padding-right: 30px;
+        padding-left: 25px;
+        align-items: center;
+    }
+    .sub-nav-item::before {
+        display: inline-block;
+        content: '';
+        width: 3px;
+        height: 3px;
+        background-color: #333;
+        border-radius: 50%;
+        margin-right: 15px;
+        vertical-align: middle;
+    }
+    .sub-nav-item:first-child::before {
+        display: none;
+    }
+    
+}
