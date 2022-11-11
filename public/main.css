@@ -3,16 +3,30 @@
     --orange: #ff6e14;
     --orange-active: #c0562a;
     --shadow: rgba(26, 26, 26, 0.12);
+    --black: #333;
+    --light-black: rgb(151, 146, 146);
 }
 
 @keyframes hiddenNavOpening {
     0% {
-        right: 100%;
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes fromMiddleToFull {
+    0% {
+        width: 0px;
+        left: 50%;
     }
     100% {
         right: 0;
+        width: 100%;
+        left: 0;
     }
 }
+
 
 
 /* general properties */
@@ -22,10 +36,11 @@
 }
 
 html, body {
-    height: 100%;
+    height: 3000px;
     margin: 0;
     font-size: 10px;
     font-family: Open Sans, sans-serif, Arial;
+    position: relative;
 }
 
 ul {
@@ -52,13 +67,39 @@ a {
     display: none;
 }
 
+            /*dev-todo*/
+            .dev-todo {
+                position: fixed;
+                bottom: 50px;
+                left: calc(50% - 200px);
+                width: 100%;
+                max-width: 400px;
+                background-color: #ff6e1488;
+                border-radius: 5px;
+                padding: 10px 10px 20px 10px;
+                font-size: 1.4rem;
+                color: white;
+            }
+            .dev-todo h5 {
+                font-size: 2rem;
+                font-weight: bold;
+                margin-top: 0;
+                margin-bottom: 5px;
+            }
+            .dev-todo li {
+                font-style: italic;
+                margin: 5px 0;
+            }
+            .dev-todo ul {
+                list-style-type: disc;
+                margin-left: 20px;
+            }
 
 
-/* dev */ body {
-    background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
-                url(design/mobile-homepage.jpg) center top no-repeat;
-}
-
+            /* dev */ body {
+                background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+                            url(design/mobile-homepage.jpg) center top no-repeat;
+            }
 
 
 
@@ -73,7 +114,7 @@ a {
     position: absolute;
     top: 0;
     left: 0;
-    right: 100%;
+    right: 0;
     bottom: 0;
     animation: hiddenNavOpening forwards 1s;
     /*dev*/background-color: white;/* #ffffff2f;  /*a remplacer par white*/
@@ -124,6 +165,7 @@ a {
     margin-top: 0;
     margin-left: 0;
     height: 65px;
+    border-bottom: solid 1px transparent;
     box-shadow: 0 0 40px var(--shadow);
     display: flex;
     align-items: center;
@@ -212,6 +254,15 @@ a {
                     url(design/tablet-homepage.jpg) center top -3px no-repeat;
     }
 
+    .hidden-nav.visible {
+        width: 482px;
+        right: auto;
+    }
+    .hidden-nav .nav-left .nav-logo {
+        height: 60px;
+    }
+
+    
     .navbar {
         height: 60px;
         box-shadow: 0 0 15px var(--shadow);
@@ -279,14 +330,32 @@ a {
         display: flex;
         align-items: center;
     }
-    .nav-right-item {
-        margin-left: 16px;
-    }
     .nav-right-item a {
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding: 0 8px;
+        position: relative;
     }
+    .nav-left-item:last-child a {
+        padding-left: 5px;
+        padding-right: 8px;
+        position: relative;
+    }
+    .nav-right-item a::after, .nav-left-item:last-child a::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        height: 3px;
+        background-color: var(--orange);
+    }
+    .nav-left-item:last-child a::after {
+        bottom: -12px;
+    }
+    .nav-right-item a:hover::after, .nav-left-item:last-child a:hover::after {
+        animation: fromMiddleToFull forwards .5s;
+    }
+
     .nav-right-item span {
         font-size: 1.2rem;
         line-height: 1.7rem;
@@ -309,13 +378,14 @@ a {
         display: flex;
         align-items: center;
     }
+    
     .nav-left-item .icon {
         margin-right: 4px;
     }
     .nav-left-item:nth-child(2) {
         align-self: flex-end;
         padding-bottom: 3px;
-        margin-right: 22px;
+        margin-right: 14px;
     }
     .nav-left-item:nth-child(2) a {
         color: white;
@@ -344,23 +414,75 @@ a {
     }
 
     .sub-nav {
-        justify-content: space-between;
-        padding-right: 30px;
-        padding-left: 25px;
         align-items: center;
+        padding: 0 12px;
+    }
+
+    .sub-nav-item  {
+        flex: 1 0;
+        padding: 0 15px;
+        white-space: nowrap;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+    }
+    .sub-nav-item span {
+        display: inline-block;
+        margin: 0 auto;
     }
     .sub-nav-item::before {
-        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: calc(50% - 1px);
+        display: block;
         content: '';
         width: 3px;
         height: 3px;
-        background-color: #333;
+        background-color: var(--black);
         border-radius: 50%;
-        margin-right: 15px;
-        vertical-align: middle;
     }
     .sub-nav-item:first-child::before {
         display: none;
     }
-    
+    .sub-nav-item::after {
+        position: absolute;
+        content: '';
+        display: block;
+        bottom: -1px;
+        height: 2px;
+        background-color: var(--black);
+    }
+    .sub-nav-item:hover {
+        font-weight: bold;
+        transition: font-weight 1.5s;
+    }
+    .sub-nav-item:hover::after {
+        animation: fromMiddleToFull forwards .5s;
+    }
+
+    .top-nav .nav-right-item.active a::after, .sub-nav-item.active::after {
+        right: 0;
+        width: 100%;
+        left: 0;
+    }
+}
+
+
+
+
+/*résolution par rapport à la hauteur d'écran */
+@media only screen and (min-height: 800px) {
+    .navbar {
+        position: fixed;
+        background-color: white;
+        top: 0;
+        max-width: 1080px;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .hidden-nav.visible {
+        position: fixed;
+    }
 }

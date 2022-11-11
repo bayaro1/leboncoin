@@ -17,4 +17,5 @@ document.querySelector('.hidden-nav-opener').addEventListener('click', function(
 })
 
 
+
 // REFACTORISER TOUT ça EN METTANT LES PARAMETRES DANS LE BOUTON HIDDEN NAV OPENER DANS LE HTML
