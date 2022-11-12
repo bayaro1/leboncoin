@@ -1,12 +1,15 @@
 
 :root {
     --orange: #ff6e14;
-    --orange-active: #c0562a;
-    --shadow: rgba(26, 26, 26, 0.12);
-    --black: #333;
-    --placeholder-grey: rgb(176, 183, 199); 
-    --placeholder-bg-grey: rgb(240, 240, 240); 
+    --orange-hover: #c0562a;
     --blue: #4183d7;
+    --blue-hover: #369;
+    --shadow: rgba(203, 208, 211, 0.6);
+    --black: #333;
+    --input-border-color: #cad1d9; 
+    --input-placeholder-color: #a3a9b1; 
+    --select-bg: #f4f6f7;
+    --select-bg-hover: #e6ebef;
 }
 
 @keyframes hiddenNavOpening {
@@ -67,16 +70,32 @@ button {
     background-color: transparent;
     border: none;
 }
-.btn.btn-blue {
+.btn {
+    border-radius: 4px;
+    transition: background-color .3s;
+    cursor: pointer;
+    font-weight: 600;
+}
+.btn-blue {
     background-color: var(--blue);
     color: white;
+}
+.btn-orange {
+    background-color: var(--orange);
+    color: white;
+}
+.btn-blue:hover {
+    background-color: var(--blue-hover);
+}
+.btn-orange:hover {
+    background-color: var(--orange-hover);
 }
 
 .container {
     max-width: 1070px;
     margin: 0 auto;
-    /*dev*/border-left: solid 1px lightgreen;
-    /*dev*/border-right: solid 1px lightgreen;
+    /*dev border-left: solid 1px lightgreen; */
+    /*dev border-right: solid 1px lightgreen; */
 }
 
 .icon {
@@ -121,8 +140,8 @@ button {
 
 
             /* dev */ body {
-                background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
-                            url(design/mobile-homepage.jpg) center top no-repeat;
+                /* background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+                            url(design/mobile-homepage.jpg) center top no-repeat; */
             }
 
 
@@ -135,12 +154,14 @@ button {
 
  .hidden-nav.visible {
     display: block;
-    position: absolute;
+    position: fixed;
+    z-index: 2;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    animation: hiddenNavOpening forwards 1s;
+    box-shadow: 0 0 10000px var(--black);
+    animation: hiddenNavOpening forwards .3s;
     /*dev*/background-color: white;/* #ffffff2f;  /*a remplacer par white*/
 }
 
@@ -188,9 +209,8 @@ button {
     margin-right: 0;
     margin-top: 0;
     margin-left: 0;
-    height: 65px;
-    border-bottom: solid 1px transparent;
-    box-shadow: 0 0 40px var(--shadow);
+    height: 60px;
+    border-bottom: solid 1px rgb(230, 235, 239);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -229,14 +249,14 @@ button {
     /*navbar*/
 
     .navbar-block { 
-        border-bottom: solid 1px transparent;
-        box-shadow: 0 0 40px var(--shadow);
+        border-bottom: solid 1px var(--shadow);
+        box-shadow: 3px 3px 15px var(--shadow);
     }
 
     .navbar {
         position: relative;
         display: flex;
-        height: 65px;
+        height: 60px;
         align-items: center;
         justify-content: center;
         color: #333;
@@ -275,6 +295,7 @@ button {
         margin-top: 65px;
         display: flex;
         flex-direction: column;
+        font-size: 1.5rem;
     }
     .main h1 {
         order: 2;
@@ -287,51 +308,62 @@ button {
     }
     
     .main-form {
-        border-bottom: solid 1px transparent;
-        box-shadow: 0 0 40px var(--shadow);
+        border-bottom: solid 1px var(--shadow);
+        box-shadow: 0 0 20px var(--shadow);
         border-radius: 0 0 20px 0;
-        height: 218px;
-        padding-top: 8px;
+        padding-top: 9px;
     }
     .main .form-group {
         margin: 12px 18px;
     }
     .main-form .form-box {
         outline: none;
-        border: solid 1px var(--placeholder-grey);
+        border: solid 1px var(--input-border-color);
         height: 40px;
         display: block;
         width: 100%;
         border-radius: 4px;
         font-size: 1.5rem;
     }
-    .main-form .form-select .form-box {
-        background-color: var(--placeholder-bg-grey);
+
+    .main-form .form-select .form-box, .main-form .form-select label {
+        cursor: pointer;
+        background-color: var(--select-bg);
         border: none;
+        transition: background-color .3s;
     }
+    .main-form .form-select .form-box:hover, .main-form .form-select .form-box:hover label {
+        background-color: var(--select-bg-hover);
+    }
+    
     .main-form .form-group {
         position: relative;
     }
     .main-form .form-group .icon {
         position: absolute;
         top: calc(50% - 8px);
-        color: var(--placeholder-grey)
+        color: var(--input-placeholder-color)
     }
     .main-form .form-group .i-left {
         left: 12px;
     }
     .main-form .form-group .i-right {
-        right: 14px;
+        right: 12px;
     }
     .main-form .form-select .i-left {
+        width: 2.6rem;
+        height: 2.6rem;
+        top: calc(50% - 1.3rem);
         color: var(--black);
-        width: 20px;
-        height: 20px;
-        top: calc(50% - 10px);
+    }
+    .main-form .form-select .i-right {
+        width: 3.2rem;
+        height: 3.2rem;
+        top: calc(50% - 1.6rem);
     }
 
     .main-form input::placeholder {
-        color: var(--placeholder-grey);
+        color: var(--input-placeholder-color);
     }
     .main-form input {
         padding-left: 40px;
@@ -342,33 +374,45 @@ button {
         margin: 0 auto;
         font-size: 1.3rem;;
     }
+
+    .main h1 {
+        text-align: center;
+        margin-bottom: 6px;
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+    .main-deposit {
+        display: flex;
+        align-items: center;
+    }
+    .main-deposit a {
+        flex: 1 0;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .main-deposit a .icon {
+        margin-left: 1rem;
+        font-weight: 600;
+        margin-top: 2px;
+    }
 }
 
 
 /***********************************RESPONSIVE**************************************************/
 
 
-@media only screen and (min-width: 580px) {
+@media only screen and (min-width: 620px) {
     /*dev*/ body {
-        background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
-                    url(design/tablet-homepage.jpg) center top -3px no-repeat;
+        /* background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+                    url(design/tablet-homepage.jpg) center top -3px no-repeat; */
     }
 
 
     .hidden-nav.visible {
         width: 482px;
         right: auto;
-    }
-    .hidden-nav .nav-left .nav-logo {
-        height: 60px;
-    }
-
-    
-    .navbar-block {
-        box-shadow: 0 0 15px var(--shadow);
-    }
-    .navbar {
-        height: 60px;
     }
 
     .nav-logo .i-logo {
@@ -382,14 +426,53 @@ button {
         height: 35px;
         left: 0;
     }
+
+    /*main*/
+    .main h1 {
+        margin-top: 2rem;
+    }
+    .main-form .form-row:nth-child(2) {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .main-form .form-group {
+        margin: 8px 10px;
+    }
+    .main-form .form-box {
+        width: 280px;
+    }
+    .main-form .form-group button[type=submit] {
+        width: 280px;
+        flex: none;
+    }
+    .main-form .form-group:last-child {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .main-deposit {
+        justify-content: center;
+    }
+    .main-deposit a {
+        flex: none;
+        width: 210px;
+    }
 }
 
 
 
 @media only screen and (min-width: 1050px) {
     /*dev */ body {
-        background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
-                    url(design/desktop-homepage.jpg) center top no-repeat;
+        /* background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+                    url(design/desktop-homepage.jpg) center top no-repeat; */
+    }
+
+    h1 {
+        font-size: 2.4rem;;
     }
 
     /* la fonctionnalité hidden-nav ne peut pas être utilisée sur grande largeur */
@@ -492,16 +575,16 @@ button {
         margin-right: 14px;
     }
     .nav-left-item:nth-child(2) a {
-        color: white;
-        background-color: var(--orange);
         width: 195px;
         height: 42px;
         padding: 0 5px;
         border-radius: 4px;
-        transition: background-color .3s;
+        background-color: var(--orange);
+        color: white;
+        transition: all .3s;
     }
     .nav-left-item:nth-child(2) a:hover {
-        background-color: var(--orange-active);
+        background-color: var(--orange-hover);
     }
     .nav-left-item:nth-child(3) .icon {
         margin-top: 3px;
@@ -571,6 +654,115 @@ button {
         width: 100%;
         left: 0;
     }
+
+    /*main*/
+
+    .main {
+        margin-top: 130px;
+    }
+    .main h1 {
+        order: -1;
+    }
+    .main-form {
+        margin: 28px auto;
+        width: 930px;
+        height: 212px;
+        border-radius: 4px;
+        padding: 20px 12px;
+        position: relative;
+        border: solid 1px var(--shadow);
+        box-shadow: 3px 3px 10px var(--shadow);
+    }
+    .main .main-form .form-row {
+        display: block;
+        display: flex;
+        align-items: center;
+    }
+    .sort-list {
+        display: flex;
+    }
+
+    .main-form .form-radio {
+        margin-right: 20px;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+    }
+    .main-form .form-radio input {
+        margin-right: 8px;
+    }
+
+    .main-form .form-row:nth-child(2) {
+        max-width: 100%;
+        justify-content: flex-start;
+    }
+    .form-row:nth-child(2) .form-group {
+        margin-right: 0;
+    }
+    .form-row:nth-child(2) .form-box {
+        background-color: var(--select-bg);
+        border: none;
+    }
+    .form-row:nth-child(2) .form-box:first-child {
+        width: 196px;
+        border-radius: 4px 0 0 4px;
+    }
+    .form-row:nth-child(2) .form-group:nth-child(2) .form-box {
+        width: 320px;
+        border-left: solid 1px var(--input-border-color);
+        border-radius: 0 4px 4px 0;
+    }
+    .form-row:nth-child(2) .form-group:nth-child(3) .form-box {
+        width: 364px;
+    }
+    .form-row:nth-child(2) .form-group:nth-child(2) {
+        margin-left: 0;
+    }
+    .form-row:nth-child(2) .form-group .form-box:focus {
+        border: solid 2px black;
+        border-left: solid 2px black;
+        border-radius: 4px;
+    }
+    .main-form .form-select .form-box {
+        text-align: left;
+        padding-left: 44px;
+    }
+
+    .main-form .sort-item {
+        border: solid 1px var(--input-border-color);
+        padding: 5px 14px;
+        margin-right: 5px;
+        border-radius: 20px;
+        font-size: 1.4rem;
+        transition: background-color .3s; 
+    }
+    .main-form .sort-item:hover {
+        background-color: var(--select-bg-hover);
+        cursor: pointer;
+    }
+
+    .main-form .form-row:nth-child(4) {
+        margin-top: 5px;
+    }
+    .main-form .form-checkbox {
+        display: flex;
+        align-items: center;
+    }
+    .main-form .form-checkbox input {
+        margin-right: 10px;
+    }
+
+    .main-form .form-submit {
+        position: static;
+    }
+    .main-form .form-group button[type=submit] {
+        width: 238px;
+        height: 40px;
+        position: absolute;
+        bottom: -20px;
+        left: calc(50% - 119px);
+    }
+
 }
 
 
@@ -580,6 +772,7 @@ button {
 @media only screen and (min-height: 800px) {
     .navbar-block {
         position: fixed;
+        z-index: 1;
         background-color: white;
         top: 0;
         width: 100%;

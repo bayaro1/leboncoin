@@ -9,11 +9,11 @@
         <div class="main-form">
             <div class="form-row">
                 <div class="form-group form-radio">
-                    <input type="radio" id="offers" name="offers" value="offers" checked>
+                    <input type="radio" id="offers" name="offersOrNeeds" value="offers" checked>
                     <label for="offers">Offres</label>
                 </div>
                 <div class="form-group form-radio">
-                    <input type="radio" id="needs" name="needs" value="needs">
+                    <input type="radio" id="needs" name="offersOrNeeds" value="needs">
                     <label for="needs">Demandes</label>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                         </svg>
                         <label for="category">Catégories</label>
                         <svg class="icon i-right">
-                            <use xlink:href="/img/svg/sprite.svg#list"></use>
+                            <use xlink:href="/img/svg/sprite.svg#expand-more"></use>
                         </svg>
                     </button>
                 </div>
@@ -43,18 +43,18 @@
                 </div>
             </div>
             <div class="form-row">
-                <ul class="sort-list">
+                <ul class="sort-list form-group">
                     <li class="sort-item">Prix</li>
                     <li class="sort-item">Date</li>
                 </ul>
             </div>
             <div class="form-row">
-                <div class="form-group form-radio">
-                    <input class="js-radio js-radio-slider" type="radio" id="deliverable" name="deliverable" value="deliverable">
+                <div class="form-group form-checkbox">
+                    <input class="js-radio js-radio-slider" type="checkbox" id="deliverable" name="deliverable" value="deliverable">
                     <label for="deliverable">Voir également les annonces disponibles en livraison <span class="help js-info"></span></label>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group form-submit">
                 <button class="btn btn-blue form-box" type="submit">Rechercher (<span class="js-search-total-results"></span>)</button>
             </div>
         </div>
