@@ -4,7 +4,9 @@
     --orange-active: #c0562a;
     --shadow: rgba(26, 26, 26, 0.12);
     --black: #333;
-    --light-black: rgb(151, 146, 146);
+    --placeholder-grey: rgb(176, 183, 199); 
+    --placeholder-bg-grey: rgb(240, 240, 240); 
+    --blue: #4183d7;
 }
 
 @keyframes hiddenNavOpening {
@@ -39,8 +41,16 @@ html, body {
     height: 3000px;
     margin: 0;
     font-size: 10px;
+    font-weight: 400;
     font-family: Open Sans, sans-serif, Arial;
     position: relative;
+    color: var(--black);
+}
+
+h1 {
+    line-height: 1.9rem;
+    font-weight: 600;
+    font-size: 1.4rem;
 }
 
 ul {
@@ -53,12 +63,26 @@ a {
     text-decoration: none;
     color: inherit;
 }
+button {
+    background-color: transparent;
+    border: none;
+}
+.btn.btn-blue {
+    background-color: var(--blue);
+    color: white;
+}
 
 .container {
     max-width: 1070px;
     margin: 0 auto;
+    /*dev*/border-left: solid 1px lightgreen;
+    /*dev*/border-right: solid 1px lightgreen;
 }
 
+.icon {
+    width: 1.8rem;
+    height: 1.8rem;
+}
 .top-nav .icon {
     width: 2.7rem;
     height: 2.7rem;
@@ -204,14 +228,17 @@ a {
 @media only screen and (min-width: 280px) {
     /*navbar*/
 
-    .navbar {
-        position: relative;
-        height: 65px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .navbar-block { 
         border-bottom: solid 1px transparent;
         box-shadow: 0 0 40px var(--shadow);
+    }
+
+    .navbar {
+        position: relative;
+        display: flex;
+        height: 65px;
+        align-items: center;
+        justify-content: center;
         color: #333;
         font-size: 1.4rem;
     }
@@ -242,6 +269,79 @@ a {
         left: 10px;
         color: var(--orange);
     }
+
+    /*main*/
+    .main {
+        margin-top: 65px;
+        display: flex;
+        flex-direction: column;
+    }
+    .main h1 {
+        order: 2;
+    }
+    .main-deposit {
+        order: 3;
+    }
+    .main-form .form-row:first-child, .main-form .form-row:nth-child(3), .main-form .form-row:nth-child(4) {
+        display: none;
+    }
+    
+    .main-form {
+        border-bottom: solid 1px transparent;
+        box-shadow: 0 0 40px var(--shadow);
+        border-radius: 0 0 20px 0;
+        height: 218px;
+        padding-top: 8px;
+    }
+    .main .form-group {
+        margin: 12px 18px;
+    }
+    .main-form .form-box {
+        outline: none;
+        border: solid 1px var(--placeholder-grey);
+        height: 40px;
+        display: block;
+        width: 100%;
+        border-radius: 4px;
+        font-size: 1.5rem;
+    }
+    .main-form .form-select .form-box {
+        background-color: var(--placeholder-bg-grey);
+        border: none;
+    }
+    .main-form .form-group {
+        position: relative;
+    }
+    .main-form .form-group .icon {
+        position: absolute;
+        top: calc(50% - 8px);
+        color: var(--placeholder-grey)
+    }
+    .main-form .form-group .i-left {
+        left: 12px;
+    }
+    .main-form .form-group .i-right {
+        right: 14px;
+    }
+    .main-form .form-select .i-left {
+        color: var(--black);
+        width: 20px;
+        height: 20px;
+        top: calc(50% - 10px);
+    }
+
+    .main-form input::placeholder {
+        color: var(--placeholder-grey);
+    }
+    .main-form input {
+        padding-left: 40px;
+    }
+    .main-form .form-group button[type=submit] {
+        height: 30px;
+        width: 75%;
+        margin: 0 auto;
+        font-size: 1.3rem;;
+    }
 }
 
 
@@ -254,6 +354,7 @@ a {
                     url(design/tablet-homepage.jpg) center top -3px no-repeat;
     }
 
+
     .hidden-nav.visible {
         width: 482px;
         right: auto;
@@ -263,9 +364,11 @@ a {
     }
 
     
+    .navbar-block {
+        box-shadow: 0 0 15px var(--shadow);
+    }
     .navbar {
         height: 60px;
-        box-shadow: 0 0 15px var(--shadow);
     }
 
     .nav-logo .i-logo {
@@ -308,9 +411,10 @@ a {
     }
     /***/
 
+
     .navbar {
-        padding-top: 5px;
         height: 112px;
+        padding-top: 5px;
         flex-direction: column;
         align-items: stretch;
     }
@@ -474,11 +578,10 @@ a {
 
 /*résolution par rapport à la hauteur d'écran */
 @media only screen and (min-height: 800px) {
-    .navbar {
+    .navbar-block {
         position: fixed;
         background-color: white;
         top: 0;
-        max-width: 1080px;
         width: 100%;
         margin: 0 auto;
     }
