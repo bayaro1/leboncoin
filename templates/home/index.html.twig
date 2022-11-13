@@ -36,8 +36,11 @@
                     <input class="js-auto-suggest suggest-q form-box" type="text" name="q" id="q" placeholder="Que recherchez-vous ?">
                 </div>
                 <div class="form-group form-input">
-                    <svg class="icon i-left">
+                    <svg class="icon i-left i-location">
                         <use xlink:href="/img/svg/sprite.svg#location"></use>
+                    </svg>
+                    <svg class="icon i-left i-location-fill">
+                        <use xlink:href="/img/svg/sprite.svg#location-fill"></use>
                     </svg>
                     <input class="js-auto-suggest suggest-location form-box" type="text" name="location" id="location" placeholder="Saisissez une ville et un rayon">
                 </div>
@@ -51,7 +54,24 @@
             <div class="form-row">
                 <div class="form-group form-checkbox">
                     <input class="js-radio js-radio-slider" type="checkbox" id="deliverable" name="deliverable" value="deliverable">
-                    <label for="deliverable">Voir également les annonces disponibles en livraison <span class="help js-info"></span></label>
+                    <label for="deliverable">
+                        <div class="special-checkbox">
+                            <div class="special-checkbox-ball">
+                                <svg class="icon i-check">
+                                    <use xlink:href="/img/svg/sprite.svg#check"></use>
+                                </svg>
+                                <svg class="icon i-close">
+                                    <use xlink:href="/img/svg/sprite.svg#close"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        Voir également les annonces disponibles en livraison
+                    </label>
+                    <div class="form-help js-help">
+                        <svg class="icon i-help">
+                            <use xlink:href="/img/svg/sprite.svg#help"></use>
+                        </svg>
+                    </div>
                 </div>
             </div>
             <div class="form-group form-submit">

@@ -47,7 +47,6 @@ html, body {
 }
 body.frozen {
     overflow: hidden;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
 }
 
 h1 {
@@ -94,8 +93,6 @@ button {
 .container {
     max-width: 1070px;
     margin: 0 auto;
-    /*dev border-left: solid 1px lightgreen; */
-    /*dev border-right: solid 1px lightgreen; */
 }
 
 .icon {
@@ -110,39 +107,7 @@ button {
     display: none;
 }
 
-            /*dev-todo*/
-            .dev-todo {
-                position: fixed;
-                bottom: 50px;
-                left: calc(50% - 200px);
-                width: 100%;
-                max-width: 400px;
-                background-color: #ff6e1488;
-                border-radius: 5px;
-                padding: 10px 10px 20px 10px;
-                font-size: 1.4rem;
-                color: white;
-            }
-            .dev-todo h5 {
-                font-size: 2rem;
-                font-weight: bold;
-                margin-top: 0;
-                margin-bottom: 5px;
-            }
-            .dev-todo li {
-                font-style: italic;
-                margin: 5px 0;
-            }
-            .dev-todo ul {
-                list-style-type: disc;
-                margin-left: 20px;
-            }
-
-
-            /* dev */ body {
-                /* background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
-                            url(design/mobile-homepage.jpg) center top no-repeat; */
-            }
+        
 
 
 
@@ -155,7 +120,7 @@ button {
     right: 100%;
     bottom: 0;
     box-shadow: 0 0 0 var(--black);
-    /*dev*/background-color: white;/* #ffffff2f;  /*a remplacer par white*/
+    background-color: white;
     transition: all .3s;
 }
  .hidden-nav.visible {
@@ -218,6 +183,14 @@ button {
     cursor: pointer;
 }
 
+
+
+.main-form .form-group .i-location {
+    display: none;
+} 
+.main-form .form-group .icon.i-location-fill {
+    color: var(--black);
+}
 
 
 
@@ -354,6 +327,7 @@ button {
         height: 3.2rem;
         top: calc(50% - 1.6rem);
     }
+    
 
     .main-form input::placeholder {
         color: var(--input-placeholder-color);
@@ -397,10 +371,6 @@ button {
 
 
 @media only screen and (min-width: 620px) {
-    /*dev*/ body {
-        /* background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
-                    url(design/tablet-homepage.jpg) center top -3px no-repeat; */
-    }
 
     /*nav*/
     .hidden-nav {
@@ -459,10 +429,6 @@ button {
 
 
 @media only screen and (min-width: 1050px) {
-    /*dev */ body {
-        /* background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
-                    url(design/desktop-homepage.jpg) center top no-repeat; */
-    }
 
     h1 {
         font-size: 2.4rem;;
@@ -482,7 +448,7 @@ button {
     .nav-right, .sub-nav {
         display: block;
     }
-    .nav-left-item {
+    .navbar .nav-left-item {
         display: inline-block;
     }
     /***/
@@ -756,6 +722,14 @@ button {
         padding-left: 44px;
     }
 
+    .main-form .form-group .i-location {
+        display: block;
+    }
+    .main-form .form-group .i-location-fill {
+        display: none;
+    }
+     
+
     .main-form .sort-item {
         border: solid 1px var(--input-border-color);
         padding: 5px 14px;
@@ -769,12 +743,7 @@ button {
         cursor: pointer;
     }
 
-    .main-form .form-row:nth-child(4) {
-        margin-top: 5px;
-    }
-    .main-form .form-checkbox {
-        margin-left: 12px;
-    }
+    
     .main-form .form-checkbox input {
         display: none;
     }
@@ -785,7 +754,7 @@ button {
         font-size: 1.4rem;
         position: relative;
     }
-    .main-form .form-checkbox label::before {
+    .main-form .form-checkbox .special-checkbox {
         content: '';
         display: inline-block;
         width: 40px;
@@ -795,20 +764,13 @@ button {
         margin-right: 8px;
         transition: background-color .5s;
     }
-    .main-form .form-checkbox label:hover::before {
+    .main-form .form-checkbox label:hover .special-checkbox {
         box-shadow: 0 0 15px var(--input-border-color);
     }
-    /*a solutionner */
-    .main-form .form-checkbox input:focus-visible + label::before {
-        width: 36px;
-        height: 20px;
-        border: solid 2px black;
-    }
-    .main-form .form-checkbox input:checked + label::before {
+    .main-form .form-checkbox input:checked + label .special-checkbox {
         background-color: var(--orange);
     }
-    .main-form .form-checkbox label::after {
-        content: 'x';
+    .main-form .form-checkbox .special-checkbox-ball {
         text-align: center;
         display: block;
         position: absolute;
@@ -820,11 +782,53 @@ button {
         top: calc(50% - 10px);
         transition: all .5s;
     }
-    .main-form .form-checkbox input:checked + label::after {
-        content: 'v';
+    .main-form .form-checkbox input:checked + label .special-checkbox-ball {
         text-align: center;
         color: var(--orange);
         left: 18px;
+    }
+    .main-form .form-checkbox .special-checkbox-ball .icon {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        left: calc(50% - 7px);
+        top: calc(50% - 7px);
+    }
+    .main-form .form-checkbox .special-checkbox-ball .i-close {
+        color: var(--input-placeholder-color);
+    }
+    .main-form .form-checkbox .special-checkbox-ball .i-check {
+        color: var(--orange);
+        display: none;
+    }
+    .main-form .form-checkbox input:checked + label .special-checkbox-ball .i-check {
+        display: block;
+    }
+    .main-form .form-checkbox input:checked + label .special-checkbox-ball .i-close {
+        display: none;
+    }
+
+
+    .main-form .form-checkbox {
+        position: relative;
+    }
+    .main-form .form-help {
+        cursor: pointer;
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        right: -25px; 
+        top: calc(50% - 8px);
+        background-color: var(--blue);
+        border-radius: 16px;
+    }
+    .main-form .form-help .i-help {
+        color: white;
+        width: 14px;
+        height: 14px;
+        position: absolute;
+        top: calc(50% - 7px);
+        left: calc(50% - 7px);
     }
 
     .main-form .form-submit {
@@ -858,3 +862,74 @@ button {
         position: fixed;
     }
 }
+
+
+
+
+
+
+
+
+/*****************************************/
+
+/********************DEV******************/
+
+.container {
+    /* border-left: solid 1px lightgreen;
+    border-right: solid 1px lightgreen; */
+}
+.navbar .hidden-nav {
+    /* color: #ffffff2f;  */
+}
+
+
+/* calques */
+/* 
+body {
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+                url(design/mobile-homepage.jpg) center top no-repeat;
+}
+
+@media only screen and (min-width: 620px) {
+    body {
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+                    url(design/tablet-homepage.jpg) center top -3px no-repeat;
+    }
+}
+@media only screen and (min-width: 1050px) {
+    body {
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+                    url(design/desktop-homepage.jpg) center top no-repeat;
+    }
+} */
+
+
+
+/*dev-todo*/
+.dev-todo {
+    position: fixed;
+    bottom: 50px;
+    left: calc(50% - 200px);
+    width: 100%;
+    max-width: 400px;
+    background-color: #ff6e1488;
+    border-radius: 5px;
+    padding: 10px 10px 20px 10px;
+    font-size: 1.4rem;
+    color: white;
+}
+.dev-todo h5 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.dev-todo li {
+    font-style: italic;
+    margin: 5px 0;
+}
+.dev-todo ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
