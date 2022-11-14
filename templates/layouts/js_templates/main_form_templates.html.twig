@@ -1,0 +1,167 @@
+<template id="main-form-category-template">
+
+        <header class="main-form-slider-topbar">
+            {% set title = 'Catégories' %}
+            {% include "layouts/js_templates/_topbar.html.twig" %}
+        </header>
+
+        <ul class="main-form-category-list">
+            <li class="main-form-category-item default">
+                <a href="#">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#list"></use>
+                    </svg>
+                    <span class="main-form-category-label">Toutes catégories</span>
+                </a>
+            </li>
+
+            <li class="main-form-category-item">
+                <a href="#">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#sun"></use>
+                    </svg>
+                    <span class="main-form-category-label">Vacances</span>
+                    <svg class="icon i-right">
+                        <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="main-form-category-item">
+                <a href="#">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#cases"></use>
+                    </svg>
+                    <span class="main-form-category-label">Emploi</span>
+                    <svg class="icon i-right">
+                        <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="main-form-category-item">
+                <a href="#">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#car"></use>
+                    </svg>
+                    <span class="main-form-category-label">Véhicules</span>
+                    <svg class="icon i-right">
+                        <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="main-form-category-item">
+                <a href="#">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#home"></use>
+                    </svg>
+                    <span class="main-form-category-label">Immobilier</span>
+                    <svg class="icon i-right">
+                        <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="main-form-category-item">
+                <a href="#">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#fashion"></use>
+                    </svg>
+                    <span class="main-form-category-label">Mode</span>
+                    <svg class="icon i-right">
+                        <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="main-form-category-item">
+                <a href="#">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#chair"></use>
+                    </svg>
+                    <span class="main-form-category-label">Maison</span>
+                    <svg class="icon i-right">
+                        <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="main-form-category-item">
+                <a href="#">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#phone"></use>
+                    </svg>
+                    <span class="main-form-category-label">Multimédia</span>
+                    <svg class="icon i-right">
+                        <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="main-form-category-item">
+                <a href="#">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#sports"></use>
+                    </svg>
+                    <span class="main-form-category-label">Loisirs</span>
+                    <svg class="icon i-right">
+                        <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="main-form-category-item">
+                <a href="#">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#pets"></use>
+                    </svg>
+                    <span class="main-form-category-label">Animaux</span>
+                    <svg class="icon i-right">
+                        <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="main-form-category-item">
+                <a href="#">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#forklift"></use>
+                    </svg>
+                    <span class="main-form-category-label">Matériel Professionnel</span>
+                    <svg class="icon i-right">
+                        <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="main-form-category-item">
+                <a href="#">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#handshake"></use>
+                    </svg>
+                    <span class="main-form-category-label">Services</span>
+                    <svg class="icon i-right">
+                        <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="main-form-category-item">
+                <a href="#">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#more-horiz"></use>
+                    </svg>
+                    <span class="main-form-category-label">Divers</span>
+                    <svg class="icon i-right">
+                        <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+
+</template>
+
+
+<template id="main-form-q-template">
+    <header class="main-form-slider-topbar">
+        {% set title = 'Que recherchez-vous ?' %}
+        {% include "layouts/js_templates/_topbar.html.twig" %}
+    </header>
+</template>
+
+<template id="main-form-location-template">
+    <header class="main-form-slider-topbar">
+        {% set title = 'Où cherchez-vous ?' %}
+        {% include "layouts/js_templates/_topbar.html.twig" %}
+    </header>
+</template>

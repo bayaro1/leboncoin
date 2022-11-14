@@ -19,7 +19,12 @@
             </div>
             <div class="form-row">
                 <div class="form-group form-select">
-                    <button class="js-category-select form-box" name="category" id="category">
+                    <button 
+                        class="category-slider-opener form-box" 
+                        data-template="#main-form-category-template"
+                        name="category" 
+                        id="category"
+                        >
                         <svg class="icon i-left">
                             <use xlink:href="/img/svg/sprite.svg#list"></use>
                         </svg>
@@ -33,7 +38,15 @@
                     <svg class="icon i-left">
                         <use xlink:href="/img/svg/sprite.svg#search"></use>
                     </svg>
-                    <input class="js-auto-suggest suggest-q form-box" type="text" name="q" id="q" placeholder="Que recherchez-vous ?">
+                    <input 
+                        class="q-slider-opener js-auto-suggest suggest-q form-box" 
+                        data-template="#main-form-q-template"
+                        data-maxwidth="1050"
+                        type="text" 
+                        name="q" 
+                        id="q" 
+                        placeholder="Que recherchez-vous ?"
+                        autocomplete="off">
                 </div>
                 <div class="form-group form-input">
                     <svg class="icon i-left i-location">
@@ -42,7 +55,15 @@
                     <svg class="icon i-left i-location-fill">
                         <use xlink:href="/img/svg/sprite.svg#location-fill"></use>
                     </svg>
-                    <input class="js-auto-suggest suggest-location form-box" type="text" name="location" id="location" placeholder="Saisissez une ville et un rayon">
+                    <input 
+                        class="location-slider-opener js-auto-suggest suggest-location form-box" 
+                        data-template="#main-form-location-template"
+                        data-maxwidth="1050"
+                        type="text" 
+                        name="location" 
+                        id="location" 
+                        placeholder="Saisissez une ville et un rayon"
+                        autocomplete="off">
                 </div>
             </div>
             <div class="form-row">
@@ -87,6 +108,9 @@
                 </svg>
             </a>
         </div>
+
+        <!-- sliders gérés en js -->
+        <div class="main-form-slider"></div>  
     </section>
 
 
