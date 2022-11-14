@@ -59,14 +59,25 @@ export class SliderManager {
             this.#slider.append(this.#getContent(e.currentTarget));
             this.#initialized = e.currentTarget.getAttribute('class');
         }
-        this.#slider.classList.add('visible');
-        document.body.classList.add('frozen');
+        this.#slider.classList.toggle('visible');
+        document.body.classList.toggle('frozen');
         
+
         this.#callOnBodyClick = (e) => this.#onBodyClick(e);
         if(this.#closeWithBodyClick) {
             document.body.addEventListener('click', this.#callOnBodyClick);
         }
         this.#slider.querySelector(this.#closerSelector).addEventListener('click', e => this.#close());
+
+        /*a finaliser et refactoriser*/
+        document.querySelectorAll('.main-form-category-item').forEach(function(item) {
+            item.addEventListener('click', function(e) {
+                document.querySelector('.category-slider-opener label').innerText = item.querySelector('span').innerText;
+                document.querySelector('.main-form-slider').classList.remove('visible');
+                document.body.classList.remove('frozen');
+            });
+        });
+        /*****************************/ 
     }
     /**
      * 

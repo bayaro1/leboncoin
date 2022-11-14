@@ -29,3 +29,32 @@ mainFormSliderManager.manage(
 );
 
 
+
+
+
+
+// /* a refactoriser dans SliderManager (problème comme ça il ferme le slider dès l'ouverture) */
+// document.body.addEventListener('click', onBodyClick);
+
+// /**
+//  * 
+//  * @param {MouseEvent} e 
+//  */
+// function onBodyClick(e) {
+//     const slider = document.querySelector('.main-form-slider');
+//     if(slider.classList.contains('visible')) {
+//         if(
+//             e.clientX < slider.getBoundingClientRect().x 
+//             ||
+//             e.clientX > slider.getBoundingClientRect().x + slider.getBoundingClientRect().width
+//             ||
+//             e.clientY < slider.getBoundingClientRect().y 
+//             ||
+//             e.clientY > slider.getBoundingClientRect().y + slider.getBoundingClientRect().height
+//         ) {
+//             document.querySelector('.main-form-slider').classList.remove('visible');
+//             document.body.classList.remove('frozen');
+//         }
+//     }
+// }
+
