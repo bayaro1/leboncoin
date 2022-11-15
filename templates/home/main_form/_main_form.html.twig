@@ -1,0 +1,55 @@
+
+{% include "home/main_form/_form_start.html.twig" %}
+
+    <div class="form-row">
+        <div class="form-group form-radio">
+            <input type="radio" id="offers" name="offersOrNeeds" value="offers" checked>
+            <label for="offers">Offres</label>
+        </div>
+        <div class="form-group form-radio">
+            <input type="radio" id="needs" name="offersOrNeeds" value="needs">
+            <label for="needs">Demandes</label>
+        </div>
+    </div>
+    <div class="form-row">
+
+        {% include "home/main_form/_category.html.twig" %}
+
+        {% include "home/main_form/_q.html.twig" %}
+
+        {% include "home/main_form/_location.html.twig" %}
+
+    </div>
+    <div class="form-row">
+        <ul class="sort-list form-group">
+            <li class="sort-item">Prix</li>
+            <li class="sort-item">Date</li>
+        </ul>
+    </div>
+    <div class="form-row">
+        <div class="form-group form-checkbox">
+            <input class="js-radio js-radio-slider" type="checkbox" id="deliverable" name="deliverable" value="deliverable">
+            <label for="deliverable">
+                <div class="special-checkbox">
+                    <div class="special-checkbox-ball">
+                        <svg class="icon i-check">
+                            <use xlink:href="/img/svg/sprite.svg#check"></use>
+                        </svg>
+                        <svg class="icon i-close">
+                            <use xlink:href="/img/svg/sprite.svg#close"></use>
+                        </svg>
+                    </div>
+                </div>
+                Voir également les annonces disponibles en livraison
+            </label>
+            <div class="form-help js-help">
+                <svg class="icon i-help">
+                    <use xlink:href="/img/svg/sprite.svg#help"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+{% include "home/main_form/_form_end.html.twig" %}
+    
+    

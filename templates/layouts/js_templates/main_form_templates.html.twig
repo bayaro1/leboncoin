@@ -1,12 +1,13 @@
 <template id="main-form-category-template">
+    <div class="main-form-category-slider">
 
         <header class="main-form-slider-topbar">
             {% set title = 'Catégories' %}
             {% include "layouts/js_templates/_topbar.html.twig" %}
         </header>
 
-        <ul class="main-form-category-list">
-            <li class="main-form-category-item default"
+        <ul class="main-form-category-list slider-list">
+            <li class="main-form-category-item default slider-item"
                 data-value=""
                 data-label="Catégories"
                 data-iconleft="true"
@@ -17,7 +18,7 @@
                 <span class="main-form-category-label">Toutes catégories</span>
             </li>
 
-            <li class="main-form-category-item"
+            <li class="main-form-category-item slider-item"
                 data-value="vacances-id"
                 data-label="Vacances"
             >
@@ -29,7 +30,7 @@
                     <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
                 </svg>
             </li>
-            <li class="main-form-category-item"
+            <li class="main-form-category-item slider-item"
                 data-value="emploi-id"
                 data-label="Emploi"
             >
@@ -41,7 +42,7 @@
                     <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
                 </svg>
             </li>
-            <li class="main-form-category-item"
+            <li class="main-form-category-item slider-item"
                 data-value="vehicule-id"
                 data-label="Véhicules"
             >
@@ -53,7 +54,7 @@
                     <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
                 </svg>
             </li>
-            <li class="main-form-category-item"
+            <li class="main-form-category-item slider-item"
                 data-value="immo-id"
                 data-label="Immobilier"
             >
@@ -65,7 +66,7 @@
                     <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
                 </svg>
             </li>
-            <li class="main-form-category-item"
+            <li class="main-form-category-item slider-item"
                 data-value="mode-id"
                 data-label="Mode"
             >
@@ -77,7 +78,7 @@
                     <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
                 </svg>
             </li>
-            <li class="main-form-category-item"
+            <li class="main-form-category-item slider-item"
                 data-value="maison-id"
                 data-label="Maison"
             >
@@ -89,7 +90,7 @@
                     <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
                 </svg>
             </li>
-            <li class="main-form-category-item"
+            <li class="main-form-category-item slider-item"
                 data-value="multimedia-id"
                 data-label="Multimédia"
             >
@@ -101,7 +102,7 @@
                     <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
                 </svg>
             </li>
-            <li class="main-form-category-item"
+            <li class="main-form-category-item slider-item"
                 data-value="loisirs-id"
                 data-label="Loisirs"
             >
@@ -113,7 +114,7 @@
                     <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
                 </svg>
             </li>
-            <li class="main-form-category-item"
+            <li class="main-form-category-item slider-item"
                 data-value="animaux-id"
                 data-label="Animaux"
             >
@@ -125,7 +126,7 @@
                     <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
                 </svg>
             </li>
-            <li class="main-form-category-item"
+            <li class="main-form-category-item slider-item"
                 data-value="mat-pro-id"
                 data-label="Matériel Professionnel"
             >
@@ -137,7 +138,7 @@
                     <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
                 </svg>
             </li>
-            <li class="main-form-category-item"
+            <li class="main-form-category-item slider-item"
                 data-value="services-id"
                 data-label="Services"
             >
@@ -149,7 +150,7 @@
                     <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
                 </svg>
             </li>
-            <li class="main-form-category-item"
+            <li class="main-form-category-item slider-item"
                 data-value="divers-id"
                 data-label="Divers"
             >
@@ -162,20 +163,130 @@
                 </svg>
             </li>
         </ul>
-
+    </div>
 </template>
 
 
 <template id="main-form-q-template">
-    <header class="main-form-slider-topbar">
-        {% set title = 'Que recherchez-vous ?' %}
-        {% include "layouts/js_templates/_topbar.html.twig" %}
-    </header>
+    <div class="main-form-input-slider main-form-q-slider">
+        <header class="main-form-slider-topbar">
+            {% set title = 'Que recherchez-vous ?' %}
+            {% include "layouts/js_templates/_topbar.html.twig" %}
+        </header>
+        {% include "home/main_form/_form_start.html.twig" %}
+        {% include "home/main_form/_q.html.twig" %}
+
+        {% include "home/main_form/_title_search.html.twig" %}
+        <ul class="lasts-q-list slider-list">
+            <li class="lasts-q-item slider-item">
+                <svg class="icon i-left">
+                    <use xlink:href="/img/svg/sprite.svg#clock"></use>
+                </svg>
+                <span>chaise</span>
+                <svg class="icon i-right js-lasts-q-item-closer">
+                    <use xlink:href="/img/svg/sprite.svg#close"></use>
+                </svg>
+            </li>
+            <li class="lasts-q-item slider-item">
+                <svg class="icon i-left">
+                    <use xlink:href="/img/svg/sprite.svg#clock"></use>
+                </svg>
+                <span>voiture</span>
+                <svg class="icon i-right js-lasts-q-item-closer">
+                    <use xlink:href="/img/svg/sprite.svg#close"></use>
+                </svg>
+            </li>
+            <li class="lasts-q-item slider-item">
+                <svg class="icon i-left">
+                    <use xlink:href="/img/svg/sprite.svg#clock"></use>
+                </svg>
+                <span>développeur web</span>
+                <svg class="icon i-right js-lasts-q-item-closer">
+                    <use xlink:href="/img/svg/sprite.svg#close"></use>
+                </svg>
+            </li>
+        </ul>
+        {% include "home/main_form/_form_end.html.twig" %}
+    </div>
 </template>
 
 <template id="main-form-location-template">
-    <header class="main-form-slider-topbar">
-        {% set title = 'Où cherchez-vous ?' %}
-        {% include "layouts/js_templates/_topbar.html.twig" %}
-    </header>
+    <div class="main-form-input-slider main-form-location-slider">
+        <header class="main-form-slider-topbar">
+            {% set title = 'Où cherchez-vous ?' %}
+            {% include "layouts/js_templates/_topbar.html.twig" %}
+        </header>
+        {% include "home/main_form/_form_start.html.twig" %}
+        {% include "home/main_form/_location.html.twig" %}
+
+        <ul class="location-choices-list">
+            <li class="location-choices-item">
+                <div class="location-bubble">
+                    <span>Morcenx (40110)</span>
+                    <svg class="icon js-location-bubble-closer">
+                        <use xlink:href="/img/svg/sprite.svg#close"></use>
+                    </svg>
+                </div>
+                <div class="location-ray">
+                    <span>rayon</span>
+                    <svg class="icon">
+                        <use xlink:href="/img/svg/sprite.svg#expand-more"></use>
+                    </svg>
+                </div>
+            </li>
+            <li class="location-choices-item">
+                <div class="location-bubble">
+                    <span>Saint-Jean-Pied-de-Cochon (64100)</span>
+                    <svg class="icon js-location-bubble-closer">
+                        <use xlink:href="/img/svg/sprite.svg#close"></use>
+                    </svg>
+                </div>
+                <div class="location-ray">
+                    <span>rayon</span>
+                    <svg class="icon js-location-ray-opener">
+                        <use xlink:href="/img/svg/sprite.svg#expand-more"></use>
+                    </svg>
+                </div>
+            </li>
+        </ul>     
+
+        <div class="">
+            <p class="">
+                Dans un rayon autour de <br>(a faire plus tard)<br>
+            </p>
+        </div>
+
+
+        <ul class="lasts-location-list slider-list">
+            <p class="lasts-location-list-title">Localisations récentes</p>
+            <li class="lasts-location-item slider-item">
+                <svg class="icon i-left">
+                    <use xlink:href="/img/svg/sprite.svg#location-fill"></use>
+                </svg>
+                <span>Biarritz (64200) - 20 km</span>
+                <svg class="icon i-right js-lasts-location-item-closer">
+                    <use xlink:href="/img/svg/sprite.svg#close"></use>
+                </svg>
+            </li>
+            <li class="lasts-location-item slider-item">
+                <svg class="icon i-left">
+                    <use xlink:href="/img/svg/sprite.svg#location-fill"></use>
+                </svg>
+                <span>Salon de Provence (13300)</span>
+                <svg class="icon i-right js-lasts-location-item-closer">
+                    <use xlink:href="/img/svg/sprite.svg#close"></use>
+                </svg>
+            </li>
+            <li class="lasts-location-item slider-item">
+                <svg class="icon i-left">
+                    <use xlink:href="/img/svg/sprite.svg#location-fill"></use>
+                </svg>
+                <span>Lamanon (13330)</span>
+                <svg class="icon i-right js-lasts-location-item-closer">
+                    <use xlink:href="/img/svg/sprite.svg#close"></use>
+                </svg>
+            </li>
+        </ul>
+        {% include "home/main_form/_form_end.html.twig" %}
+    </div>
 </template>
