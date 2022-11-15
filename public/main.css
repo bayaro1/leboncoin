@@ -27,8 +27,6 @@
 }
 
 
-
-
 /************************ general properties *********************/
 
 * {
@@ -116,7 +114,9 @@ button {
     color: var(--black);
 }
 
-
+.invisible {
+    display: none;
+}
 
 /******************************** MOBILE ***********************************************/
 
@@ -168,7 +168,7 @@ button {
 /*hidden-nav*/
 .hidden-nav {
     position: fixed;
-    z-index: 2;
+    z-index: 3;
     top: 0;
     left: -100%;
     right: 100%;
@@ -274,6 +274,8 @@ button {
     font-size: 1.5rem;
 }
 
+
+
 .main-form .form-select .form-box, .main-form .form-select label {
     cursor: pointer;
     background-color: var(--select-bg);
@@ -303,6 +305,9 @@ button {
     height: 2.6rem;
     top: calc(50% - 1.3rem);
     color: var(--black);
+}
+.main-form .form-select .form-box.no-icon-left .i-left {
+    display: none;
 }
 .main-form .form-select .i-right {
     width: 3.2rem;
@@ -353,7 +358,7 @@ button {
     display: block;
     position: fixed;
     background-color: white;
-    z-index: 2;
+    z-index: 3;
     top: 0;
     left: 100%;
     right: -100%;
@@ -400,15 +405,16 @@ button {
     margin-right: 15px;
     font-size: 1.4rem;
 }
-.main-form-category-item a {
+.main-form-category-item {
     display: block;
     padding: 12px 0;
     margin: 0;
     display: flex;
     align-items: center;
     border-bottom: solid 1px var(--select-bg);
+    cursor: pointer;
 }
-.main-form-category-item:last-child a {
+.main-form-category-item:last-child {
     border-bottom: none;
 }
 .main-form-category-item .icon {
@@ -785,6 +791,15 @@ button {
         text-align: left;
         padding-left: 44px;
     }
+    .main-form .form-select .form-box.no-icon-left {
+        padding-left: 12px;
+    }
+    .main-form .form-select .form-box label {
+        display: inline-block;
+        max-width: 142px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
 
     .main-form .form-group .i-location {
         display: block;
@@ -908,11 +923,12 @@ button {
     }
 
     /* category slider */
+
     .main-form-slider {
         position: absolute;
-        z-index: 2;
-        top: 188px;
-        left: calc(((100% - 930px) / 2 + 24px));
+        z-index: 1;
+        top: 114px;
+        left: 24px;
         right: auto;
         height: 0;
         width: 290px;
@@ -934,18 +950,18 @@ button {
         margin-right: 14px;
 
     }
-    .main-form-category-item a {
+    .main-form-category-item {
         padding: 9px 0 9px 8px;
         border-bottom: none;
         border-radius: 4px;
         width: 100%;
         transition: all .3s;
     }
-    .main-form-category-item a:hover {
+    .main-form-category-item:hover {
         background-color: var(--orange-light);
         color: var(--orange);
     }
-    .main-form-category-item a:hover .icon {
+    .main-form-category-item:hover .icon {
         color: var(--orange);
     }
 
@@ -958,7 +974,7 @@ button {
 @media only screen and (min-height: 800px) {
     .navbar-block {
         position: fixed;
-        z-index: 1;
+        z-index: 2;
         background-color: white;
         top: 0;
         width: 100%;

@@ -1,19 +1,12 @@
+import { clickIsOnElement } from "../functions/spatial.js";
+
 export class SliderManager {
 
     /** @type {HTMLElement} */
     #slider;
 
-    /** @type {string} */
-    #openerSelector;
-
-    /** @type {string} */
-    #closerSelector;
-
     /** @type {string|null} */
     #initialized = null;
-
-    /** @type {boolean} */
-    #closeWithBodyClick;
 
     /**callable */
     #callOnBodyClick;
@@ -25,66 +18,44 @@ export class SliderManager {
     constructor(sliderSelector) {
         this.#slider = document.querySelector(sliderSelector);
     }
-
-    /**
-     * @param {Node} identifier
-     * @param {Node} content 
-     * @param {string} openerSelector 
-     * @param {string} closerSelector 
-     * @param {boolean} closeWithBodyClick si on peut ou non fermer en appuyant à côté du slider
-     */
-    manage(
-        openerSelector,
-        closerSelector,
-        closeWithBodyClick = false
-    ) {
-        this.#openerSelector = openerSelector;
-        this.#closerSelector = closerSelector;
-        this.#closeWithBodyClick = closeWithBodyClick;
-
-        document.querySelector(this.#openerSelector).addEventListener('click', e => this.#open(e));
-    }
     
     /**
      * 
-     * @param {Event} e 
+     * @param {HTMLElement} opener
      */
-    #open(e) {
-        console.log(e.currentTarget.dataset.maxwidth);
-        if(e.currentTarget.dataset.maxwidth !== null && window.innerWidth > e.currentTarget.dataset.maxwidth) {
+    onOpenerClick(opener) {
+        if(opener.dataset.maxwidth !== null && window.innerWidth > opener.dataset.maxwidth) {
             return;
         }
-        if(e.currentTarget.getAttribute('class') !== this.#initialized) {
+        if(opener.getAttribute('class') !== this.#initialized) {
             this.#slider.innerHTML = '';
-            this.#slider.append(this.#getContent(e.currentTarget));
-            this.#initialized = e.currentTarget.getAttribute('class');
+            this.#slider.append(this.#getContent(opener));
+            this.#initialized = opener.getAttribute('class');
         }
-        this.#slider.classList.toggle('visible');
-        document.body.classList.toggle('frozen');
-        
 
-        this.#callOnBodyClick = (e) => this.#onBodyClick(e);
-        if(this.#closeWithBodyClick) {
-            document.body.addEventListener('click', this.#callOnBodyClick);
+        if(!this.#slider.classList.contains('visible')) {
+            
+            this.#slider.classList.add('visible');
+            if(opener.dataset.nofrozenatminwidth === undefined || opener.dataset.nofrozenatminwidth > window.innerWidth) {
+                document.body.classList.add('frozen');
+            }
+            //closers listeners
+            this.#callOnBodyClick = (e) => this.#onBodyClick(e);
+            const callable = this.#callOnBodyClick;
+            setTimeout(function() {
+                document.body.addEventListener('click', callable);
+            }, 100);
+            this.#slider.querySelector(opener.dataset.closer).addEventListener('click', e => this.close());
+        } else {
+            this.#slider.classList.remove('visible');
+            document.body.classList.remove('frozen');
         }
-        this.#slider.querySelector(this.#closerSelector).addEventListener('click', e => this.#close());
-
-        /*a finaliser et refactoriser*/
-        document.querySelectorAll('.main-form-category-item').forEach(function(item) {
-            item.addEventListener('click', function(e) {
-                document.querySelector('.category-slider-opener label').innerText = item.querySelector('span').innerText;
-                document.querySelector('.main-form-slider').classList.remove('visible');
-                document.body.classList.remove('frozen');
-            });
-        });
-        /*****************************/ 
     }
     /**
      * 
      * @param {Event} e 
      */
-    #close() {
-        
+    close() {
         this.#slider.classList.remove('visible');
         document.body.classList.remove('frozen');
         document.body.removeEventListener('click', this.#callOnBodyClick);
@@ -92,11 +63,11 @@ export class SliderManager {
 
     /**
      * 
-     * @param {Event} e 
+     * @param {Event} e
      */
     #onBodyClick(e) {
-        if(window.innerWidth > 620 && e.clientX > 482) {
-            this.#close();
+        if(!clickIsOnElement(e, this.#slider)) {
+            this.close();
         }
     }
 
