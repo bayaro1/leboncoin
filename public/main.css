@@ -638,6 +638,126 @@ button {
     color: var(--input-placeholder-color);
 }
 
+
+/*last-search*/
+.last-search h2 {
+    display: flex;
+    align-items: center;
+}
+.last-search h2 .icon.i-left {
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.4em;
+}
+
+/* carousels */
+.carousel-section {
+    padding: 5px 15px;
+}
+.carousel-section h2 {
+    margin: 0;
+    font-size: 2rem;
+}
+.carousel {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 10px 0;
+}
+.carousel.car-scroll {
+    overflow: scroll;
+}
+.carousel.car-arrow {
+    overflow: hidden;
+    position: relative;
+}
+.carousel .i-car-arrow {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: white;
+    color: var(--input-placeholder-color);
+    top: calc(50% - 15px);
+
+}
+.carousel .i-car-arrow.i-car-left {
+    left: 15px;
+}
+.carousel .i-car-arrow.i-car-right {
+    right: 15px;
+}
+.carousel-item {
+    flex: none;
+    margin-right: 15px;
+}
+/*card*/
+.card {
+    position: relative;
+    width: 210px;
+    height: 125px;
+    padding: 10px 20px 18px 15px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--shadow);
+    border: solid 1px black;
+}
+.card-title {
+    margin: 0;
+    font-size: 1.8rem;
+}
+.card-subtitle {
+    font-size: 1.4rem;
+    margin: 8px 0;
+}
+.card-footer {
+    font-size: 1.4rem;
+    margin-top: auto;
+    white-space: nowrap;
+    overflow-wrap: nowrap;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+.card-footer .icon.i-left {
+    width: 1.2em;
+    height: 1.2em;
+    flex: none;
+    margin-right: 4px;
+}
+.card .icon.i-closer {
+    position: absolute;
+    top: 5px;
+    right: 9px;
+}
+/*img-card*/
+.img-card {
+    width: 120px;
+    height: 120px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+.img-card img {
+    width: inherit;
+    height: inherit;
+}
+.img-card h3 {
+    margin: 0;
+    position: absolute;
+    color: white;
+    font-size: 1.4rem;
+    bottom: 10px;
+    left: 5px;
+    right: 5px;
+    text-align: center;
+}
+
 /***********************************RESPONSIVE**************************************************/
 
 
@@ -1257,7 +1377,7 @@ button {
 
 /* body {
     background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
-                url(design/q-slider.JPG) center top no-repeat;
+                url(design/mobile-homepage.jpg) center top no-repeat;
 }
 
 @media only screen and (min-width: 620px) {
