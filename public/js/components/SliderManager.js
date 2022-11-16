@@ -39,6 +39,8 @@ export class SliderManager {
             if(opener.dataset.nofrozenatminwidth === undefined || opener.dataset.nofrozenatminwidth > window.innerWidth) {
                 document.body.classList.add('frozen');
             }
+
+            
             //closers listeners
             this.#callOnBodyClick = (e) => this.#onBodyClick(e);
             const callable = this.#callOnBodyClick;
