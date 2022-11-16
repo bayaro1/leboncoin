@@ -1,7 +1,9 @@
+import { CloseHandler } from "./CloseHandler.js";
+
 export class InfoManager {
 
     /** @type {boolean} */
-    #open = false;
+    open = false;
 
     /** @type {HTMLElement} */
     #opener;
@@ -11,6 +13,9 @@ export class InfoManager {
 
     /** @type {HTMLElement} */
     #container;
+
+    /** @type {string} */
+    #closerSelector;
 
     /** @type {HTMLElement} */
     #info;
@@ -23,8 +28,7 @@ export class InfoManager {
         this.#opener = document.querySelector(openerSelector);
         this.#template = document.querySelector(this.#opener.dataset.template);
         this.#container = document.querySelector(this.#opener.dataset.container);
-
-        console.log(this.#template);
+        this.#closerSelector = this.#opener.dataset.closer;
 
         this.#opener.addEventListener('click', e => this.#onOpenerClick(e));
     }
@@ -34,11 +38,17 @@ export class InfoManager {
      * @param {Event} e 
      */
     #onOpenerClick(e) {
-        if(!this.#open) {
-            this.#open = true;
+        if(!this.open) {
+            this.open = true;
             this.#info = this.#template.content.cloneNode(true).firstElementChild;
             this.#container.append(this.#info);
+            new CloseHandler(this.#info, document.querySelector(this.#closerSelector), this.#close, this);
         }
+    }
+
+    #close(e, info, eltManager) {
+        info.remove();
+        eltManager.open = false;
     }
 
 }

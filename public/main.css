@@ -26,6 +26,15 @@
     }
 }
 
+@keyframes onInfoAppears {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 
 /************************ general properties *********************/
 
@@ -112,6 +121,43 @@ button {
 } 
 .main-form .form-group .icon.i-location-fill {
     color: var(--black);
+}
+
+.info { /*a mettre en haut du css*/
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--shadow);
+    padding: 15px 30px 15px 15px;
+    position: absolute;
+    z-index: 1;
+    cursor: default;
+    animation: onInfoAppears 0.3s;
+}
+.info .info-title {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: var(--black);
+    font-weight: 600;
+}
+.info p {
+    color: var(--input-placeholder-color);
+    font-size: 1.3rem;
+    margin-bottom: 0;
+}
+.info a {
+    color: var(--blue);
+}
+.info a:hover {
+    text-decoration: underline;
+}
+.info .i-info {
+    cursor: pointer;
+    width: 2.7rem;
+    height: 2.7rem;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: var(--input-placeholder-color)
 }
 
 .invisible {
@@ -1129,6 +1175,7 @@ button {
         margin-top: 12px;
         margin-left: 14px;
         margin-right: 14px;
+        width: auto;
     }
     .main-form-slider .main-form-category-item {
         padding: 9px 0 9px 8px;
@@ -1145,41 +1192,6 @@ button {
         color: var(--orange);
     }
 
-
-    .info { /*a mettre en haut du css*/
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 0 10px var(--shadow);
-        padding: 15px 30px 15px 15px;
-        position: absolute;
-        z-index: 1;
-        cursor: default;
-    }
-    .info .info-title {
-        margin-top: 0;
-        font-size: 1.4rem;
-        color: var(--black);
-        font-weight: 600;
-    }
-    .info p {
-        color: var(--input-placeholder-color);
-        font-size: 1.3rem;
-        margin-bottom: 0;
-    }
-    .info a {
-        color: var(--blue);
-    }
-    .info a:hover {
-        text-decoration: underline;
-    }
-    .info .icon.info-icon {
-        cursor: pointer;
-        width: 2.7rem;
-        height: 2.7rem;
-        position: absolute;
-        right: 10px;
-        top: 10px;
-    }
     
     /*delivery-info*/
     .delivery-info {

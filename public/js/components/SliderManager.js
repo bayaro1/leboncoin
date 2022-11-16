@@ -1,4 +1,5 @@
-import { clickIsOnElement } from "../functions/spatial.js";
+import { CloseHandler } from "./CloseHandler.js";
+
 
 export class SliderManager {
 
@@ -7,10 +8,6 @@ export class SliderManager {
 
     /** @type {string|null} */
     #initialized = null;
-
-    /**callable */
-    #callOnBodyClick;
-
 
     /**
      * @param {string} sliderSelector 
@@ -27,6 +24,7 @@ export class SliderManager {
         if(opener.dataset.maxwidth !== null && window.innerWidth > opener.dataset.maxwidth) {
             return;
         }
+        
         if(opener.getAttribute('class') !== this.#initialized) {
             this.#slider.innerHTML = '';
             this.#slider.append(this.#getContent(opener));
@@ -40,37 +38,22 @@ export class SliderManager {
                 document.body.classList.add('frozen');
             }
 
-            
-            //closers listeners
-            this.#callOnBodyClick = (e) => this.#onBodyClick(e);
-            const callable = this.#callOnBodyClick;
-            setTimeout(function() {
-                document.body.addEventListener('click', callable);
-            }, 100);
-            this.#slider.querySelector(opener.dataset.closer).addEventListener('click', e => this.close());
+            /*essayer de transformer ça en promise*/   //.then(e => this.#close(e))
+            new CloseHandler(this.#slider, this.#slider.querySelector(opener.dataset.closer), this.#close);
         } else {
+            //utiliser #close directement
             this.#slider.classList.remove('visible');
             document.body.classList.remove('frozen');
         }
     }
-    /**
-     * 
-     * @param {Event} e 
-     */
-    close() {
-        this.#slider.classList.remove('visible');
-        document.body.classList.remove('frozen');
-        document.body.removeEventListener('click', this.#callOnBodyClick);
-    }
 
     /**
-     * 
-     * @param {Event} e
+     * @param {HTMLElement} slider
+     * @param {MouseEvent} e 
      */
-    #onBodyClick(e) {
-        if(!clickIsOnElement(e, this.#slider)) {
-            this.close();
-        }
+    #close(e, slider, sliderManager = null) {
+        slider.classList.remove('visible');
+        document.body.classList.remove('frozen');
     }
 
     /**
