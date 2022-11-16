@@ -39,7 +39,7 @@ document.querySelector('.category-slider-opener')
                         document.querySelector('.category-slider-opener').classList.remove('no-icon-left');
                     }
 
-                    mainFormSliderManager.close();
+                    categorySliderManager.close();
                 });
             });
         });

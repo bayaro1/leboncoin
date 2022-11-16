@@ -38,21 +38,19 @@ export class SliderManager {
                 document.body.classList.add('frozen');
             }
 
-            /*essayer de transformer ça en promise*/   //.then(e => this.#close(e))
-            new CloseHandler(this.#slider, this.#slider.querySelector(opener.dataset.closer), this.#close);
+            /*essayer de transformer ça en promise*/   //.then(e => this.close(e))
+            new CloseHandler(
+                this.#slider, 
+                this.#slider.querySelector(opener.dataset.closer), 
+                this
+                );
         } else {
-            //utiliser #close directement
-            this.#slider.classList.remove('visible');
-            document.body.classList.remove('frozen');
+            this.close();
         }
     }
 
-    /**
-     * @param {HTMLElement} slider
-     * @param {MouseEvent} e 
-     */
-    #close(e, slider, sliderManager = null) {
-        slider.classList.remove('visible');
+    close() {
+        this.#slider.classList.remove('visible');
         document.body.classList.remove('frozen');
     }
 

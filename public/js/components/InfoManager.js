@@ -3,7 +3,7 @@ import { CloseHandler } from "./CloseHandler.js";
 export class InfoManager {
 
     /** @type {boolean} */
-    open = false;
+    #open = false;
 
     /** @type {HTMLElement} */
     #opener;
@@ -38,17 +38,21 @@ export class InfoManager {
      * @param {Event} e 
      */
     #onOpenerClick(e) {
-        if(!this.open) {
-            this.open = true;
+        if(!this.#open) {
+            this.#open = true;
             this.#info = this.#template.content.cloneNode(true).firstElementChild;
             this.#container.append(this.#info);
-            new CloseHandler(this.#info, document.querySelector(this.#closerSelector), this.#close, this);
+            new CloseHandler(
+                this.#info, 
+                document.querySelector(this.#closerSelector), 
+                this
+                );
         }
     }
 
-    #close(e, info, eltManager) {
-        info.remove();
-        eltManager.open = false;
+    close() {
+        this.#info.remove();
+        this.#open = false;
     }
 
 }
