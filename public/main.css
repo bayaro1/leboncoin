@@ -42,8 +42,6 @@
     box-sizing: border-box;
 }
 
-
-
 html, body {
     height: 3000px;
     margin: 0;
@@ -61,6 +59,10 @@ h1 {
     line-height: 1.9rem;
     font-weight: 600;
     font-size: 1.4rem;
+}
+h2 {
+    margin: 0;
+    font-size: 2rem;
 }
 
 ul {
@@ -653,50 +655,43 @@ button {
 /* carousels */
 .carousel-section {
     padding: 5px 15px;
+    position: relative;
+    overflow: hidden;
 }
-.carousel-section h2 {
-    margin: 0;
-    font-size: 2rem;
-}
+
 .carousel {
     display: flex;
     flex-wrap: nowrap;
-    margin: 10px 0;
+    margin: 10px 0 0;
+    margin-right: -15px;
+    overflow-x: scroll;
+    padding-bottom: 24px;
 }
-.carousel.car-scroll {
-    overflow: scroll;
-}
-.carousel.car-arrow {
-    overflow: hidden;
-    position: relative;
-}
-.carousel .i-car-arrow {
-    cursor: pointer;
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 30px;
-    background-color: white;
-    color: var(--input-placeholder-color);
-    top: calc(50% - 15px);
 
+.carousel::after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 50px;
+    right: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgb(255, 255, 255));
 }
-.carousel .i-car-arrow.i-car-left {
-    left: 15px;
+
+.carousel .i-car-arrow {
+    display: none;
 }
-.carousel .i-car-arrow.i-car-right {
-    right: 15px;
-}
+
 .carousel-item {
     flex: none;
     margin-right: 15px;
 }
+.carousel-item:last-of-type {
+    margin-right: 0;
+}
 /*card*/
 .card {
+    cursor: pointer;
     position: relative;
     width: 210px;
     height: 125px;
@@ -704,8 +699,8 @@ button {
     display: flex;
     flex-direction: column;
     border-radius: 8px;
-    box-shadow: 0 0 10px var(--shadow);
-    border: solid 1px black;
+    box-shadow: 1px 1px 10px var(--shadow);
+    border: solid 1px var(--select-bg-hover);
 }
 .card-title {
     margin: 0;
@@ -731,6 +726,7 @@ button {
     margin-right: 4px;
 }
 .card .icon.i-closer {
+    cursor: pointer;
     position: absolute;
     top: 5px;
     right: 9px;
@@ -742,10 +738,7 @@ button {
     border-radius: 5px;
     overflow: hidden;
     position: relative;
-}
-.img-card img {
-    width: inherit;
-    height: inherit;
+    background: url('https://via.placeholder.com/180x200.jpg') center center / cover no-repeat;
 }
 .img-card h3 {
     margin: 0;
@@ -757,6 +750,8 @@ button {
     right: 5px;
     text-align: center;
 }
+
+
 
 /***********************************RESPONSIVE**************************************************/
 
@@ -835,10 +830,29 @@ button {
         width: 100%;
     }
 
+    .card {
+        width: 300px;
+        height: 125px;
+    }
+    .img-card {
+        width: 180px;
+        height: 120px;
+    }
     
 }
 
-
+@media only screen and (min-width: 770px) {
+    h2 {
+        margin: 0;
+        font-size: 2.4rem;
+    }
+    .last-search {
+        padding-top: 0;
+    }
+    .last-search h2 .icon.i-left {
+        margin-right: 4px;
+    }
+}
 
 @media only screen and (min-width: 1050px) {
 
@@ -1333,6 +1347,60 @@ button {
         transform: rotate(-45deg);
     }
 
+    /*last-search*/
+    .last-search .carousel{
+        margin-top: 25px;
+    }
+    /*carousel*/
+    .carousel {
+        margin-right: 0;
+    }
+    .carousel.car-scroll {
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    .carousel.car-scroll::after {
+        display: none;
+    }
+    
+    /*carousel arrow*/
+    .carousel.car-arrow {
+        overflow: hidden;
+    }
+    .carousel .i-car-arrow {
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 44px;
+        background-color: white;
+        color: var(--input-placeholder-color);
+        top: calc(50% - 18px);
+        box-shadow: 0 0 5px var(--shadow);
+
+    }
+    .carousel .i-car-arrow.i-car-left {
+        left: 40px;
+    }
+    .carousel .i-car-arrow.i-car-right {
+        right: 30px;
+    }
+
+    .card {
+        min-width: 300px;
+        max-width: 346px;
+        flex: 1 0;
+        margin-right: 20px;
+    }
+    .card:last-of-type {
+        margin-right: 0;
+    }
+
 }
 
 
@@ -1399,9 +1467,9 @@ button {
 .dev-todo {
     position: fixed;
     bottom: 50px;
-    left: calc(50% - 200px);
+    left: calc(50% - 300px);
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     background-color: #ff6e1488;
     border-radius: 5px;
     padding: 10px 10px 20px 10px;

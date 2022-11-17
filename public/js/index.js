@@ -1,3 +1,4 @@
+import { CarouselArrowManager } from "./components/CarouselArrowManager.js";
 import { InfoManager } from "./components/InfoManager.js";
 import { SliderManager } from "./components/SliderManager.js";
 
@@ -48,3 +49,8 @@ document.querySelector('.category-slider-opener')
 
 /*****delivery-info ***/
 new InfoManager('.js-delivery-info');
+
+
+/**carousel */
+new CarouselArrowManager('.carousel.car-arrow', 700);
+
