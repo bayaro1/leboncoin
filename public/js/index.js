@@ -51,6 +51,16 @@ document.querySelector('.category-slider-opener')
 new InfoManager('.js-delivery-info');
 
 
-/**carousel */
-new CarouselArrowManager('.carousel.car-arrow', 700);
+/**carousels */
+
+new CarouselArrowManager(
+    document.querySelector('.top-category .carousel.car-arrow'),
+    700
+);
+
+document.querySelectorAll('.last-suggest .carousel.car-arrow')
+        .forEach(function(carousel) {
+            new CarouselArrowManager(carousel, 1200, 5);
+        });
+
 
