@@ -25,10 +25,10 @@ export class InfoManager {
 
     /**
      * 
-     * @param {string} openerSelector 
+     * @param {HTMLElement} opener 
      */
-    constructor(openerSelector) {
-        this.#opener = document.querySelector(openerSelector);
+    constructor(opener) {
+        this.#opener = opener;
         this.#template = document.querySelector(this.#opener.dataset.template);
         this.#container = document.querySelector(this.#opener.dataset.container);
         this.#closerSelector = this.#opener.dataset.closer;

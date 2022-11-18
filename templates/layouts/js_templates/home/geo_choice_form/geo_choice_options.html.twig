@@ -1,29 +1,82 @@
 <template id="geo-choice-options-template">
-    <ul class="geo-choice-list select-list">
-        <li class="geo-choice-item select-option default" data-value="Alsace">Alsace</li>
-        <li class="geo-choice-item select-option" data-value="Aquitaine">Aquitaine</li>
-        <li class="geo-choice-item select-option" data-value="Auvergne">Auvergne</li>
-        <li class="geo-choice-item select-option" data-value="Basse-Normandie">Basse-Normandie</li>
-        <li class="geo-choice-item select-option" data-value="Alsace">Bourgogne</li>
-        <li class="geo-choice-item select-option" data-value="Aquitaine">Bretagne</li>
-        <li class="geo-choice-item select-option" data-value="Auvergne">Centre</li>
-        <li class="geo-choice-item select-option" data-value="Alsace">Champagne-Ardenne</li>
-        <li class="geo-choice-item select-option" data-value="Aquitaine">Corse</li>
-        <li class="geo-choice-item select-option" data-value="Auvergne">Franche-Comté</li>
-        <li class="geo-choice-item select-option" data-value="Alsace">Haute-Normandie</li>
-        <li class="geo-choice-item select-option" data-value="Aquitaine">Ile-de-France</li>
-        <li class="geo-choice-item select-option" data-value="Auvergne">Languedoc-Roussillon</li>
-        <li class="geo-choice-item select-option" data-value="Alsace">Limousin</li>
-        <li class="geo-choice-item select-option" data-value="Aquitaine">Lorraine</li>
-        <li class="geo-choice-item select-option" data-value="Auvergne">Midi-Pyrénées</li>
-        <li class="geo-choice-item select-option" data-value="Alsace">Nord-Pas-de-Calais</li>
-        <li class="geo-choice-item select-option" data-value="Aquitaine">Pays de la Loire</li>
-        <li class="geo-choice-item select-option" data-value="Alsace">Picardie</li>
-        <li class="geo-choice-item select-option" data-value="Aquitaine">Poitou-Charentes</li>
-        <li class="geo-choice-item select-option" data-value="Provence Alpes Côte d'Azur">Provence Alpes Côte d'Azur</li>
-        <li class="geo-choice-item select-option" data-value="Rhône-Alpes">Rhône-Alpes</li>
-        <li class="geo-choice-item select-option" data-value="Auvergne">Guadeloupe</li>
-        <li class="geo-choice-item select-option" data-value="Auvergne">Martinique</li>
-        <li class="geo-choice-item select-option" data-value="Auvergne">Réunion</li>
-    </ul>
+    {% include "home/main_form/_form_start.html.twig" %}
+        <ul class="geo-choice-list select-list">
+            <li class="geo-choice-item select-option default" data-value="alsace-id">
+                <button type="submit" name="geo_filter" value="alsace-id">Alsace</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="aquitaine-id">
+                <button type="submit" name="geo_filter" value="aquitaine-id">Aquitaine</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="auvergne-id">
+                <button type="submit" name="geo_filter" value="auvergne-id">Auvergne</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="basse-normandie-id">
+                <button type="submit" name="geo_filter" value="basse-normandie-id">Basse-Normandie</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="aquitaine-id">
+                <button type="submit" name="geo_filter" value="aquitaine-id">Aquitaine</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="auvergne-id">
+                <button type="submit" name="geo_filter" value="auvergne-id">Auvergne</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="basse-normandie-id">
+                <button type="submit" name="geo_filter" value="basse-normandie-id">Basse-Normandie</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="aquitaine-id">
+                <button type="submit" name="geo_filter" value="aquitaine-id">Aquitaine</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="auvergne-id">
+                <button type="submit" name="geo_filter" value="auvergne-id">Auvergne</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="basse-normandie-id">
+                <button type="submit" name="geo_filter" value="basse-normandie-id">Basse-Normandie</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="aquitaine-id">
+                <button type="submit" name="geo_filter" value="aquitaine-id">Aquitaine</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="auvergne-id">
+                <button type="submit" name="geo_filter" value="auvergne-id">Auvergne</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="basse-normandie-id">
+                <button type="submit" name="geo_filter" value="basse-normandie-id">Basse-Normandie</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="aquitaine-id">
+                <button type="submit" name="geo_filter" value="aquitaine-id">Aquitaine</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="auvergne-id">
+                <button type="submit" name="geo_filter" value="auvergne-id">Auvergne</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="basse-normandie-id">
+                <button type="submit" name="geo_filter" value="basse-normandie-id">Basse-Normandie</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="aquitaine-id">
+                <button type="submit" name="geo_filter" value="aquitaine-id">Aquitaine</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="auvergne-id">
+                <button type="submit" name="geo_filter" value="auvergne-id">Auvergne</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="Alsace">
+                <button type="submit" name="geo_filter" value="basse-normandie-id">Basse-Normandie</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="Aquitaine-id">
+                <button type="submit" name="geo_filter" value="aquitaine-id">Aquitaine</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="auvergne-id">
+                <button type="submit" name="geo_filter" value="auvergne-id">Auvergne</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="basse-normandie-id">
+                <button type="submit" name="geo_filter" value="basse-normandie-id">Basse-Normandie</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="Aquitaine-id">
+                <button type="submit" name="geo_filter" value="aquitaine-id">Aquitaine</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="auvergne-id">
+                <button type="submit" name="geo_filter" value="auvergne-id">Auvergne</button>
+            </li>
+            <li class="geo-choice-item select-option" data-value="basse-normandie-id">
+                <button type="submit" name="geo_filter" value="basse-normandie-id">Basse-Normandie</button>
+            </li>
+            
+        </ul>
+    </form>
 </template>

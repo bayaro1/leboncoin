@@ -7,20 +7,24 @@ import { SliderManager } from "./components/SliderManager.js";
 /** gestion de la navigation cachée en mode mobile et tablette */
 const hiddenNavManager = new SliderManager('.hidden-nav');
 document.querySelector('.hidden-nav-opener')
-        .addEventListener(
-            'click', 
-            e => hiddenNavManager.onOpenerClick(e.currentTarget)
-        );
+        .addEventListener('click', function(e) {
+            if(window.innerWidth < 1050) {
+                hiddenNavManager.onOpenerClick(e.currentTarget)
+            }
+        });
 
 /******main form input sliders*******/
 const inputSliderManager = new SliderManager('.main-form-slider[data-contain=input-slider]');
 document.querySelectorAll('.q-slider-opener, .location-slider-opener')
             .forEach(function(sliderElt) {
                 sliderElt.addEventListener('click', function(e) {
-                    inputSliderManager.onOpenerClick(e.currentTarget);
-                    document.querySelector('.main-form-slider .main-form-input').focus();
+                    
+                    if(window.innerWidth < 1050) {
+                        inputSliderManager.onOpenerClick(e.currentTarget);
+                        document.querySelector('.main-form-slider .main-form-input').focus();
+                    }
                 })
-            })
+            });
 
 /*******main form category slider ******/
 const categorySliderManager = new SliderManager('.main-form-slider[data-contain=category-slider]');
@@ -49,7 +53,9 @@ document.querySelector('.category-slider-opener')
 
 
 /*****delivery-info ***/
-new InfoManager('.js-delivery-info');
+document.querySelectorAll('.js-info-opener').forEach(function(infoOpener) {
+    new InfoManager(infoOpener);
+})
 
 
 /**carousels */

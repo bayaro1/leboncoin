@@ -3,9 +3,6 @@
 
 {% block body %}
 
-{# <pre>
-    {{ dump(post) }}
-</pre> #}
 
     <section class="main">
         <h1>Des millions de petites annonces et autant d'occasions de se faire plaisir</h1>
@@ -135,9 +132,15 @@
     <section class="last-suggest">
         <h2>
             <span>D’après vos dernières recherches</span>
-            <svg class="icon i-right">
-                <use xlink:href="/img/svg/sprite.svg#help"></use>
-            </svg>
+            <div class="js-info-opener last-suggest-info-container"
+                 data-template="#last-suggest-info-template"
+                 data-container=".last-suggest-info-container"
+                 data-closer=".last-suggest-info .js-info-closer"    
+                >
+                <svg class="icon i-right i-help">
+                    <use xlink:href="/img/svg/sprite.svg#help"></use>
+                </svg>
+            </div>
         </h2>
         <div class="last-suggest-row carousel-section">
             <p class="section-subtitle">
@@ -877,7 +880,8 @@
                 id="geo-choice" 
                 class="geo-choice-select js-select"
                 data-optionstemplate="#geo-choice-options-template"
-                >  <!-- .focus -->
+                data-currentchoicevalue=""
+                >
                 <span class="current-choice-label"></span>
                 <svg class="icon">
                     <use xlink:href="/img/svg/sprite.svg#expand-more"></use>
@@ -886,8 +890,27 @@
         </div>
     </section>
 
+
+    <section class="footer-banner">
+        <a href="#" class="footer-banner-link">
+            <div class="footer-banner-body">
+                <h3>Avoir une passion c'est bien ! La partager avec les autres, c'est mieux !</h3>
+                <p>Jardinage, mode, vélo... Ils sont nombreux à en parler sur la Communauté leboncoin ! Rejoignez-les !</p>
+                <button class="btn btn-orange">Découvrir la communauté</button>
+            </div>
+        </a>
+    </section>
+
+    <section class="general-description">
+        <p>
+            Avec leboncoin, trouvez la bonne affaire sur le site référent de petites annonces de particulier à particulier et de professionnels. 
+            Avec des millions de petites annonces, trouvez la bonne occasion dans nos catégories 
+            <a href="#">voiture</a>, <a href="#">immobilier</a>, <a href="#">emploi</a>, <a href="#">location de vacances</a>, <a href="#">vêtements</a>, <a href="#">meubles</a>, 
+            <a href="#">bricolage</a>, <a href="#">téléphonie</a>, <a href="#">jeux vidéo</a>, etc...
+            Déposez une annonce gratuite en toute simplicité pour vendre, rechercher, donner vos biens de seconde main ou promouvoir vos services. 
+            Pour cet été, découvrez nos idées de destination avec notre <a href="#">guide de vacances en France</a>. Achetez en toute sécurité avec notre système de paiement en ligne et de livraison pour les annonces éligibles.
+        </p>
+    </section>
     
     {% include "layouts/js_templates/home/home_templates.html.twig" %}
 {% endblock %}
-
-

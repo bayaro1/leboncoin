@@ -21,6 +21,7 @@ export class SelectManager {
         this.#select = select;
         this.#select.append(document.querySelector(optionsTemplateSelector).content.cloneNode(true));
         this.#select.querySelector('.current-choice-label').innerText = this.#select.querySelector('.select-option.default').innerText;
+        this.#select.dataset.currentchoicevalue = this.#select.querySelector('.select-option.default').dataset.value;
 
         this.#select.addEventListener('click', e => this.#onClick(e));
     }
@@ -63,6 +64,7 @@ export class SelectManager {
     onChoice(e) {
         e.stopPropagation();
         this.#select.querySelector('.current-choice-label').innerText = e.currentTarget.innerText;
+        this.#select.dataset.currentchoicevalue = e.currentTarget.dataset.value;
         this.close();
     }
 
