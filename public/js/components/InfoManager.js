@@ -20,6 +20,9 @@ export class InfoManager {
     /** @type {HTMLElement} */
     #info;
 
+    /** @type {CloseHandler} */
+    #closeHandler;
+
     /**
      * 
      * @param {string} openerSelector 
@@ -31,6 +34,7 @@ export class InfoManager {
         this.#closerSelector = this.#opener.dataset.closer;
 
         this.#opener.addEventListener('click', e => this.#onOpenerClick(e));
+        console.log(this.#opener);
     }
 
     /**
@@ -38,14 +42,15 @@ export class InfoManager {
      * @param {Event} e 
      */
     #onOpenerClick(e) {
+        console.log(this.#opener);
         if(!this.#open) {
             this.#open = true;
             this.#info = this.#template.content.cloneNode(true).firstElementChild;
             this.#container.append(this.#info);
-            new CloseHandler(
+            this.#closeHandler = new CloseHandler(
                 this.#info, 
-                document.querySelector(this.#closerSelector), 
-                this
+                this,
+                document.querySelector(this.#closerSelector)
                 );
         }
     }
@@ -53,6 +58,7 @@ export class InfoManager {
     close() {
         this.#info.remove();
         this.#open = false;
+        this.#closeHandler.delete();
     }
 
 }

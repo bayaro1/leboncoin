@@ -1,4 +1,5 @@
 import { CarouselArrowManager } from "./components/CarouselArrowManager.js";
+import { SelectManager } from "./components/Form/SelectManager.js";
 import { InfoManager } from "./components/InfoManager.js";
 import { SliderManager } from "./components/SliderManager.js";
 
@@ -64,3 +65,9 @@ document.querySelectorAll('.last-suggest .carousel.car-arrow')
         });
 
 
+
+/*selects*/
+
+document.querySelectorAll('.js-select').forEach(function(select) {
+    new SelectManager(select, select.dataset.optionstemplate);
+})

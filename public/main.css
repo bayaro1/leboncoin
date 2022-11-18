@@ -5,6 +5,7 @@
     --orange-light: #fef0e9;
     --blue: #4183d7;
     --blue-hover: #369;
+    --green: #4e9850;
     --shadow: rgba(203, 208, 211, 0.6);
     --black: #333;
     --input-border-color: #cad1d9; 
@@ -43,7 +44,7 @@
 }
 
 html, body {
-    height: 3000px;
+    height: 5000px;
     margin: 0;
     font-size: 10px;
     font-weight: 400;
@@ -164,6 +165,41 @@ button {
 
 .invisible {
     display: none;
+}
+
+.chip-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 7px 0;
+}
+
+.chip-item {
+    flex: none;
+    background-color: rgb(254, 240, 233);
+    border-radius: 4px;
+    padding: 3px 10px;
+    margin: 0 5px 2px 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.urgent-tag {
+    position: relative;
+}
+.urgent-tag::after {
+    content: 'Urgent';
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 3px 7px;
+    border-radius: 4px;
+    border: solid 1px var(--orange);
+    color: var(--orange);
+    position: absolute;
+}
+.urgent-tag-top-left::after {
+    top: 10px;
+    left: 10px;
 }
 
 /******************************** MOBILE ***********************************************/
@@ -651,6 +687,10 @@ button {
     height: 1.2em;
     margin-right: 0.4em;
 }
+.last-search .card-footer {
+    white-space: nowrap;
+    overflow: hidden;
+}
 
 /* carousels */
 .carousel-section {
@@ -692,16 +732,19 @@ button {
 }
 /*card*/
 .card {
-    cursor: pointer;
     position: relative;
     width: 210px;
     height: 125px;
-    padding: 10px 20px 18px 15px;
-    display: flex;
-    flex-direction: column;
     border-radius: 8px;
     box-shadow: 1px 1px 10px var(--shadow);
     border: solid 1px var(--select-bg-hover);
+}
+.card a {
+    width: 100%;
+    height: 100%;
+    padding: 10px 20px 18px 15px;
+    display: flex;
+    flex-direction: column;
 }
 .card-title {
     margin: 0;
@@ -714,9 +757,6 @@ button {
 .card-footer {
     font-size: 1.4rem;
     margin-top: auto;
-    white-space: nowrap;
-    overflow-wrap: nowrap;
-    overflow: hidden;
     display: flex;
     align-items: center;
 }
@@ -741,6 +781,11 @@ button {
     position: relative;
     background: url('https://via.placeholder.com/180x200.jpg') center center / cover no-repeat;
 }
+.img-card a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
 .img-card h3 {
     margin: 0;
     position: absolute;
@@ -752,9 +797,23 @@ button {
     text-align: center;
 }
 
+
 /*last-suggest*/
 .last-suggest h2 {
     padding-left: 15px;
+    display: flex;
+    align-items: center;
+}
+.last-suggest h2 .icon.i-right {
+    cursor: pointer;
+    margin-left: 7px;
+    margin-bottom: -2px;
+    background-color: var(--input-placeholder-color);
+    color: white;
+    border-radius: 50%;
+    padding: 2px;
+    width: 2rem;
+    height: 2rem;
 }
 .last-suggest .section-subtitle {
     font-size: 1.4rem;
@@ -772,8 +831,16 @@ button {
 .suggest-product-card {
     width: 153px;
     min-height: 330px;
+}
+.suggest-product-card a {
+    display: block;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+}
+.suggest-product-card a:hover .suggest-product-card-title {
+    color: var(--orange);
 }
 .suggest-product-card-img {
     flex: none;
@@ -789,13 +856,28 @@ button {
     font-size: 1.6rem;
     font-weight: 600;
     margin: 0;
+    transition: color .3s;
 }
 .suggest-product-card-price {
     flex: none;
     font-size: 1.4rem;
     font-weight: 600;
     margin: 0;
+    display: flex;
+    align-items: center;
 }
+.price-down {
+    color: var(--green);
+}
+.price-down::after {
+    background: url(img/svg/trending_down_green.svg) center center / contain no-repeat;
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+}
+
 .suggest-product-card .card-footer {
     flex: 1 0;
     color: var(--input-placeholder-color);
@@ -829,6 +911,13 @@ button {
     height: 2rem;
     margin-right: 5px;
 }
+.suggest-product-card-user .icon.i-right:nth-of-type(2) {
+    width: 1.4rem;
+    height: 1.4rem;
+    color: rgb(255, 110, 20);
+    position: relative;
+    top: 2px;
+}
 .suggest-product-username {
     font-size: 1.4rem;
     font-weight: 600;
@@ -842,7 +931,71 @@ button {
     color: var(--input-placeholder-color);
 }
 
-
+/*geo-choice*/
+.geo-choice {
+    margin: 20px;
+}
+.geo-choice-map {
+    width: 100%;
+    height: auto;
+}
+.geo-choice-select {
+    width: 100%;
+    height: 38px;
+    border-radius: 4px;
+    appearance: none;
+    border: solid 1px var(--input-border-color); 
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    cursor: pointer;
+    position: relative;
+}
+.geo-choice-select span {
+    font-size: 1.3rem;
+}
+.geo-choice-form .icon {
+    display: block;
+    width: 2.6rem;
+    height: 2.6rem;
+    color: var(--input-placeholder-color);
+    margin-left: auto;
+}
+.geo-choice-select.focus {
+    border: solid 1px var(--blue);
+}
+.geo-choice-form label {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+/*geo-choice-list*/
+.geo-choice-list {
+    position: absolute;
+    overflow-y: scroll;
+    top: 100%;
+    left: 1px;
+    right: 1px;
+    height: 0;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: height .1s;
+}
+.geo-choice-list.visible {
+    height: 370px;
+    box-shadow: 1px 1px 4px var(--black);
+    border: solid 1px rgba(129, 128, 128, 0.5);
+}
+.geo-choice-item {
+    padding: 2px 10px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.geo-choice-item:hover, .geo-choice-item.default {
+    background-color: var(--blue);
+    color: white;
+}
 
 /***********************************RESPONSIVE**************************************************/
 
@@ -942,6 +1095,11 @@ button {
     }
     .last-search h2 .icon.i-left {
         margin-right: 4px;
+    }
+    .geo-choice-map, .geo-choice-form {
+        width: 400px;
+        display: block;
+        margin: 0 auto;
     }
 }
 
@@ -1488,7 +1646,10 @@ button {
     .last-suggest .carousel.car-arrow .i-car-arrow {
         width: 36px;
         height: 36px;
-        top: 37%;
+        top: calc(44px + (225px / 2));
+    }
+    .last-suggest .last-suggest-row.car-section-with-user .carousel.car-arrow .i-car-arrow {
+        top: calc((225px / 2) + 84px);
     }
 
     /*card*/
@@ -1512,6 +1673,13 @@ button {
     .suggest-product-card-img {
         width: 180px;
         height: 225px;
+    }
+
+    /*geo-choice*/
+    .geo-choice-map, .geo-choice-form {
+        width: 300px;
+        display: block;
+        margin: 0 auto;
     }
 
 }
@@ -1581,14 +1749,14 @@ button {
 
 .dev-todo {
     position: fixed;
-    bottom: 50px;
+    bottom: 10px;
     left: calc(50% - 300px);
     width: 100%;
     max-width: 600px;
     background-color: #ff6e1488;
     border-radius: 5px;
     padding: 10px 10px 20px 10px;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: white;
 }
 .dev-todo h5 {

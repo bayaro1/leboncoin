@@ -9,6 +9,9 @@ export class SliderManager {
     /** @type {string|null} */
     #initialized = null;
 
+    /** @type {CloseHandler} */
+    #closeHandler;
+
     /**
      * @param {string} sliderSelector 
      */
@@ -39,10 +42,10 @@ export class SliderManager {
             }
 
             /*essayer de transformer ça en promise*/   //.then(e => this.close(e))
-            new CloseHandler(
+            this.#closeHandler = new CloseHandler(
                 this.#slider, 
-                this.#slider.querySelector(opener.dataset.closer), 
-                this
+                this,
+                this.#slider.querySelector(opener.dataset.closer)
                 );
         } else {
             this.close();
@@ -52,6 +55,7 @@ export class SliderManager {
     close() {
         this.#slider.classList.remove('visible');
         document.body.classList.remove('frozen');
+        this.#closeHandler.delete();
     }
 
     /**

@@ -14,16 +14,18 @@ export class CloseHandler {
 
     /**
      * @param {HTMLElement} eltToClose
-     * @param {HTMLElement} closerElt 
      * @param {Object} eltManager  // doit contenir une méthode close accessible en public
+     * @param {HTMLElement} closerElt
      */
-    constructor(eltToClose, closerElt, eltManager) {
+    constructor(eltToClose, eltManager, closerElt = null) {
 
         this.#eltToClose = eltToClose;
         this.#eltManager = eltManager;
         
          //on écoute le closer et on applique le closingProcess en cas de click
-        closerElt.addEventListener('click', e => this.#closingProcess(e));
+        if(closerElt !== null) {
+            closerElt.addEventListener('click', e => this.#closingProcess(e));
+        }
 
         //on écoute le body et on appelle onBodyClick en cas de click
         //pour pouvoir appeler le removeEventListener, on utilise un callable
@@ -55,6 +57,10 @@ export class CloseHandler {
         e.preventDefault();
         e.stopPropagation();
         this.#eltManager.close();
+        document.body.removeEventListener('click', this.#callOnBodyClick);
+    }
+
+    delete() {
         document.body.removeEventListener('click', this.#callOnBodyClick);
     }
 }
