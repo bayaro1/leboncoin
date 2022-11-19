@@ -3,7 +3,6 @@
 
 {% block body %}
 
-
     <section class="main">
         <h1>Des millions de petites annonces et autant d'occasions de se faire plaisir</h1>
         
@@ -22,6 +21,8 @@
 
     </section>
 
+
+    <div class="container-small">
     <section class="last-search carousel-section">
         <h2> 
             <svg class="icon i-left">
@@ -297,7 +298,7 @@
                 <svg class="icon i-left">
                     <use xlink:href="/img/svg/sprite.svg#car"></use>
                 </svg>
-                <span>En équipements auto</span>
+                <span>En équipement auto</span>
             </p>
             <ul class="carousel car-arrow">
                 <li class="carousel-item suggest-product-card">
@@ -891,15 +892,15 @@
     </section>
 
 
-    <section class="footer-banner">
-        <a href="#" class="footer-banner-link">
-            <div class="footer-banner-body">
-                <h3>Avoir une passion c'est bien ! La partager avec les autres, c'est mieux !</h3>
-                <p>Jardinage, mode, vélo... Ils sont nombreux à en parler sur la Communauté leboncoin ! Rejoignez-les !</p>
-                <button class="btn btn-orange">Découvrir la communauté</button>
-            </div>
-        </a>
-    </section>
+        <section class="footer-banner">
+            <a href="#" class="footer-banner-link">
+                <div class="footer-banner-body">
+                    <h3>Avoir une passion c'est bien ! La partager avec les autres, c'est mieux !</h3>
+                    <p>Jardinage, mode, vélo... Ils sont nombreux à en parler sur la Communauté leboncoin ! Rejoignez-les !</p>
+                    <button class="btn btn-orange">Découvrir la communauté</button>
+                </div>
+            </a>
+        </section>
 
     <section class="general-description">
         <p>
@@ -911,6 +912,7 @@
             Pour cet été, découvrez nos idées de destination avec notre <a href="#">guide de vacances en France</a>. Achetez en toute sécurité avec notre système de paiement en ligne et de livraison pour les annonces éligibles.
         </p>
     </section>
+    </div>
     
     {% include "layouts/js_templates/home/home_templates.html.twig" %}
 {% endblock %}
