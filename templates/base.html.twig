@@ -17,9 +17,10 @@
         {# css #}
         <link rel="stylesheet" href="/main.css">
 
-        {% block js %}
-            <script src="/js/index.js" type="module" defer></script>
+        {% block base_js %}
+            <script src="/js/views/base.js" type="module" defer></script>
         {% endblock %}
+        {% block js %}{% endblock %}
         
     </head>
     <body>

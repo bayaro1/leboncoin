@@ -1,5 +1,16 @@
 {% extends "base.html.twig" %}
 
+{% block js %}
+    <script src="/js/views/product/index.js" type="module" defer></script>
+{% endblock %}
+
 {% block body %}
     {% include "home/main_form/_main_form.html.twig" %}
+
+
+
+
+
+    
+    {% include "layouts/js_templates/home/main_form/main_form_templates.html.twig" %}
 {% endblock %}
