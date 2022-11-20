@@ -77,3 +77,16 @@ document.querySelectorAll('.last-suggest .carousel.car-arrow')
 document.querySelectorAll('.js-select').forEach(function(select) {
     new SelectManager(select, select.dataset.optionstemplate);
 })
+
+
+
+
+
+
+
+/**********************************DEV************************************* */
+/**************************************************************************** */
+/*dev-todo*/
+document.querySelector('.dev-todo-closer').addEventListener('click', function(e) {
+    document.querySelector('.dev-todo').remove();
+})

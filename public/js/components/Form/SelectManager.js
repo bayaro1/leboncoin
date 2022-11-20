@@ -26,6 +26,7 @@ export class SelectManager {
         }
 
         this.#select.addEventListener('click', e => this.#onClick(e));
+        this.#listenChoice();
     }
 
     /**
@@ -46,7 +47,6 @@ export class SelectManager {
 
         this.#open = true;
 
-        this.#listenChoice();
         this.#closeHandler = new CloseHandler(this.#select.querySelector('.select-list'), this);
     }
 
@@ -63,9 +63,11 @@ export class SelectManager {
      * @param {Event} e 
      */
     onChoice(e) {
-        e.preventDefault();
         e.stopPropagation();
-        this.#select.querySelector('.current-choice-label').innerText = e.currentTarget.innerText;
+        // this.#select.querySelector('.current-choice-label').innerText = e.currentTarget.innerText;
+        
+        this.#select.querySelector('.current-choice-label').innerHTML = e.currentTarget.cloneNode(true).innerHTML;
+
         this.#select.dataset.currentchoicevalue = e.currentTarget.dataset.value;
         this.close();
     }

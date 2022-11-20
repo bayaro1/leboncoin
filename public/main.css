@@ -2042,6 +2042,14 @@ button {
         right: 10px;
         color: rgb(71, 71, 71);
     }
+    .js-strangers .current-choice-label .icon {
+        position: static;
+        margin-right: 5px;
+    }
+    .js-strangers .current-choice-label {
+        display: flex;
+        align-items: center;
+    }
 
     /*.strangers-list*/
     .strangers-list {
@@ -2167,5 +2175,14 @@ button {
 .dev-todo ul {
     list-style-type: disc;
     margin-left: 20px;
+}
+.dev-todo-closer {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    color: var(--black);
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
