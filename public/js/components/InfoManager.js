@@ -34,7 +34,6 @@ export class InfoManager {
         this.#closerSelector = this.#opener.dataset.closer;
 
         this.#opener.addEventListener('click', e => this.#onOpenerClick(e));
-        console.log(this.#opener);
     }
 
     /**

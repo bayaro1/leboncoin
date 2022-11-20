@@ -1129,6 +1129,7 @@ button {
     color: #8191a0;
 }
 
+
 /*sub-footer*/
 
 .sub-footer {
@@ -1164,6 +1165,9 @@ button {
 }
 .sub-footer-bottom p:first-child {
     font-size: 1.2rem;
+}
+.sub-footer a.footer-sub-link:hover {
+    text-decoration: underline;
 }
 
 .sub-footer-bottom a {
@@ -1928,9 +1932,6 @@ button {
     .sub-footer p {
         margin: 10px 0;
     }
-    .sub-footer-link:hover {
-        text-decoration: underline;
-    }
     .sub-footer .footer-title {
         margin-bottom: 15px;
         padding-bottom: 5px;
@@ -2012,6 +2013,69 @@ button {
     .icon-footer-media {
         width: 2.5rem;
         height: 2.5rem;
+    }
+
+    /*button select strangers*/
+
+    .js-strangers {
+        width: 100%;
+        height: 36px;
+        background-color: white;
+        border-radius: 4px;
+        position: relative;
+        padding-left: 20px;
+        padding-right: 40px;
+        color: rgb(71, 71, 71);
+        font-weight: 100;
+        text-align: left;
+        cursor: pointer;
+        transition: background-color .3s;
+    }
+    .js-strangers:hover {
+        background-color: #f4f6f7;
+    }
+    .js-strangers .icon {
+        width: 2rem;
+        height: 2rem;
+        position: absolute;
+        top: calc(50% - 1rem);
+        right: 10px;
+        color: rgb(71, 71, 71);
+    }
+
+    /*.strangers-list*/
+    .strangers-list {
+        display: none;
+    }
+    .strangers-list.visible {
+        position: absolute;
+        background-color: white;
+        color: rgb(71, 71, 71);
+        width: 1010px;
+        bottom: 0;
+        right: 0;
+        border-radius: 4px;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 8px 4px;
+    }
+    .strangers-item {
+        width: calc(20% - 8px);
+        margin: 0 4px;
+    }
+    .strangers-item a {
+        display: block;
+        padding: 10px 10px;
+        display: flex;
+        align-items: center;
+    }
+    .strangers-item a .icon {
+        position: static;
+        margin-right: 5px;
+    }
+    .strangers-item a:hover {
+        color: var(--blue);
+        background-color: #f4f6f7;
     }
 }
 

@@ -20,8 +20,10 @@ export class SelectManager {
     constructor(select, optionsTemplateSelector) {
         this.#select = select;
         this.#select.append(document.querySelector(optionsTemplateSelector).content.cloneNode(true));
-        this.#select.querySelector('.current-choice-label').innerText = this.#select.querySelector('.select-option.default').innerText;
-        this.#select.dataset.currentchoicevalue = this.#select.querySelector('.select-option.default').dataset.value;
+        if(this.#select.querySelector('.select-option.default')) {
+            this.#select.querySelector('.current-choice-label').innerText = this.#select.querySelector('.select-option.default').innerText;
+            this.#select.dataset.currentchoicevalue = this.#select.querySelector('.select-option.default').dataset.value;
+        }
 
         this.#select.addEventListener('click', e => this.#onClick(e));
     }
@@ -38,7 +40,6 @@ export class SelectManager {
             this.close();
             return;
         }
-
         this.#select.querySelector('.select-list').classList.add('visible');
         this.#select.querySelector('.select-list').scroll(0, 0);
         this.#select.classList.add('focus');
@@ -62,6 +63,7 @@ export class SelectManager {
      * @param {Event} e 
      */
     onChoice(e) {
+        e.preventDefault();
         e.stopPropagation();
         this.#select.querySelector('.current-choice-label').innerText = e.currentTarget.innerText;
         this.#select.dataset.currentchoicevalue = e.currentTarget.dataset.value;
