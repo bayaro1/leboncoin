@@ -1,5 +1,7 @@
 
 import { SliderManager } from "../../components/SliderManager.js";
+import { clickIsOnElement } from "../../functions/spatial.js";
+import { focusLightningOff, focusLightningOn } from "../../functions/style.js";
 
 /******main form input sliders*******/
 const inputSliderManager = new SliderManager('.main-form-slider[data-contain=input-slider]');
@@ -40,16 +42,24 @@ document.querySelector('.category-slider-opener')
 
 
 
-const form_row = document.querySelector('.main-searchpage .main-form .form-row:first-child');
 
-document.querySelector('.body-dark').setAttribute(
-    'style',
-    'position: absolute; z-index: 3; top: 0; bottom: 0; left: 0; right: 0; background-color: rgba(0, 0, 0, 0.5)'
-)
-const lighting_form = document.querySelector('.main-searchpage .main-form');
-document.querySelector('.main-searchpage').append(lighting_form.cloneNode(true));
-lighting_form.classList.add('lightning-form', 'main-form');
+/*focus lightning sur le main-form dans main-searchpage*/    //A REFACTORISER
 
-document.body.prepend(lighting_form);
+const onFormFocus = (e) => {
+    focusLightningOn(e.currentTarget);
+    e.currentTarget.removeEventListener('click', onFormFocus);
+    e.target.focus();
+    document.body.addEventListener('click', function(e) {
+        if(!clickIsOnElement(e, document.querySelector('.focus-lightning'))) {
+            focusLightningOff(document.querySelector('.main-searchpage .main-form'));
+            document.querySelector('.main-searchpage .main-form').addEventListener('click', onFormFocus);
 
+        }
+    })
 }
+
+document.querySelector('.main-searchpage .main-form').addEventListener('click', onFormFocus);
+
+
+
+
