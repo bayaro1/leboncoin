@@ -443,6 +443,49 @@ button {
     margin-top: 2px;
 }
 
+.sort-list {
+    display: flex;
+}
+.main-form .sort-item {
+    border: solid 1px var(--input-border-color);
+    padding: 5px 14px;
+    margin-right: 5px;
+    border-radius: 20px;
+    font-size: 1.4rem;
+    transition: background-color .3s; 
+    background-color: white;
+}
+.main-form .sort-item:hover {
+    background-color: var(--select-bg-hover);
+    cursor: pointer;
+}
+
+
+/*main-searchpage-form*/
+.main-searchpage .main-form .form-select {
+    display: none;
+}
+.main-searchpage .main-form {
+    border-radius: 0;
+    border: none;
+    position: relative;
+    height: 240px;
+}
+.main-searchpage .main-form .form-row {
+    display: block;
+    border-bottom: solid 1px var(--input-border-color);
+}
+.main-searchpage .main-form .form-submit {
+    position: absolute;
+    height:30px;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+}
+.main-searchpage .main-form-input {
+    border: none;
+    background-color: var(--select-bg);
+}
 
 /*main-form slider*/
 .main-form-slider {
@@ -1237,6 +1280,17 @@ button {
         width: 210px;
     }
 
+    /*main-searchpage-form*/
+    .main-searchpage .main-form .main-form-input {
+        width: 100%;
+    }
+    .main-searchpage .main-form .form-row:nth-child(2) {
+        max-width: 100%;
+        justify-content: flex-start;
+    }
+    .main-searchpage .main-form .form-row {
+        padding: 8px 8px;
+    }
 
     /*main-form-slider*/
     .main-form-input-slider .main-form-input {
@@ -1530,9 +1584,6 @@ button {
         display: flex;
         align-items: center;
     }
-    .sort-list {
-        display: flex;
-    }
 
     .main-form .form-radio {
         margin-right: 15px;
@@ -1634,21 +1685,6 @@ button {
         display: none;
     }
      
-
-    .main-form .sort-item {
-        border: solid 1px var(--input-border-color);
-        padding: 5px 14px;
-        margin-right: 5px;
-        border-radius: 20px;
-        font-size: 1.4rem;
-        transition: background-color .3s; 
-    }
-    .main-form .sort-item:hover {
-        background-color: var(--select-bg-hover);
-        cursor: pointer;
-    }
-
-    
     .main-form .form-checkbox input {
         display: none;
     }
@@ -1748,6 +1784,150 @@ button {
         font-size: inherit;
     }
 
+    /*main-searchpage-form*/
+    .main-searchpage .main-form {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+    .main-searchpage .main-form .form-row:first-child {
+        border-radius: 4px;
+        padding: 20px 16px;
+        border: solid 1px var(--shadow);
+        box-shadow: 3px 3px 10px var(--shadow);
+        border-radius: 10px;
+        height: 72px;
+        background-color: white;
+    }
+    .main-searchpage .main-form .form-select {
+        display: block;
+    }
+    .main-searchpage .main-form .form-row {
+        border: none;
+    }
+    .main-searchpage .main-form .form-submit, .main-searchpage .main-form .form-submit .form-box[type=submit] {
+        position: static;
+    }
+
+    .main-searchpage .main-form .form-row:first-child .form-select .form-box {
+        width: 150px;
+        flex: none;
+        border-radius: 4px 0 0 4px;
+    }
+    .main-searchpage .main-form .form-row:first-child .form-select label[for=category] {
+        margin-bottom: -2px;
+        margin-left: -2px;
+        font-size: 0.9em;
+    }
+    .main-searchpage .main-form .form-row:first-child .main-form-input {
+        width: 260px;
+        flex: none;
+    }
+    .main-searchpage .main-form .form-row:first-child .main-form-input:focus {
+        border-radius: 4px;
+        border: solid 2px black;
+    }
+    .main-searchpage .main-form .form-row:first-child .main-form-q {
+        border-left: solid 1px var(--input-border-color);
+        border-radius: 0 4px 4px 0;
+    }
+    .main-searchpage .main-form .form-row:first-child .form-group:nth-child(3) {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .main-searchpage .main-form .form-row:first-child .form-group {
+        margin: 0;
+    }
+    .main-searchpage .main-form .form-submit {
+        width: 100%;
+        height: 40px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    .main-searchpage .main-form .form-submit .form-box[type=submit] {
+        width: 100%;
+    }
+    .main-searchpage .main-form .form-row:nth-child(2) {
+        margin-top: 14px;
+        padding-left: 0;
+    }
+    .main-searchpage .main-form .form-row:nth-child(2) .sort-list {
+        margin-left: 0;
+    }
+    .main-searchpage .main-form-slider[data-contain=category-slider] {
+        top: 64px;
+        left: 20px;
+    }
+
+    /*lightning-form (a refactoriser)*/
+    .main-form.lightning-form {
+        position: absolute;
+        z-index: 4;
+        background-color: white;
+        height: 72px;
+        top: 130px;
+        left: calc(50% - 465px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 10px;
+    }
+    .main-form.lightning-form .form-submit [type=submit] {
+        position: static;
+    }
+    .main-form.lightning-form .form-row:nth-child(2) {
+        display: none;
+    }
+    .main-form.lightning-form .form-row:first-child {
+        display: flex;
+    }
+    
+    .main-form.lightning-form .form-row:first-child .form-select .form-box {
+        width: 150px;
+        flex: none;
+        border-radius: 4px 0 0 4px;
+    }
+    .main-form.lightning-form .form-row:first-child .form-select label[for=category] {
+        margin-bottom: -2px;
+        margin-left: -2px;
+        font-size: 0.9em;
+    }
+    .main-form.lightning-form .form-row:first-child .main-form-input {
+        width: 260px;
+        flex: none;
+    }
+    .main-form.lightning-form .form-row:first-child .main-form-input:focus {
+        border-radius: 4px;
+        border: solid 2px black;
+    }
+    .main-form.lightning-form .form-row:first-child .main-form-q {
+        border-left: solid 1px var(--input-border-color);
+        border-radius: 0 4px 4px 0;
+    }
+    .main-form.lightning-form .form-row:first-child .form-group:nth-child(3) {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .main-form.lightning-form .form-row:first-child .form-group {
+        margin: 0;
+    }
+    .main-form.lightning-form .form-submit {
+        width: 100%;
+        height: 40px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    .main-form.lightning-form .form-submit .form-box[type=submit] {
+        width: 100%;
+        font-size: 1.5rem;
+    }
+    .main-form.lightning-form .form-row:first-child .main-form-input {
+        background-color: var(--select-bg);
+        border: none;
+    }
+    .main-form.lightning-form .form-row:first-child .main-form-q {
+        border-left: solid 1px var(--input-border-color);
+    }
 
     /* main form slider -> uniquement le category slider */
     .main-form-slider[data-contain=category-slider] {

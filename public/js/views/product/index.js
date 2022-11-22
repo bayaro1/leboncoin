@@ -37,3 +37,19 @@ document.querySelector('.category-slider-opener')
                 });
             });
         });
+
+
+
+const form_row = document.querySelector('.main-searchpage .main-form .form-row:first-child');
+
+document.querySelector('.body-dark').setAttribute(
+    'style',
+    'position: absolute; z-index: 3; top: 0; bottom: 0; left: 0; right: 0; background-color: rgba(0, 0, 0, 0.5)'
+)
+const lighting_form = document.querySelector('.main-searchpage .main-form');
+document.querySelector('.main-searchpage').append(lighting_form.cloneNode(true));
+lighting_form.classList.add('lightning-form', 'main-form');
+
+document.body.prepend(lighting_form);
+
+}
