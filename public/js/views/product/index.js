@@ -1,4 +1,5 @@
 
+import { SelectManager } from "../../components/Form/SelectManager.js";
 import { SliderManager } from "../../components/SliderManager.js";
 import { clickIsOnElement } from "../../functions/spatial.js";
 import { focusLightningOff, focusLightningOn } from "../../functions/style.js";
@@ -40,22 +41,28 @@ document.querySelector('.category-slider-opener')
             });
         });
 
+/*selects*/
 
+document.querySelectorAll('.js-select').forEach(function(select) {
+    new SelectManager(select, select.dataset.optionstemplate);
+})
 
 
 /*focus lightning sur le main-form dans main-searchpage*/    //A REFACTORISER
+
+const onBodyClick = e => {
+    if(!clickIsOnElement(e, document.querySelector('.focus-lightning'))) {
+        focusLightningOff(document.querySelector('.main-searchpage .main-form'));
+        document.querySelector('.main-searchpage .main-form').addEventListener('click', onFormFocus);
+        document.body.removeEventListener('click', onBodyClick);
+    }
+}
 
 const onFormFocus = (e) => {
     focusLightningOn(e.currentTarget);
     e.currentTarget.removeEventListener('click', onFormFocus);
     e.target.focus();
-    document.body.addEventListener('click', function(e) {
-        if(!clickIsOnElement(e, document.querySelector('.focus-lightning'))) {
-            focusLightningOff(document.querySelector('.main-searchpage .main-form'));
-            document.querySelector('.main-searchpage .main-form').addEventListener('click', onFormFocus);
-
-        }
-    })
+    document.body.addEventListener('click', onBodyClick)
 }
 
 document.querySelector('.main-searchpage .main-form').addEventListener('click', onFormFocus);

@@ -223,6 +223,60 @@ button {
     top: 10px;
     left: 10px;
 }
+.pro-tag {
+    position: relative;
+}
+.pro-tag::after {
+    content: 'Pro';
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 4px;
+    border: solid 1px var(--black);
+    position: absolute;
+}
+.pro-tag-top-right::after {
+    top: 10px;
+    right: 10px;
+}
+
+
+/*select-list*/
+.select-list {
+    position: absolute;
+    overflow-y: scroll;
+    top: 100%;
+    left: 1px;
+    right: 1px;
+    height: 0;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: height .1s;
+}
+.select-list.visible {
+    background-color: white;
+    box-shadow: 1px 1px 6px var(--black);
+    border: solid 1px rgba(129, 128, 128, 0.5);
+    z-index: 1;
+}
+
+.select-option {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    padding: 2px 10px;
+    font-size: 1.3rem;
+    font-weight: 400;
+    text-align: left;
+    color: var(--black);
+    overflow: hidden;
+    white-space: nowrap;
+}
+.select-option:hover, .select-option.default {
+    background-color: var(--blue);
+    color: white;
+}
 
 /******************************** MOBILE ***********************************************/
 
@@ -942,6 +996,8 @@ button {
 }
 .price-down {
     color: var(--green);
+    display: flex;
+    flex-direction: row;
 }
 .price-down::after {
     background: url(img/svg/trending_down_green.svg) center center / contain no-repeat;
@@ -1013,7 +1069,14 @@ button {
     width: 100%;
     height: auto;
 }
-.geo-choice-select {
+.geo-choice-form label {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.js-select {
     width: 100%;
     height: 38px;
     border-radius: 4px;
@@ -1025,60 +1088,22 @@ button {
     cursor: pointer;
     position: relative;
 }
-.geo-choice-select span {
+.js-select span {
     font-size: 1.3rem;
 }
-.geo-choice-form .icon {
+.js-select .icon {
     display: block;
     width: 2.6rem;
     height: 2.6rem;
     color: var(--input-placeholder-color);
     margin-left: auto;
 }
-.geo-choice-select.focus {
+.js-select.focus {
     border: solid 1px var(--blue);
 }
-.geo-choice-form label {
-    display: block;
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
 /*geo-choice-list*/
-.geo-choice-list {
-    position: absolute;
-    overflow-y: scroll;
-    top: 100%;
-    left: 1px;
-    right: 1px;
-    height: 0;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: height .1s;
-}
 .geo-choice-list.visible {
-    background-color: white;
     height: 370px;
-    box-shadow: 1px 1px 6px var(--black);
-    border: solid 1px rgba(129, 128, 128, 0.5);
-}
-
-.geo-choice-item button {
-    cursor: pointer;
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 2px 10px;
-    font-size: 1.3rem;
-    font-weight: 400;
-    text-align: left;
-    color: var(--black);
-    overflow: hidden;
-    white-space: nowrap;
-}
-.geo-choice-item:hover button, .geo-choice-item.default button {
-    background-color: var(--blue);
-    color: white;
 }
 
 .geo-choice .main-form {   /*on supprime toutes les propriétés du main-form*/
@@ -1092,7 +1117,7 @@ button {
     box-sizing: none;
 }
 
-
+/*footer-banner*/
 .footer-banner-link {
     display: flex;
     flex-direction: column;
@@ -1237,8 +1262,137 @@ button {
     height: 2rem;
 }
 
+/*banner-adds*/
+.banner-adds {
+    max-width: 960px;
+    padding: 0 30px;
+    margin: 0 auto;
+}
+.banner-adds img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/*searchpage-results*/ 
+.searchpage-results {
+    padding: 0 15px;
+    margin: 20px 0;
+}
+.results-title {
+    font-size: 1.8rem;
+}
+
+.search-sort-list.visible {
+    height: 112px;
+    overflow: hidden;
+}
+.save-search {
+    display: none;
+}
+.save-search-sticky {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    width: 230px;
+    height: 40px;
+    border-radius: 40px;
+    bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.save-search-sticky .icon {
+    margin-right: 7px;
+    margin-top: -2px;
+}
+
+.results-main {
+    display: flex;
+}
+
+.results-list {
+    flex: 1 0;
+    margin: 20px 0;  
+    position: relative;
+    max-width: 750px;
+}
+.results-list li {
+    width: 100%;
+}
+.product-card {
+    display: flex;
+    height: 192px;
+    max-width: 750px;
+    border-radius: 8px;
+    border: solid 1px var(--input-border-color);
+    position: relative;
+    overflow: hidden;
+    margin: 18px 0;
+}
+.product-card-img {
+    background: url('https://via.placeholder.com/240x192.jpg') center center / cover no-repeat;
+    width: 120px;
+    flex: none;
+    position: relative;
+}
+.product-card-img-number {
+    position: absolute;
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    bottom: 7px;
+    right: 9px;
+    padding: 4px 8px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+}
+.product-card-body {
+    padding: 12px 46px 12px 15px;
+    flex: 1 0;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.product-card-footer {
+    margin-top: auto;
+    color: var(--input-placeholder-color);
+    font-size: 1.2rem;
+    line-height: 1.4;
+}
+.product-card-favorite {
+    width: 2.8rem;
+    height: 2.8rem;
+    color: var(--input-placeholder-color);
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+}
+.product-card-title {
+    margin: 0;
+    line-height: 1.2;
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+}
+.product-card .product-card-price {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.product-card p {
+    margin: 0 0;
+}
+
+/*
+
+
 /***********************************RESPONSIVE**************************************************/
 
+@media only screen and (min-width: 480px) {
+    .product-card-img {
+        width: 240px;
+    }
+}
 
 @media only screen and (min-width: 620px) {
 
@@ -1387,6 +1541,35 @@ button {
     .top-footer-geo .top-footer-article:nth-child(2),
     .top-footer-geo .top-footer-article:nth-child(6) {
         border-bottom: none;
+    }
+
+    .results-title {
+        font-size: 2.4rem;
+    }
+    .results-controls {
+        display: flex;
+    }
+    .search-sort-select {
+        width: 200px;
+        height: 40px;
+    }
+    .save-search {
+        width: 230px;
+        height: 40px;
+        margin-left: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .save-search .icon {
+        margin-bottom: -3px;
+        margin-right: 7px;
+    }
+    
+    .save-search-sticky {
+        position: static;
+        width: 100%;
+        border-radius: 6px;
     }
 }
 
@@ -1804,6 +1987,7 @@ button {
         border: none;
         box-shadow: none;
         padding: 0;
+        height: 134px;
     }
     .main-searchpage .main-form .form-row:first-child {
         border-radius: 4px;
@@ -1886,6 +2070,7 @@ button {
         flex-direction: column;
         justify-content: center;
         border-radius: 10px;
+        box-shadow: none;
     }
     .main-form.focus-lightning .form-submit [type=submit] {
         position: static;
@@ -2293,6 +2478,25 @@ button {
         color: var(--blue);
         background-color: #f4f6f7;
     }
+
+
+    /*searchpage-results*/
+    .results-main .sidebar {
+        width: calc(100% - 750px);
+        align-self: stretch;
+        position: relative;
+        padding: 38px 0 50px 16px;
+    }
+    .results-main .sidebar-pub {
+        background: url(img/aside_pub.jpg) top center / contain no-repeat;
+        height: 554px;
+        position: sticky;
+        top: 126px;
+        left: 0;
+        right: 0;
+    }
+
+
 }
 
 

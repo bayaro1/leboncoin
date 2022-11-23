@@ -69,6 +69,8 @@ export class SelectManager {
         this.#select.querySelector('.current-choice-label').innerHTML = e.currentTarget.cloneNode(true).innerHTML;
 
         this.#select.dataset.currentchoicevalue = e.currentTarget.dataset.value;
+        this.#select.querySelector('.default').classList.remove('default');
+        e.currentTarget.classList.add('default');
         this.close();
     }
 
