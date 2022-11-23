@@ -68,5 +68,13 @@ const onFormFocus = (e) => {
 document.querySelector('.main-searchpage .main-form').addEventListener('click', onFormFocus);
 
 
-
+/*favorite*/
+const onFavoriteClick = e => {
+    e.preventDefault();
+    e.currentTarget.parentElement.parentElement.classList.toggle('in-cart');
+}
+document.querySelectorAll('.product-card-favorite')
+        .forEach(favorite => {
+            favorite.addEventListener('click', onFavoriteClick);
+        });
 

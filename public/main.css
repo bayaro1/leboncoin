@@ -1301,6 +1301,7 @@ button {
     bottom: 20px;
     margin-left: auto;
     margin-right: auto;
+    font-size: 1.4rem;
 }
 .save-search-sticky .icon {
     margin-right: 7px;
@@ -1363,16 +1364,36 @@ button {
 .product-card-favorite {
     width: 2.8rem;
     height: 2.8rem;
-    color: var(--input-placeholder-color);
+    color: rgb(168, 180, 192);
     position: absolute;
     bottom: 12px;
     right: 12px;
+    transition: color .3s;
+}
+.product-card-favorite:hover {
+    color: rgb(129, 145, 160);
+}
+.product-card-favorite.favorite-fill {
+    color: var(--orange);
+}
+.product-card .product-card-favorite.favorite-fill {
+    display: none;
+}
+.product-card.in-cart .product-card-favorite {
+    display: none;
+}
+.product-card.in-cart .product-card-favorite.favorite-fill {
+    display: block;
 }
 .product-card-title {
     margin: 0;
     line-height: 1.2;
     font-size: 1.6rem;
     margin-bottom: 5px;
+    transition: color .3s;
+}
+.product-card:hover .product-card-title {
+    color: var(--orange);
 }
 .product-card .product-card-price {
     font-size: 1.4rem;
@@ -1383,7 +1404,50 @@ button {
     margin: 0 0;
 }
 
-/*
+/*pagination*/
+
+.pagination {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+    flex-wrap: wrap;
+}
+.pagination-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+.pagination-arrow .icon{
+    width: 3.2rem;
+    height: 3.2rem;
+}
+.pagination-arrow.disabled {
+    color: var(--input-border-color);
+}
+.pagination-item {
+    margin: 0 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color .3s;
+}
+.pagination-item:hover {
+    background-color: var(--select-bg-hover);
+}
+.pagination-number.active {
+    background-color: black;
+    color: white;
+}
+.pagination-arrow.disabled:hover {
+    background-color: transparent;
+}
 
 
 /***********************************RESPONSIVE**************************************************/
@@ -2485,7 +2549,7 @@ button {
         width: calc(100% - 750px);
         align-self: stretch;
         position: relative;
-        padding: 38px 0 50px 16px;
+        padding: 38px 0 130px 16px;
     }
     .results-main .sidebar-pub {
         background: url(img/aside_pub.jpg) top center / contain no-repeat;
