@@ -78,3 +78,15 @@ document.querySelectorAll('.product-card-favorite')
             favorite.addEventListener('click', onFavoriteClick);
         });
 
+
+
+/*save-search & scroll*/
+const max_scroll = document.body.getBoundingClientRect().height - document.querySelector('.footer-block').getBoundingClientRect().height - window.innerHeight;
+const min_scroll = max_scroll - document.querySelector('.results-list').getBoundingClientRect().height;
+document.addEventListener('scroll', function(e) {
+    if(window.scrollY > min_scroll + window.innerHeight && window.scrollY < max_scroll - window.innerHeight) {
+        document.querySelector('.save-search-sticky').classList.add('small');
+    } else {
+        document.querySelector('.save-search-sticky').classList.remove('small');
+    }
+})

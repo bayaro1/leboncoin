@@ -119,10 +119,12 @@ button {
 .navbar-block .container {
     background-color: white;
 }
+body.homepage {
+    background-color: rgb(250, 250, 250);
+}
 .container {
     max-width: 1070px;
     margin: 0 auto;
-    background-color: rgb(250, 250, 250);
 }
 .container-small {
     max-width: 1020px;
@@ -420,6 +422,7 @@ button {
     box-shadow: 0 0 20px var(--shadow);
     border-radius: 0 0 20px 0;
     padding-top: 9px;
+    background-color: white;
 }
 .main .form-group {
     margin: 12px 18px;
@@ -1302,6 +1305,19 @@ button {
     margin-left: auto;
     margin-right: auto;
     font-size: 1.4rem;
+    transition: width .3s;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.save-search-sticky.small {
+    width: 40px;
+    margin-right: 20px;
+}
+.save-search-sticky.small span {
+    display: none;
+}
+.save-search-sticky.small .icon {
+    margin-right: 0;
 }
 .save-search-sticky .icon {
     margin-right: 7px;
@@ -2186,12 +2202,11 @@ button {
         font-size: 1.5rem;
         background-color: white;
         color: var(--blue);
-        border: solid 2px var(--blue);
+        border: solid 1px var(--blue);
     }
     .main-form.focus-lightning .form-submit .form-box[type=submit]:hover {
-        background-color: var(--blue);
-        color: white;
-        border: none;
+        background-color: rgb(233, 240, 244);
+        color: rgb(51, 102, 153);
     }
     .main-form.focus-lightning .form-row:first-child .main-form-input {
         background-color: var(--select-bg);
