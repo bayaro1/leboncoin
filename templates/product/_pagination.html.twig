@@ -1,0 +1,60 @@
+
+{% if pageCount > 1 %}
+    <div class="pagination results-pagination">
+
+
+    {% if previous is defined %}
+        <a 
+            href="{{ path(route, query|merge({(pageParameterName): previous})) }}"
+            class="pagination-item pagination-arrow pagination-left">    
+            <svg class="icon">
+                <use xlink:href="/img/svg/sprite.svg#chevron-left"></use>
+            </svg>
+        </a>
+    {% else %}
+        <a
+            class="pagination-item pagination-arrow pagination-left disabled">    
+            <svg class="icon">
+                <use xlink:href="/img/svg/sprite.svg#chevron-left"></use>
+            </svg>
+        </a>
+    {% endif %}
+
+
+    {% for page in pagesInRange %}
+        {% if page != current %}
+            <a  href="{{ path(route, query|merge({(pageParameterName): page})) }}" 
+                class="pagination-item pagination-number">
+                {{ page }}    
+            </a>
+        {% else %}
+            <a  href="{{ path(route, query|merge({(pageParameterName): page})) }}" 
+                class="pagination-item pagination-number active">
+                {{ page }}    
+            </a>
+        {% endif %}
+    {% endfor %}
+
+
+    {% if next is defined %}
+        <a  
+            href="{{ path(route, query|merge({(pageParameterName): next})) }}"
+            class="pagination-item pagination-arrow pagination-right">    
+            <svg class="icon">
+                <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+            </svg>
+        </a>
+    {% else %}
+        <a
+            class="pagination-item pagination-arrow pagination-right disabled">    
+            <svg class="icon">
+                <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+            </svg>
+        </a>
+    {% endif %}
+
+
+        
+    </div>
+{% endif %}
+

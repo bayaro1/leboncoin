@@ -2524,10 +2524,10 @@ body.homepage {
     }
 
     /*.strangers-list*/
-    .strangers-list {
+    .js-strangers .strangers-list {
         display: none;
     }
-    .strangers-list.visible {
+    .js-strangers .strangers-list.visible {
         position: absolute;
         background-color: white;
         color: rgb(71, 71, 71);
@@ -2538,6 +2538,14 @@ body.homepage {
         display: flex;
         flex-wrap: wrap;
         padding: 8px 4px;
+
+        overflow-y: hidden;
+        top: auto;
+        left: auto;
+        height: auto;
+        cursor: auto;
+        font-size: inherit;
+        transition: none;
     }
     .strangers-item {
         width: calc(20% - 8px);
@@ -2552,6 +2560,7 @@ body.homepage {
     .strangers-item a .icon {
         position: static;
         margin-right: 5px;
+        margin-left: 0;
     }
     .strangers-item a:hover {
         color: var(--blue);

@@ -1,0 +1,23 @@
+ <li>
+    <a class="results-item product-card urgent-tag urgent-tag-top-left" href="#">
+        <div class="product-card-img">
+            <div class="product-card-img-number">4</div>
+        </div>
+        <div class="product-card-body pro-tag pro-tag-top-right">
+            <h2 class="product-card-title">{{ product.title }}</h2>
+            <p class="product-card-price">{{ product.price | price_format }}</p>
+            <p class="chip-item">Livraison possible</p>
+            <div class="product-card-footer">
+                <p class="product-card-category">{{ product.category.name }}</p>
+                <p class="product-card-location">{{ product.location }}</p>
+                <p class="product-card-date">{{ product.createdAt | date_format }}</p>
+            </div>
+            <svg class="icon product-card-favorite">
+                <use xlink:href="/img/svg/sprite.svg#favorite"></use>
+            </svg>
+            <svg class="icon product-card-favorite favorite-fill">
+                <use xlink:href="/img/svg/sprite.svg#favorite-fill"></use>
+            </svg>
+        </div>
+    </a>
+</li>
