@@ -41,7 +41,11 @@ document.querySelector('.category-slider-opener')
             });
         });
 
-
+/****filters*** */
+document.querySelector('.filters-opener').addEventListener('click', function(e) {
+    document.querySelector('.filters').classList.toggle('active');
+    e.currentTarget.classList.toggle('active');
+});
 
 /*****delivery-info ***/
 document.querySelectorAll('.js-info-opener').forEach(function(infoOpener) {
@@ -60,5 +64,6 @@ document.querySelectorAll('.last-suggest .carousel.car-arrow')
         .forEach(function(carousel) {
             new CarouselArrowManager(carousel, 1200, 5);
         });
+
 
 

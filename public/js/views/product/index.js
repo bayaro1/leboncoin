@@ -41,6 +41,13 @@ document.querySelector('.category-slider-opener')
             });
         });
 
+
+/****filters*** */
+document.querySelector('.filters-opener').addEventListener('click', function(e) {
+    document.querySelector('.filters').classList.toggle('active');
+    e.currentTarget.classList.toggle('active');
+});
+
 /*selects*/
 
 document.querySelectorAll('.js-select').forEach(function(select) {
