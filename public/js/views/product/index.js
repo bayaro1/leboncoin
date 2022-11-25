@@ -1,4 +1,5 @@
 
+import { InfoManager } from "../../components/InfoManager.js";
 import { SelectManager } from "../../components/Form/SelectManager.js";
 import { SliderManager } from "../../components/SliderManager.js";
 import { clickIsOnElement } from "../../functions/spatial.js";
@@ -41,6 +42,11 @@ document.querySelector('.category-slider-opener')
             });
         });
 
+        
+/*****delivery-info ***/
+document.querySelectorAll('.js-info-opener').forEach(function(infoOpener) {
+    new InfoManager(infoOpener);
+});
 
 /****filters*** */
 document.querySelector('.filters-opener').addEventListener('click', function(e) {
@@ -100,4 +106,4 @@ document.addEventListener('scroll', function(e) {
     } else {
         document.querySelector('.save-search-sticky').classList.remove('small');
     }
-})
+});

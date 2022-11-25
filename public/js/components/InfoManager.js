@@ -41,7 +41,6 @@ export class InfoManager {
      * @param {Event} e 
      */
     #onOpenerClick(e) {
-        console.log(this.#opener);
         if(!this.#open) {
             this.#open = true;
             this.#info = this.#template.content.cloneNode(true).firstElementChild;
