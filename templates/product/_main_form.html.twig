@@ -1,0 +1,26 @@
+
+{% include "main_form/_form_start.html.twig" %}
+
+    <div class="form-row">
+
+        {% include "main_form/fields/_category.html.twig" %}
+        {% include "main_form/fields/_q.html.twig" %}
+        {% include "main_form/fields/_location.html.twig" %}
+        {% include "main_form/_submit.html.twig" %}
+
+    </div>
+
+
+    {% set custom_filters_set = [
+        '_offersOrNeeds',
+        '_price',
+        '_individualsAndPros',
+        '_deliverable'
+    ] %}
+
+    {% include "main_form/_more_filters.html.twig" %}
+
+    
+{% include "main_form/_form_end.html.twig" %}
+    
+    

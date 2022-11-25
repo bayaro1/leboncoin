@@ -43,6 +43,7 @@ document.querySelector('.category-slider-opener')
 
 /****filters*** */
 document.querySelector('.filters-opener').addEventListener('click', function(e) {
+    e.stopPropagation();
     document.querySelector('.filters').classList.toggle('active');
     e.currentTarget.classList.toggle('active');
 });

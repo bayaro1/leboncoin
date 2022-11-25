@@ -37,6 +37,22 @@
 }
 
 
+@keyframes mooving {
+    0% {
+
+    }
+    25% {
+        transform: translateX(5px);
+    }
+    50% {
+        transform: translateX(-5px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
 /************************ general properties *********************/
 
 * {
@@ -280,6 +296,47 @@ body.homepage {
     color: white;
 }
 
+
+/*custom checkbox*/
+.custom-checkbox-label {
+    display: flex;
+    align-items: center;
+    margin-left: 2px;
+    padding-bottom: 20px;
+}
+.custom-checkbox-input {
+    display: none;
+}
+.custom-checkbox {
+    border: solid 2px var(--input-placeholder-color);
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color .5s;
+}
+.custom-checkbox-label .custom-checkbox .custom-checkbox-cross.icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: calc(50% - 10px);
+    left: calc(50% - 10px);
+    color: white;
+    display: none;
+}
+.custom-checkbox-input:checked + .custom-checkbox-label .custom-checkbox-cross {
+    display: block;
+}
+.custom-checkbox-input:checked + .custom-checkbox-label .custom-checkbox {
+    background-color: var(--orange);
+    border: none;
+}
+
+
+
+
 /******************************** MOBILE ***********************************************/
 
 /*navbar*/
@@ -517,6 +574,10 @@ body.homepage {
 
 /*filters*/
 
+.main-searchpage .main-form .form-row.filters-row {
+    flex-direction: column;
+}
+
 .main .main-form .form-row.filters-row {
     align-items: flex-start;
 }
@@ -525,7 +586,6 @@ body.homepage {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: 20px;
 }
 
 .filters-group {
@@ -533,6 +593,16 @@ body.homepage {
     align-items: center;
     margin: 10px 0;
 }
+.filters .price-input-group {
+    width: calc(50% - 23px);
+    margin: 0 7px 0 15px;
+}
+
+.filters .price-input-group input[type=number] {
+    width: 100%;
+    height: 38px;
+}
+
 .main .main-form .form-row .filters-group .form-radio {
     margin-right: 20px;
 }
@@ -548,6 +618,10 @@ body.homepage {
     font-size: 1.4rem;
     transition: background-color .3s; 
     background-color: white;
+}
+
+.main-form .filters-opener.active {
+    animation: mooving forwards .1s;
 }
 .main-form .filters-opener .icon {
     margin-left: 10px;
@@ -568,7 +642,6 @@ body.homepage {
     display: block;
 }
 
-
 /*main-searchpage-form*/
 .main-searchpage .main-form .form-select {
     display: none;
@@ -577,6 +650,7 @@ body.homepage {
     border-radius: 0;
     border: none;
     position: relative;
+    padding-bottom: 60px;
 }
 .main-searchpage .main-form .form-row {
     display: block;
@@ -667,42 +741,8 @@ body.homepage {
     width: 100%;
     border-radius: 0;
 }
+
 /*main-form-q-slider*/
-.main-form-q-slider .title-search-group label {
-    display: flex;
-    align-items: center;
-    margin-left: 2px;
-    padding-bottom: 20px;
-}
-.main-form-q-slider .title-search-group input {
-    display: none;
-}
-.main-form-q-slider .title-search-group .custom-checkbox {
-    border: solid 2px var(--input-placeholder-color);
-    border-radius: 4px;
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    cursor: pointer;
-    position: relative;
-    transition: background-color .5s;
-}
-.main-form-q-slider .title-search-group .custom-checkbox-cross {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    top: calc(50% - 10px);
-    left: calc(50% - 10px);
-    color: white;
-    display: none;
-}
-.main-form-q-slider .title-search-group input:checked + label .custom-checkbox-cross {
-    display: block;
-}
-.main-form-q-slider .title-search-group input:checked + label .custom-checkbox {
-    background-color: var(--orange);
-    border: none;
-}
 .lasts-q-list .icon.i-left {
     width: 1.7rem;
     height: 1.7rem;
@@ -1885,7 +1925,7 @@ body.homepage {
     .main-form {
         margin: 28px auto;
         width: 930px;
-        height: 212px;
+        min-height: 212px;
         border-radius: 4px;
         padding: 20px 12px;
         position: relative;
@@ -2102,7 +2142,7 @@ body.homepage {
         border: none;
         box-shadow: none;
         padding: 0;
-        height: auto;
+        min-height: 0;
     }
     .main-searchpage .main-form .form-row:first-child {
         border-radius: 4px;
@@ -2179,6 +2219,7 @@ body.homepage {
         z-index: 4;
         background-color: white;
         height: 72px;
+        min-height: 0;
         margin-top: 0;
         margin-bottom: 0;
         display: flex;

@@ -1,0 +1,33 @@
+
+{% include "main_form/_form_start.html.twig" %}
+
+    <div class="form-row">
+        {% include "main_form/optionnal_fields/_offersOrNeeds.html.twig" %}
+    </div>
+    <div class="form-row">
+
+        {% include "main_form/fields/_category.html.twig" %}
+
+        {% include "main_form/fields/_q.html.twig" %}
+
+        {% include "main_form/fields/_location.html.twig" %}
+
+    </div>
+    
+
+    {% set custom_filters_set = [
+        '_price',
+        '_individualsAndPros'
+    ] %}
+
+    {% include "main_form/_more_filters.html.twig" %}
+
+
+    <div class="form-row">
+        {% include "main_form/optionnal_fields/_deliverable.html.twig" %}
+    </div>
+    {% include "main_form/_submit.html.twig" %}
+
+{% include "main_form/_form_end.html.twig" %}
+    
+    

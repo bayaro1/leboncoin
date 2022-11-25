@@ -173,10 +173,10 @@
             {% set title = 'Que recherchez-vous ?' %}
             {% include "layouts/js_templates/home/main_form/_topbar.html.twig" %}
         </header>
-        {% include "home/main_form/_form_start.html.twig" %}
-        {% include "home/main_form/_q.html.twig" %}
+        {% include "main_form/_form_start.html.twig" %}
+        {% include "main_form/fields/_q.html.twig" %}
 
-        {% include "home/main_form/_title_search.html.twig" %}
+        {% include "main_form/optionnal_fields/_title_search.html.twig" %}
         <ul class="lasts-q-list slider-list">
             <li class="lasts-q-item slider-item">
                 <svg class="icon i-left">
@@ -206,8 +206,8 @@
                 </svg>
             </li>
         </ul>
-        {% include "home/main_form/_submit.html.twig" %}
-        {% include "home/main_form/_form_end.html.twig" %}
+        {% include "main_form/_submit.html.twig" %}
+        {% include "main_form/_form_end.html.twig" %}
     </div>
 </template>
 
@@ -217,8 +217,8 @@
             {% set title = 'Où cherchez-vous ?' %}
             {% include "layouts/js_templates/home/main_form/_topbar.html.twig" %}
         </header>
-        {% include "home/main_form/_form_start.html.twig" %}
-        {% include "home/main_form/_location.html.twig" %}
+        {% include "main_form/_form_start.html.twig" %}
+        {% include "main_form/fields/_location.html.twig" %}
 
         <ul class="location-choices-list">
             <li class="location-choices-item">
@@ -288,7 +288,7 @@
                 </svg>
             </li>
         </ul>
-        {% include "home/main_form/_submit.html.twig" %}
-        {% include "home/main_form/_form_end.html.twig" %}
+        {% include "main_form/_submit.html.twig" %}
+        {% include "main_form/_form_end.html.twig" %}
     </div>
 </template>

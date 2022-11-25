@@ -44,6 +44,7 @@ document.querySelector('.category-slider-opener')
 
 /****filters*** */
 document.querySelector('.filters-opener').addEventListener('click', function(e) {
+    e.stopPropagation();
     document.querySelector('.filters').classList.toggle('active');
     e.currentTarget.classList.toggle('active');
 });
@@ -60,19 +61,22 @@ document.querySelectorAll('.js-select').forEach(function(select) {
 const onBodyClick = e => {
     if(!clickIsOnElement(e, document.querySelector('.focus-lightning'))) {
         focusLightningOff(document.querySelector('.main-searchpage .main-form'));
-        document.querySelector('.main-searchpage .main-form').addEventListener('click', onFormFocus);
+        document.querySelector('.main-searchpage .main-form .form-row:first-child').addEventListener('click', onFormFocus);
         document.body.removeEventListener('click', onBodyClick);
     }
 }
 
 const onFormFocus = (e) => {
-    focusLightningOn(e.currentTarget);
+    if(e.target === document.querySelector('.main-searchpage .main-form .btn.btn-blue')) {
+        return;
+    }
+    focusLightningOn(document.querySelector('.main-searchpage .main-form'));
     e.currentTarget.removeEventListener('click', onFormFocus);
     e.target.focus();
     document.body.addEventListener('click', onBodyClick)
 }
 
-document.querySelector('.main-searchpage .main-form').addEventListener('click', onFormFocus);
+document.querySelector('.main-searchpage .main-form .form-row:first-child').addEventListener('click', onFormFocus);
 
 
 /*favorite*/

@@ -1,0 +1,13 @@
+<div class="form-row filters-row">
+    <div class="filters-opener">
+        <span>Tous les filtres</span>
+        <svg class="icon i-right">
+            <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
+        </svg>
+    </div>
+    <div class="filters">
+        {% for _filter in custom_filters_set %}
+            {% include 'main_form/optionnal_fields/'~_filter~'.html.twig' %}
+        {% endfor %}
+    </div>
+</div>
