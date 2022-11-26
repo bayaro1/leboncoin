@@ -2,11 +2,11 @@
     <h4 class="filters-group-title">Type d'annonces</h4>
     <div class="filters-group offersOrNeeds-group">
         <div class="form-group form-radio">
-            <input type="radio" id="offers" name="offersOrNeeds" value="offers" checked>
+            <input type="radio" id="offers" name="offersOrNeeds" value="offers" {% if searchFilter.offersOrNeeds is same as 'offers' %}checked{% endif %}>
             <label for="offers">Offres</label>
         </div>
         <div class="form-group form-radio">
-            <input type="radio" id="needs" name="offersOrNeeds" value="needs">
+            <input type="radio" id="needs" name="offersOrNeeds" value="needs" {% if searchFilter.offersOrNeeds is same as 'needs' %}checked{% endif %}>
             <label for="needs">Demandes</label>
         </div>
     </div>

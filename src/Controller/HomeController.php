@@ -1,6 +1,7 @@
 <?php 
 namespace App\Controller;
 
+use App\DataModel\SearchFilter;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +20,8 @@ class HomeController extends AbstractController
     {
         $countResults = $this->productRepository->count([]);
         return $this->render('home/index.html.twig', [
-            'count_results' => $countResults
+            'count_results' => $countResults,
+            'searchFilter' => new SearchFilter
         ]);
     }
 }

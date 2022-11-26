@@ -1,20 +1,20 @@
 <div class="form-group form-select">
     <button 
-        class="category-slider-opener form-box" 
+        class="category-slider-opener form-box {% if searchFilter.category is not null %}no-icon-left{% endif %}" 
         data-template="#main-form-category-template"
         data-closer=".i-return"
         data-nofrozenatminwidth="1050"
         id="category"
         >
         <select name="category" class="main-form-category invisible">
-            <option value=""></option>
+            <option value="{{ searchFilter.category }}"></option>
         </select>
-        <svg class="icon i-left">
-            <use xlink:href="/img/svg/sprite.svg#list"></use>
-        </svg>
-        <label for="category">Catégories</label>
-        <svg class="icon i-right">
-            <use xlink:href="/img/svg/sprite.svg#expand-more"></use>
-        </svg>
+            <svg class="icon i-left">
+                <use xlink:href="/img/svg/sprite.svg#list"></use>
+            </svg>
+        <label for="category">{{ searchFilter.categoryLabel }}</label>
+            <svg class="icon i-right">
+                <use xlink:href="/img/svg/sprite.svg#expand-more"></use>
+            </svg>
     </button>
 </div>

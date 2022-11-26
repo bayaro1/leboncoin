@@ -13,6 +13,7 @@ import { getPosition } from "./spatial.js";
     document.body.prepend(body_dark);
     
     const backElt = elt.cloneNode(true);
+    backElt.classList.add('back-elt')
     elt.parentElement.append(backElt);
     elt.classList.add('focus-lightning');
     document.body.prepend(elt);

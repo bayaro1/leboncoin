@@ -4,7 +4,15 @@
         data-optionstemplate="#search-sort-options-template"
         >
         <input class="search-sort-input js-select-input" type="hidden" value="">
-        <span class="current-choice-label">Tri : {{ currentSortLabel ?? 'Pertinence' }} </span>
+        <span class="current-choice-label">
+            Tri : {{ searchFilter.sortLabel }}
+            <div class="sort-hidden-inputs">
+                {% if searchFilter.sortby %}
+                    <input type="hidden" name="sortby" value="{{ searchFilter.sortby }}">
+                    <input type="hidden" name="dir" value="{{ searchFilter.dir }}">
+                {% endif %}
+            </div> 
+        </span>
         <svg class="icon">
             <use xlink:href="/img/svg/sprite.svg#expand-more"></use>
         </svg>

@@ -2,7 +2,7 @@
     <h4 class="filters-group-title">Type de vendeurs</h4>
     <div class="filters-group individualsAndPros-group">
         <div class="form-group form-checkbox">
-            <input class="custom-checkbox-input" type="checkbox" id="individuals" name="individualsAndPros[]" value="individuals">
+            <input class="custom-checkbox-input" type="checkbox" id="individuals" name="individuals" {% if searchFilter.individuals %}checked{% endif %}>
             <label class="custom-checkbox-label" for="individuals">
                 <div class="custom-checkbox">
                     <svg class="icon custom-checkbox-cross">
@@ -13,7 +13,7 @@
             </label>
         </div>
         <div class="form-group form-checkbox">
-            <input class="custom-checkbox-input" type="checkbox" id="pros" name="individualsAndPros[]" value="pros">
+            <input class="custom-checkbox-input" type="checkbox" id="pros" name="pros" {% if searchFilter.pros %}checked{% endif %}>
             <label class="custom-checkbox-label" for="pros">
                 <div class="custom-checkbox">
                     <svg class="icon custom-checkbox-cross">

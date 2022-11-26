@@ -34,7 +34,6 @@ export class SelectManager {
      * @param {Event} e 
      */
     #onClick(e) {
-        console.log('onclick');
         if(this.#select.querySelector('.select-list').contains(e.target)) {
             return;
         }
@@ -65,7 +64,7 @@ export class SelectManager {
      */
     onChoice(e) {
         e.stopPropagation();
-        console.log('onchoice');
+        console.log(e.currentTarget.cloneNode(true).innerHTML);
         this.#select.querySelector('.current-choice-label').innerHTML = e.currentTarget.cloneNode(true).innerHTML;
 
         this.#select.dataset.currentchoicevalue = e.currentTarget.dataset.value;

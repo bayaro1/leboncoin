@@ -67,4 +67,23 @@ document.querySelectorAll('.last-suggest .carousel.car-arrow')
         });
 
 
+/**on form-submission */
+document.querySelector('.main-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const sort_inputs = document.querySelector('.search-sort-select .sort-hidden-inputs');
+    if(sort_inputs) {
+        e.currentTarget.append(sort_inputs);
+    }
+    
+    if(e.currentTarget.querySelector('select[name=category] option').value === '') {
+        e.currentTarget.querySelector('select[name=category]').removeAttribute('name');
+    } 
+    for(const field of ['q', 'location', 'offersOrNeeds', 'max_price', 'min_price']) {
+        const input = e.currentTarget.querySelector('input[name='+field+']');
+        if(input.value === '') {
+            input.removeAttribute('name');
+        }
+    }
 
+    e.currentTarget.submit();
+});
