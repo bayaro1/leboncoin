@@ -856,6 +856,7 @@ body.homepage {
 }
 .main-form-slider-topbar {
     position: relative;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2189,23 +2190,9 @@ body.homepage {
 
     /*delivery-info*/
     .main-form .form-help {
-        display: block;
-        cursor: pointer;
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        right: -25px; 
-        top: calc(50% - 8px);
-        background-color: var(--blue);
-        border-radius: 16px;
+       
     }
     .main-form .form-help .i-help {
-        color: white;
-        width: 14px;
-        height: 14px;
-        position: absolute;
-        top: calc(50% - 7px);
-        left: calc(50% - 7px);
     }
 
     .main-form .form-submit {
@@ -2219,6 +2206,78 @@ body.homepage {
         left: calc(50% - 119px);
         font-size: inherit;
     }
+
+
+    /*main-filters*/
+    .filters-opener {
+        margin-left: 10px;
+    }
+    .filters-group-title {
+        display: none;
+    }
+    .filters-group {
+        display: flex;
+        align-items: center;
+        margin-left: 8px;
+        padding-bottom: 0;
+    }
+    .filters-group.deliverable-group {
+        margin-left: 15px;
+    }
+    .filters-group .form-help {
+        position: relative;
+        margin-left: 10px;
+        margin-top: 3px;
+        display: block;
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+        background-color: var(--blue);
+        border-radius: 16px;
+    }
+    .filters-group .form-help .i-help {
+        color: white;
+        width: 14px;
+        height: 14px;
+        position: absolute;
+        top: calc(50% - 7px);
+        left: calc(50% - 7px);
+    }
+    .filters-group.individualsAndPros-group .form-checkbox:last-child {
+        margin-bottom: 10px;
+    }
+    .filters.active {
+        justify-content: flex-start;
+    }
+    .filters .filter-block {
+        margin-left: 0;
+    }
+
+    /*main-searchpage filters*/
+    .main-searchpage .main-form .form-row.filters-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+    .main-searchpage .main-form .filters-opener {
+        flex: none;
+        width: auto;
+    }
+    .main-searchpage .filters {
+        flex-direction: column;
+        width: 75%;
+    }
+    .main-searchpage .filter-block {
+        width: 100%;
+    }
+    .main-searchpage .filters .filters-group .form-group {
+        margin-right: 15px;
+    }
+    .main-searchpage .filters .form-group:last-child {
+        margin-bottom: 7px;
+    }
+
+    
 
     /*main-searchpage-form*/
     .main-searchpage .main-form {

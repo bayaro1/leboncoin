@@ -73,6 +73,9 @@ const onBodyClick = e => {
 }
 
 const onFormFocus = (e) => {
+    if(window.innerWidth < 1050) {
+        return;
+    }
     if(e.target === document.querySelector('.main-searchpage .main-form .btn.btn-blue')) {
         return;
     }
