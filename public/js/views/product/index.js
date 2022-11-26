@@ -36,7 +36,7 @@ document.querySelector('.category-slider-opener')
                     } else {
                         document.querySelector('.category-slider-opener').classList.remove('no-icon-left');
                     }
-
+                    document.querySelector('.main-form').dispatchEvent(new Event('change'));
                     categorySliderManager.close();
                 });
             });
@@ -135,3 +135,10 @@ document.querySelector('.main-form').addEventListener('submit', function(e) {
 
     e.currentTarget.submit();
 });
+
+
+
+/*auto-count-results*/
+document.querySelector('.main-form').addEventListener('change', function(e) {
+    console.log('à faire : envoyer une requête avec fetch (soumission du form) et recevoir le nombre de résultats');
+})

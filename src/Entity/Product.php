@@ -30,6 +30,15 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Location $location = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $offersOrNeeds = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $vendorState = null;
+
+    #[ORM\Column()]
+    private ?bool $deliverable = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,6 +100,42 @@ class Product
     public function setLocation(?Location $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getOffersOrNeeds(): ?string
+    {
+        return $this->offersOrNeeds;
+    }
+
+    public function setOffersOrNeeds(string $offersOrNeeds): self
+    {
+        $this->offersOrNeeds = $offersOrNeeds;
+
+        return $this;
+    }
+
+    public function getVendorState(): ?string
+    {
+        return $this->vendorState;
+    }
+
+    public function setVendorState(string $vendorState): self
+    {
+        $this->vendorState = $vendorState;
+
+        return $this;
+    }
+
+    public function isDeliverable(): ?bool
+    {
+        return $this->deliverable;
+    }
+
+    public function setDeliverable(bool $deliverable): self
+    {
+        $this->deliverable = $deliverable;
 
         return $this;
     }

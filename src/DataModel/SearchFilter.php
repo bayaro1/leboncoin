@@ -11,7 +11,7 @@ class SearchFilter
 
     public $location;
 
-    public $offersOrNeeds;
+    public $offersOrNeeds = 'offers';
 
     public $min_price;
 
@@ -27,22 +27,6 @@ class SearchFilter
 
     public $dir;
 
-    public function hasMoreFilters():bool
-    {
-        if(
-            $this->offersOrNeeds === null &&
-            $this->min_price === null &&
-            $this->max_price === null &&
-            $this->individuals === false &&
-            $this->pros === false &&
-            $this->deliverable === false
-        )
-        {
-            return false;
-        }
-        return true;
-    }
-
     
     public function getCategoryLabel()
     {
@@ -57,11 +41,11 @@ class SearchFilter
     {
         if($this->sortby)
         {
-            if($this->sortby === 'time' && $this->dir === 'asc')
+            if($this->sortby === 'createdAt' && $this->dir === 'asc')
             {
                 return 'Plus anciennes';
             }
-            elseif($this->sortby === 'time' && $this->dir === 'desc')
+            elseif($this->sortby === 'createdAt' && $this->dir === 'desc')
             {
                 return 'Plus récentes';
             }

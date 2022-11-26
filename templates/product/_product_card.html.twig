@@ -3,11 +3,14 @@
         <div class="product-card-img">
             <div class="product-card-img-number">4</div>
         </div>
-        <div class="product-card-body pro-tag pro-tag-top-right">
+        <div class="product-card-body {% if product.vendorState is same as 'pro' %}pro-tag pro-tag-top-right{% endif %}">
             <h2 class="product-card-title">{{ product.title }}</h2>
             <p class="product-card-price">{{ product.price | price_format }}</p>
-            <p class="chip-item">Livraison possible</p>
+            {% if product.deliverable %}
+                <p class="chip-item">Livraison possible</p>
+            {% endif %}
             <div class="product-card-footer">
+                <p>{{ product.offersOrNeeds }}</p>
                 <p class="product-card-category">{{ product.category.name }}</p>
                 <p class="product-card-location">{{ product.location }}</p>
                 <p class="product-card-date">{{ product.createdAt | date_format }}</p>

@@ -26,7 +26,7 @@ class ProductController extends AbstractController
         $form = $this->createForm(SearchFilterType::class, $searchFilter);
         $form->handleRequest($request);
 
-        $pagination = $this->productRepository->findFilteredPaginated($request);
+        $pagination = $this->productRepository->findFilteredPaginated($searchFilter, $request);
         
         return $this->render('product/index.html.twig', [
             'pagination' => $pagination,
@@ -34,4 +34,5 @@ class ProductController extends AbstractController
             'searchFilter' => $searchFilter
         ]);
     }
+
 }

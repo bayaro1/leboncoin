@@ -39,6 +39,9 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
                     ->setCreatedAt((new DateTimeImmutable())->sub(new DateInterval($duration)))
                     ->setCategory($faker->randomElement($categories))
                     ->setLocation($faker->randomElement($locations))
+                    ->setOffersOrNeeds($faker->randomElement(['offers', 'needs']))
+                    ->setDeliverable($faker->randomElement([true, false]))
+                    ->setVendorState($faker->randomElement(['individual', 'pro']))
                     ;
             $manager->persist($product);
         }

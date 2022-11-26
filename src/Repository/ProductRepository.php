@@ -3,6 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use Doctrine\ORM\QueryBuilder;
+use App\DataModel\SearchFilter;
+use App\Repository\LocationRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +22,12 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
  */
 class ProductRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry, private PaginatorInterface $paginator)
+    public function __construct(
+        ManagerRegistry $registry, 
+        private PaginatorInterface $paginator, 
+        private CategoryRepository $categoryRepository,
+        private LocationRepository $locationRepository
+        )
     {
         parent::__construct($registry, Product::class);
     }
@@ -42,19 +50,96 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
-    public function findFilteredPaginated(Request $request):PaginationInterface
+    public function findFilteredPaginated(SearchFilter $searchFilter, Request $request):PaginationInterface
     {
-        $query = $this->createQueryBuilder('p')
-                        ->select('p')
-                        ->orderBy('p.createdAt', 'DESC')
-                        ->getQuery()
+        $qb = $this->createQueryBuilder('p')
+                        ->join('p.category', 'c')
+                        ->join('p.location', 'l')
+                        ->select('p', 'c', 'l')
                         ;
+        $this->filter($searchFilter, $qb);
+            
+        $query = $qb->getQuery();
+
+        
+
         return $this->paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             10 /*limit per page*/
         );
 
+    }
+    
+    private function filter(SearchFilter $searchFilter, QueryBuilder $qb)
+    {
+        /*filters*/
+        if($searchFilter->category)
+        {
+            $category = $this->categoryRepository->find($searchFilter->category);
+            $qb->andWhere('p.category = :category')
+                ->setParameter('category', $category)
+                ;
+        }
+        if($searchFilter->q)
+        {
+            $qb->andWhere('p.title LIKE :q')
+                ->setParameter('q', '%'.$searchFilter->q.'%')
+                ;
+        }
+        if($searchFilter->location)
+        {
+            $postalCode = explode(' ', $searchFilter->location);
+            $location = $this->locationRepository->findOneBy(['postalCode' => $postalCode]);
+            $qb->andWhere('p.location = :location')
+                ->setParameter('location', $location)
+                ;
+        }
+        /*more-filters*/
+        if($searchFilter->offersOrNeeds)
+        {
+            $qb->andWhere('p.offersOrNeeds = :offersOrNeeds')
+                ->setParameter('offersOrNeeds', $searchFilter->offersOrNeeds)
+                ;
+        }
+        if($searchFilter->min_price)
+        {
+            $qb->andWhere('p.price >= :min_price')
+                ->setParameter('min_price', $searchFilter->min_price)
+                ;
+        }
+        if($searchFilter->max_price)
+        {
+            $qb->andWhere('p.price <= :max_price')
+                ->setParameter('max_price', $searchFilter->max_price)
+                ;
+        }
+        if($searchFilter->individuals && !$searchFilter->pros)
+        {
+            $qb->andWhere('p.vendorState = :individual')
+                ->setParameter('individual', 'individual')
+                ;
+        }
+        if($searchFilter->pros && !$searchFilter->individuals)
+        {
+            $qb->andWhere('p.vendorState = :pro')
+                ->setParameter('pro', 'pro')
+                ;
+        }
+        if(!$searchFilter->deliverable)
+        {
+            $qb->andWhere('p.deliverable = false');
+        }
+
+        /*sort*/
+        if($searchFilter->sortby && in_array($searchFilter->dir, ['asc', 'desc']))
+        {
+            $qb->orderBy('p.'.$searchFilter->sortby, $searchFilter->dir);
+        }
+        else
+        {
+            $qb->orderBy('p.createdAt', 'desc');
+        }
     }
 
 //    /**
