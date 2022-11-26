@@ -20,7 +20,7 @@ export class SelectManager {
     constructor(select, optionsTemplateSelector) {
         this.#select = select;
         this.#select.append(document.querySelector(optionsTemplateSelector).content.cloneNode(true));
-        if(this.#select.querySelector('.select-option.default')) {
+        if(this.#select.querySelector('.select-option.default') && this.#select.querySelector('.current-choice-label').innerText === '') {
             this.#select.querySelector('.current-choice-label').innerText = this.#select.querySelector('.select-option.default').innerText;
             this.#select.dataset.currentchoicevalue = this.#select.querySelector('.select-option.default').dataset.value;
         }
@@ -34,6 +34,7 @@ export class SelectManager {
      * @param {Event} e 
      */
     #onClick(e) {
+        console.log('onclick');
         if(this.#select.querySelector('.select-list').contains(e.target)) {
             return;
         }
@@ -64,11 +65,14 @@ export class SelectManager {
      */
     onChoice(e) {
         e.stopPropagation();
-        // this.#select.querySelector('.current-choice-label').innerText = e.currentTarget.innerText;
-        
+        console.log('onchoice');
         this.#select.querySelector('.current-choice-label').innerHTML = e.currentTarget.cloneNode(true).innerHTML;
 
         this.#select.dataset.currentchoicevalue = e.currentTarget.dataset.value;
+        if (this.#select.querySelector('input[type=hidden]')) {
+            this.#select.querySelector('input[type=hidden]').value = e.currentTarget.dataset.value;
+            this.#select.querySelector('input[type=hidden]').dispatchEvent(new Event('change'));
+        }
         if(this.#select.querySelector('.default')) {
             this.#select.querySelector('.default').classList.remove('default');
         }

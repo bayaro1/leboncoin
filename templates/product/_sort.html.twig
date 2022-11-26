@@ -2,9 +2,9 @@
     <div
         class="search-sort-select js-select"
         data-optionstemplate="#search-sort-options-template"
-        data-currentchoicevalue=""
         >
-        <span class="current-choice-label"></span>
+        <input class="search-sort-input js-select-input" type="hidden" value="">
+        <span class="current-choice-label">Tri : {{ currentSortLabel ?? 'Pertinence' }} </span>
         <svg class="icon">
             <use xlink:href="/img/svg/sprite.svg#expand-more"></use>
         </svg>

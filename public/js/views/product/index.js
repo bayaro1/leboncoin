@@ -55,12 +55,6 @@ document.querySelector('.filters-opener').addEventListener('click', function(e) 
     e.currentTarget.classList.toggle('active');
 });
 
-/*selects*/
-
-document.querySelectorAll('.js-select').forEach(function(select) {
-    new SelectManager(select, select.dataset.optionstemplate);
-})
-
 
 /*focus lightning sur le main-form dans main-searchpage*/    //A REFACTORISER
 
@@ -110,3 +104,12 @@ document.addEventListener('scroll', function(e) {
         document.querySelector('.save-search-sticky').classList.remove('small');
     }
 });
+
+
+
+/**sort**/ 
+document.querySelector('.search-sort-input').addEventListener('change', function(e) {
+    const form = document.querySelector('.main-searchpage .main-form');
+    form.append(document.querySelector('.search-sort-select .sort-hidden-inputs'));
+    form.submit();
+})
