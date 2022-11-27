@@ -1,3 +1,9 @@
-<form action="{{ path('product_index') }}" method="get" class="main-form">
+<form   action="{{ path('product_index') }}" 
+        method="get" 
+        class="main-form js-form"
+        data-countresults=".js-count-results"
+        data-countapi="{{ path('product_count_results') }}"
+        data-mapping='[".main-form-category",".main-form-q",".main-form-location",".main-form-deliverable",".main-form-individuals",".main-form-pros",".main-form-offers",".main-form-needs",".main-form-min-price",".main-form-max-price"]'
+        >
 
 

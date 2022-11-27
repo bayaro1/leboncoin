@@ -25,7 +25,6 @@ class ProductController extends AbstractController
         $searchFilter = new SearchFilter;
         $form = $this->createForm(SearchFilterType::class, $searchFilter);
         $form->handleRequest($request);
-
         $pagination = $this->productRepository->findFilteredPaginated($searchFilter, $request);
         
         return $this->render('product/index.html.twig', [
@@ -33,6 +32,18 @@ class ProductController extends AbstractController
             'count_results' => $pagination->getTotalItemCount(),
             'searchFilter' => $searchFilter
         ]);
+    }
+
+    #[Route('/recherche/count-results', name: 'product_count_results')]
+    public function countResults(Request $request):Response  
+    {
+        $searchFilter = new SearchFilter;
+        $form = $this->createForm(SearchFilterType::class, $searchFilter);
+        $form->handleRequest($request);
+
+        $pagination = $this->productRepository->findFilteredPaginated($searchFilter, $request);
+
+        return new Response(json_encode($pagination->getTotalItemCount()));
     }
 
 }

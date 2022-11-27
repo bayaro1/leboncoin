@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Config\CategoryConfig;
 use App\Entity\Product;
 use Doctrine\ORM\QueryBuilder;
 use App\DataModel\SearchFilter;
@@ -76,7 +77,7 @@ class ProductRepository extends ServiceEntityRepository
         /*filters*/
         if($searchFilter->category)
         {
-            $category = $this->categoryRepository->find($searchFilter->category);
+            $category = $this->categoryRepository->findOneBy(['name' => CategoryConfig::CATEGORIES[$searchFilter->category]]);
             $qb->andWhere('p.category = :category')
                 ->setParameter('category', $category)
                 ;
