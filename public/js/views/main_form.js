@@ -1,7 +1,8 @@
 
 import { InfoManager } from "../components/InfoManager.js";
 import { SliderManager } from "../components/SliderManager.js";
-import { AutoCountResults } from "../components/AutoCountResults.js";
+import { AutoCountResults } from "../components/Form/AutoCountResults.js";
+import { AutoSuggestor } from "../components/Form/AutoSuggestor.js";
 
 /******main form input sliders*******/
 const inputSliderManager = new SliderManager('.main-form-slider[data-contain=input-slider]');
@@ -76,3 +77,9 @@ document.querySelector('.main-form').addEventListener('submit', function(e) {
 
 /*auto-count-results*/
 new AutoCountResults(document.querySelector('.js-form'));
+
+
+
+/*location auto-suggest*/
+new AutoSuggestor(document.querySelector('.js-auto-suggest.suggest-location'));
+

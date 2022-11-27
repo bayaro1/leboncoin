@@ -62,14 +62,19 @@ class ProductRepository extends ServiceEntityRepository
             
         $query = $qb->getQuery();
 
-        
-
         return $this->paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             10 /*limit per page*/
         );
 
+    }
+    public function countFiltered(SearchFilter $searchFilter):?int 
+    {
+        $qb = $this->createQueryBuilder('p')
+                    ;
+        $this->filter($searchFilter, $qb);
+        return count($qb->getQuery()->getResult());
     }
     
     private function filter(SearchFilter $searchFilter, QueryBuilder $qb)
@@ -106,13 +111,13 @@ class ProductRepository extends ServiceEntityRepository
         if($searchFilter->min_price)
         {
             $qb->andWhere('p.price >= :min_price')
-                ->setParameter('min_price', $searchFilter->min_price)
+                ->setParameter('min_price', $searchFilter->min_price * 100)
                 ;
         }
         if($searchFilter->max_price)
         {
             $qb->andWhere('p.price <= :max_price')
-                ->setParameter('max_price', $searchFilter->max_price)
+                ->setParameter('max_price', $searchFilter->max_price *100)
                 ;
         }
         if($searchFilter->individuals && !$searchFilter->pros)

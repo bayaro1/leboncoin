@@ -40,10 +40,9 @@ class ProductController extends AbstractController
         $searchFilter = new SearchFilter;
         $form = $this->createForm(SearchFilterType::class, $searchFilter);
         $form->handleRequest($request);
+        $count = $this->productRepository->countFiltered($searchFilter);
 
-        $pagination = $this->productRepository->findFilteredPaginated($searchFilter, $request);
-
-        return new Response(json_encode($pagination->getTotalItemCount()));
+        return new Response(json_encode($count));
     }
 
 }

@@ -1,3 +1,5 @@
+import { myFetch } from "../../functions/api.js";
+
 export class AutoCountResults {
 
     #formElt;
@@ -17,7 +19,7 @@ export class AutoCountResults {
         this.#formElt.addEventListener('change', e => this.#onChange(e))
     }
 
-    #onChange(e) {
+    async #onChange(e) {
         const formData = new FormData(this.#formElt);
         let params = [];
         for(const fieldSelector of this.#mapping) {
@@ -28,24 +30,18 @@ export class AutoCountResults {
         }
         const url = this.#countApi + '?' + params.join('&');
         const countElt = this.#countElt;
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                "Accept": "application/json",
-                "Content-type": "application/json"
-            }
-        })
-        .then(function(res) {
-            if(res.ok) {
-                return res.json();
-            }
-        })
-        .then(function(value) {
+        try {
+            const value = await myFetch(url, {
+                method: 'GET',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-type": "application/json"
+                }
+            });
             countElt.innerText = new Intl.NumberFormat('fr-FR').format(value);
-        })
-        .catch(function(error) {
-            console.error(error);
-        })
+        } catch(e) {
+            console.error(e);
+        }
     }
 }
 

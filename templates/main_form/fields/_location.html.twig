@@ -7,9 +7,15 @@
     </svg>
     <input 
         class="main-form-input main-form-location location-slider-opener js-auto-suggest suggest-location form-box" 
+        {# slider #}
         data-template="#main-form-location-template"
         data-closer=".i-return"
         data-maxwidth="1050"
+        {# autosuggest #}
+        data-entrypoint="https://api-adresse.data.gouv.fr/search/?type=municipality&limit=5&q="
+        data-suggesttemplate="#main-form-suggest-template"
+        data-minqlength="3"
+
         type="text" 
         name="location" 
         id="location" 
