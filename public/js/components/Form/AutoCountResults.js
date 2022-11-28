@@ -15,7 +15,13 @@ export class AutoCountResults {
         this.#formElt = formElt;
         this.#countApi = this.#formElt.dataset.countapi;
         this.#mapping = JSON.parse(this.#formElt.dataset.mapping);
-        this.#countElt = document.querySelector(this.#formElt.dataset.countresults);
+        // Si il y a un élément countResult dans le form, on choisit celui-là, sinon on recherche le countResult dans le document global
+        if(this.#formElt.querySelector(this.#formElt.dataset.countresults)) {
+            this.#countElt = this.#formElt.querySelector(this.#formElt.dataset.countresults);
+        } else {
+            this.#countElt = document.querySelector(this.#formElt.dataset.countresults);
+        }
+
         this.#formElt.addEventListener('change', e => this.#onChange(e))
     }
 

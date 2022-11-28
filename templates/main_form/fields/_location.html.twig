@@ -1,4 +1,4 @@
-<div class="form-group form-input">
+<div class="form-group form-input main-form-location-group">
     <svg class="icon i-left i-location">
         <use xlink:href="/img/svg/sprite.svg#location"></use>
     </svg>
@@ -12,9 +12,9 @@
         data-closer=".i-return"
         data-maxwidth="1050"
         {# autosuggest #}
-        data-entrypoint="https://api-adresse.data.gouv.fr/search/?type=municipality&limit=5&q="
-        data-suggesttemplate="#main-form-suggest-template"
+        data-entrypoint="https://api-adresse.data.gouv.fr/search?type=municipality&limit=5"
         data-minqlength="3"
+        data-locationsuggestor="true"
 
         type="text" 
         name="location" 

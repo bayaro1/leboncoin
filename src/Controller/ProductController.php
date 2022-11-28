@@ -45,4 +45,13 @@ class ProductController extends AbstractController
         return new Response(json_encode($count));
     }
 
+    #[Route('/recherche/title-suggest', name: 'product_titleSuggest')]
+    public function titleSuggest(Request $request):Response 
+    {
+        $q = str_replace('+', ' ', $request->get('q'));
+        $titles = $this->productRepository->findTitlesByQ($q);
+
+        return new Response(json_encode($titles));
+    }
+
 }

@@ -13,6 +13,16 @@ document.querySelectorAll('.q-slider-opener, .location-slider-opener')
                     if(window.innerWidth < 1050) {
                         inputSliderManager.onOpenerClick(e.currentTarget);
                         document.querySelector('.main-form-slider .main-form-input').focus();
+                        
+                        /*auto-suggest*/
+                        document.querySelectorAll('.main-form-slider .js-auto-suggest')
+                                .forEach(function(elt) {
+                                    new AutoSuggestor(elt);
+                                });
+                        
+                        
+                        /*auto-count-results*/
+                        new AutoCountResults(document.querySelector('.main-form-slider .js-form'));
                     }
                 })
             });
@@ -80,6 +90,9 @@ new AutoCountResults(document.querySelector('.js-form'));
 
 
 
-/*location auto-suggest*/
-new AutoSuggestor(document.querySelector('.js-auto-suggest.suggest-location'));
+/*auto-suggest*/
 
+document.querySelectorAll('.js-auto-suggest')
+        .forEach(function(elt) {
+            new AutoSuggestor(elt);
+        });

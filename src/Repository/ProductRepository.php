@@ -51,6 +51,25 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
+    public function findTitlesByQ(string $q, $limit = 5)
+    {
+        $data = $this->createQueryBuilder('p')
+                    ->select('p.title as title')
+                    ->where('p.title LIKE :q')
+                    ->setParameter('q', '%'.$q.'%')
+                    ->setMaxResults($limit)
+                    ->orderBy('p.createdAt', 'DESC')
+                    ->getQuery()
+                    ->getResult()
+                    ;
+        $titles = [];
+        foreach($data as $d)
+        {
+            $titles[] = $d['title'];
+        }
+        return $titles;
+    }
+
     public function findFilteredPaginated(SearchFilter $searchFilter, Request $request):PaginationInterface
     {
         $qb = $this->createQueryBuilder('p')
