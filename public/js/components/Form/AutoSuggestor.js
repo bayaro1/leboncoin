@@ -28,6 +28,11 @@ export class AutoSuggestor {
     /** @type {boolean} */
     #locationSuggestor = false;
 
+
+    #timer;
+
+    #timeout = 300;
+
     /**
      * 
      * @param {HTMLElement} inputElt 
@@ -44,28 +49,30 @@ export class AutoSuggestor {
         if(this.#container.querySelector('.auto-suggest-list') === null) {
             this.#suggestList = this.#createList();
             this.#container.append(this.#suggestList);
-            this.#inputElt.addEventListener('input', e => this.#onInput(e));
+            this.#inputElt.addEventListener('input', e => {
+                clearInterval(this.#timer);
+                const object = this;
+                this.#timer = setTimeout(function() {
+                    object.onInput(e);
+                }, this.#timeout);
+            });
         }
     }
 
-    /**
-     * 
-     * @param {Event} e 
-     */
-    async #onInput(e) {
-        const q = e.currentTarget.value;
+    async onInput(e) {
+        const q = e.target.value;
         if(q.length < this.#minQLength) {
             if(this.#open) {
                 this.close();
             }
             return;
         }
-        console.log(this.#entryPoint);
         const url = (new UrlManager(this.#entryPoint))
                     .setParam('q', q.replace(' ', '+'))
                     .toString()
                     ;
-        console.log(url);
+        this.#container.classList.add('loading');
+
 
         try {
             const data = await myFetch(url, {
@@ -96,7 +103,7 @@ export class AutoSuggestor {
                     this.#suggestList.append(this.#createItem(value, label))
                 }
             }
-            
+            this.#container.classList.remove('loading');
             if(!this.#open) {
                 this.#openList();
             }
@@ -133,6 +140,7 @@ export class AutoSuggestor {
 
     #onChoice(e) {
         this.#inputElt.value = e.currentTarget.getAttribute('value');
+        this.#inputElt.dispatchEvent(new Event('change', {'bubbles': true}));
         this.close();
     }
 

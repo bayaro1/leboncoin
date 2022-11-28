@@ -1,4 +1,5 @@
 import { myFetch } from "../../functions/api.js";
+import { UrlManager } from "../Tools/UrlManager.js";
 
 export class AutoCountResults {
 
@@ -27,17 +28,16 @@ export class AutoCountResults {
 
     async #onChange(e) {
         const formData = new FormData(this.#formElt);
-        let params = [];
+        const urlManager = new UrlManager(this.#countApi);
         for(const fieldSelector of this.#mapping) {
             const elt = document.querySelector(fieldSelector);
             if(formData.get(elt.name) !== "" && formData.get(elt.name) !== null) {
-                params.push(elt.name + '=' + formData.get(elt.name));
+                urlManager.setParam(elt.name, formData.get(elt.name));
             }
         }
-        const url = this.#countApi + '?' + params.join('&');
         const countElt = this.#countElt;
         try {
-            const value = await myFetch(url, {
+            const value = await myFetch(urlManager.toString(), {
                 method: 'GET',
                 headers: {
                     "Accept": "application/json",

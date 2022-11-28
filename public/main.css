@@ -667,6 +667,29 @@ body.homepage {
     display: none;
 }
 
+@keyframes rotation {
+    0% {
+
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*main-form auto-suggest-loader*/
+.main-form .form-group.form-input input {
+    padding-right: 35px;
+}
+.main-form .form-group.form-input.loading::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: url(img/svg/loader.svg) center center / contain no-repeat;
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 10px);
+    animation: rotation 1s infinite;
+}
 
 /*main head*/
 
@@ -1011,6 +1034,7 @@ body.homepage {
     cursor: pointer;
     margin: 16px 0; 
 }
+
 
 
 /* location bubble */
