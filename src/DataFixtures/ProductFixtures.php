@@ -32,6 +32,9 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
         for($i=0; $i<10000; $i++)
         {
             $duration = 'P'.random_int(0, 5).'Y'.random_int(0, 11).'M'.random_int(0, 30).'DT'.random_int(0, 23).'H'.random_int(0, 59).'M'.random_int(0, 59).'S';
+            $offersOrNeeds = random_int(0, 9) <= 8 ? 'offers': 'needs';
+            $deliverable = random_int(0, 9) <= 8 ? false: true;
+            $vendorState = random_int(0, 9) <= 6 ? 'individual': 'pro';
 
             $product = new product;
             $product->setTitle($faker->productName)
@@ -39,9 +42,9 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
                     ->setCreatedAt((new DateTimeImmutable())->sub(new DateInterval($duration)))
                     ->setCategory($faker->randomElement($categories))
                     ->setLocation($faker->randomElement($locations))
-                    ->setOffersOrNeeds($faker->randomElement(['offers', 'needs']))
-                    ->setDeliverable($faker->randomElement([true, false]))
-                    ->setVendorState($faker->randomElement(['individual', 'pro']))
+                    ->setOffersOrNeeds($offersOrNeeds)
+                    ->setDeliverable($deliverable)
+                    ->setVendorState($vendorState)
                     ;
             $manager->persist($product);
         }

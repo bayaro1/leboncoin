@@ -88,8 +88,8 @@ export class AutoSuggestor {
                     return;
                 }
                 for(const feature of data.features) {
-                    const label = feature.properties.name + ' ('+feature.properties.postcode+')';
-                    const value = label;
+                    const label = feature.properties.name + ' (' + feature.properties.postcode + ')';
+                    const value = feature.properties.name + ' ' + feature.properties.postcode;
                     this.#suggestList.append(this.#createItem(value, label))
                 }
             } else {

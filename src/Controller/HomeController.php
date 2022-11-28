@@ -18,6 +18,9 @@ class HomeController extends AbstractController
     #[Route('/', name:'home_index')]
     public function index():Response
     {
+        
+
+
         $countResults = $this->productRepository->count(['deliverable' => false, 'offersOrNeeds' => 'offers']);
         return $this->render('home/index.html.twig', [
             'count_results' => $countResults,

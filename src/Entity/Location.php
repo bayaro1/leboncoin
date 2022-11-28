@@ -24,6 +24,12 @@ class Location
     #[ORM\OneToMany(mappedBy: 'location', targetEntity: Product::class)]
     private Collection $products;
 
+    #[ORM\Column]
+    private ?int $posX = null;
+
+    #[ORM\Column]
+    private ?int $posY = null;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -89,6 +95,30 @@ class Location
                 $product->setLocation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPosX(): ?int
+    {
+        return $this->posX;
+    }
+
+    public function setPosX(int $posX): self
+    {
+        $this->posX = $posX;
+
+        return $this;
+    }
+
+    public function getPosY(): ?int
+    {
+        return $this->posY;
+    }
+
+    public function setPosY(int $posY): self
+    {
+        $this->posY = $posY;
 
         return $this;
     }
