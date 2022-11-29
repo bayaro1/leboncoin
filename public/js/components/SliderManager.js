@@ -23,7 +23,7 @@ export class SliderManager {
      * 
      * @param {HTMLElement} opener
      */
-    onOpenerClick(opener) {
+    async onOpenerClick(opener) {
         if(opener.dataset.maxwidth !== null && window.innerWidth > opener.dataset.maxwidth) {
             return;
         }
@@ -41,12 +41,13 @@ export class SliderManager {
                 document.body.classList.add('frozen');
             }
 
-            /*essayer de transformer ça en promise*/   //.then(e => this.close(e))
             this.#closeHandler = new CloseHandler(
-                this.#slider, 
-                this,
+                this.#slider,
                 this.#slider.querySelector(opener.dataset.closer)
                 );
+            await this.#closeHandler.start();
+            this.close();
+            
         } else {
             this.close();
         }
@@ -55,7 +56,7 @@ export class SliderManager {
     close() {
         this.#slider.classList.remove('visible');
         document.body.classList.remove('frozen');
-        this.#closeHandler.delete();
+        this.#closeHandler.stop();
     }
 
     /**

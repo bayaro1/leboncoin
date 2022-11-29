@@ -28,9 +28,13 @@ export class AutoSuggestor {
     /** @type {boolean} */
     #locationSuggestor = false;
 
+    /** @type {AbortController} */
+    #controller;
 
-    #timer;
+    /** @type {number} timestamp (ms)*/
+    #lastFetchCall;
 
+    /** @type {number} (ms) */
     #timeout = 300;
 
     /**
@@ -45,70 +49,82 @@ export class AutoSuggestor {
         this.#entryPoint = this.#inputElt.dataset.entrypoint;
         this.#minQLength = this.#inputElt.dataset.minqlength;
         this.#container = this.#inputElt.parentElement;
-        
-        if(this.#container.querySelector('.auto-suggest-list') === null) {
-            this.#suggestList = this.#createList();
-            this.#container.append(this.#suggestList);
-            this.#inputElt.addEventListener('input', e => {
-                clearInterval(this.#timer);
-                const object = this;
-                this.#timer = setTimeout(function() {
-                    object.onInput(e);
-                }, this.#timeout);
-            });
-        }
+
+        this.#suggestList = this.#createList();
+        this.#container.append(this.#suggestList);
+
+        this.#inputElt.addEventListener('input', e => {
+            this.#onInput(e);
+        });
     }
 
-    async onInput(e) {
+    async #onInput(e) {
+        if(Date.now() - this.#lastFetchCall < this.#timeout) {
+            this.#controller.abort();
+        }
+
         const q = e.target.value;
         if(q.length < this.#minQLength) {
             if(this.#open) {
-                this.close();
+                this.#close();
             }
             return;
         }
+        this.#container.classList.add('loading');
+
+        const data = await this.#callApi(q);
+        this.#loadList(data);
+
+        this.#container.classList.remove('loading');
+        if(!this.#open) {
+            this.#openList();
+        }
+    }
+
+    #callApi(q) {
+
         const url = (new UrlManager(this.#entryPoint))
                     .setParam('q', q.replace(' ', '+'))
                     .toString()
                     ;
-        this.#container.classList.add('loading');
 
-
+        this.#controller = new AbortController();
+        this.#lastFetchCall = Date.now();
         try {
-            const data = await myFetch(url, {
+            return myFetch(url, {
                 headers: {
                     "Accept": "application/json",
                     "Content-type": "application/json"
-                }
+                },
+                signal: this.#controller.signal
             });
-            this.#suggestList.innerHTML = '';
-            if(this.#locationSuggestor) {
-                if(data.features.length === 0 && this.#open) {
-                    this.close();
-                    return;
-                }
-                for(const feature of data.features) {
-                    const label = feature.properties.name + ' (' + feature.properties.postcode + ')';
-                    const value = feature.properties.name + ' ' + feature.properties.postcode;
-                    this.#suggestList.append(this.#createItem(value, label))
-                }
-            } else {
-                if(data.length === 0 && this.#open) {
-                    this.close();
-                    return;
-                }
-                for(const d of data) {
-                    const label = d;
-                    const value = d;
-                    this.#suggestList.append(this.#createItem(value, label))
-                }
-            }
-            this.#container.classList.remove('loading');
-            if(!this.#open) {
-                this.#openList();
-            }
         } catch(e) {
             console.error(e);
+        }
+    }
+
+    async #loadList(data) {
+        this.#suggestList.innerHTML = '';
+        if(this.#locationSuggestor) {
+            if(data.features.length === 0 && this.#open) {
+                this.#close();
+                return;
+            }
+            for(const feature of data.features) {
+                const label = feature.properties.name + ' (' + feature.properties.postcode + ')';
+                const value = feature.properties.name + ' ' + feature.properties.postcode;
+                this.#suggestList.append(this.#createItem(value, label))
+            }
+        } else {
+            if(data.length === 0 && this.#open) {
+                this.#close();
+                return;
+            }
+            for(const d of data) {
+                const label = d;
+                const value = d;
+                this.#suggestList.append(this.#createItem(value, label))
+            }
         }
     }
 
@@ -141,19 +157,24 @@ export class AutoSuggestor {
     #onChoice(e) {
         this.#inputElt.value = e.currentTarget.getAttribute('value');
         this.#inputElt.dispatchEvent(new Event('change', {'bubbles': true}));
-        this.close();
+        this.#close();
     }
 
-    #openList() {
+    async #openList() {
         this.#suggestList.classList.add('visible');
-        this.#closeHandler = new CloseHandler(this.#suggestList, this);
         this.#open = true;
+
+        this.#closeHandler = new CloseHandler(this.#suggestList);
+        await this.#closeHandler.start();
+        this.#close();
     }
 
-    close() {
+    #close() {
         this.#suggestList.innerHTML = '';
         this.#suggestList.classList.remove('visible');
-        this.#closeHandler.delete();
+        this.#closeHandler.stop();
         this.#open = false;
+        this.#controller.abort();
+        this.#container.classList.remove('loading');
     }
 }

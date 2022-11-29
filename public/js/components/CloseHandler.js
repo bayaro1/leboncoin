@@ -1,54 +1,60 @@
 import { clickIsOnElement } from "../functions/spatial.js";
 
-
+/**
+ * renvoie une promise qui est resolved dès que l'utilisateur commande la fermeture de l'élément
+ */
 export class CloseHandler {
 
     /** @type {HTMLElement} */
     #eltToClose;
 
+    /** @type {HTMLElement} */
+    #closerElt;
+
     /** @type {callable} */
-    #callOnBodyClick;
+    #onBodyClick;
 
-    /** @type {Object} */
-    #eltManager;
+    #resolve;
 
+    
     /**
      * @param {HTMLElement} eltToClose
-     * @param {Object} eltManager  // doit contenir une méthode close accessible en public
      * @param {HTMLElement} closerElt
      */
-    constructor(eltToClose, eltManager, closerElt = null) {
-
+    constructor(eltToClose, closerElt = null) {
         this.#eltToClose = eltToClose;
-        this.#eltManager = eltManager;
-        
-         //on écoute le closer et on applique le closingProcess en cas de click
-        if(closerElt !== null) {
-            closerElt.addEventListener('click', e => this.#closingProcess(e));
+        this.#closerElt = closerElt;
+    }
+    
+    start() {
+        //on écoute le closer et on applique le closingProcess en cas de click
+        if(this.#closerElt !== null) {
+            this.#closerElt.addEventListener('click', e => this.#closingProcess(e));
         }
 
         //on écoute le body et on appelle onBodyClick en cas de click
         //pour pouvoir appeler le removeEventListener, on utilise un callable
-        this.#callOnBodyClick = (e) => {
-            this.#onBodyClick(e);
+        this.#onBodyClick = (e) => {
+            if(!clickIsOnElement(e, this.#eltToClose)) {
+                this.#closingProcess(e);
+                }
         }
         setTimeout(() => {
-            document.body.addEventListener('click', this.#callOnBodyClick);
+            document.body.addEventListener('click', this.#onBodyClick);
         }, 100);
+
+        //on retourne une promesse qui sera résolue lors de l'appel à closingProcess
+        return new Promise((resolve, reject) => {
+            this.#resolve = resolve;  
+        });
     }
     
-    //si le click est hors de l'élément, alors on applique le closingProcess
-    /**
-     * 
-     * @param {Event} e 
-     */    
-    #onBodyClick(e) {
-        if(!clickIsOnElement(e, this.#eltToClose)) {
-            this.#closingProcess(e)
-            document.body.removeEventListener('click', this.#callOnBodyClick);
-            }
+    stop() {
+        document.body.removeEventListener('click', this.#onBodyClick);
     }
 
+
+    //on résoud la promesse
     /**
      * 
      * @param {Event} e 
@@ -56,14 +62,9 @@ export class CloseHandler {
     #closingProcess(e) {
         e.preventDefault();
         e.stopPropagation();
-        this.#eltManager.close();
-        document.body.removeEventListener('click', this.#callOnBodyClick);
+        document.body.removeEventListener('click', this.#onBodyClick);
+        this.#resolve(e);
     }
 
-    delete() {
-        document.body.removeEventListener('click', this.#callOnBodyClick);
-    }
 }
-
-
 

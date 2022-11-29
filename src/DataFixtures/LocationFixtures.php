@@ -52,7 +52,6 @@ class LocationFixtures extends Fixture
             if(!empty($data->features))
             {
                 $properties = $data->features[0]->properties;
-
                 if(isset($properties->x) && isset($properties->y) && isset($properties->city) && isset($properties->postcode))
                 {
                     $city = $properties->city;

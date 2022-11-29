@@ -54,7 +54,7 @@ class ProductRepository extends ServiceEntityRepository
     public function findTitlesByQ(string $q, $limit = 5)
     {
         $data = $this->createQueryBuilder('p')
-                    ->select('p.title as title')
+                    ->select('DISTINCT(p.title) as title')
                     ->where('p.title LIKE :q')
                     ->setParameter('q', '%'.$q.'%')
                     ->setMaxResults($limit)

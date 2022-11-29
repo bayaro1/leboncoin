@@ -33,12 +33,12 @@ export class SelectManager {
      * 
      * @param {Event} e 
      */
-    #onClick(e) {
+    async #onClick(e) {
         if(this.#select.querySelector('.select-list').contains(e.target)) {
             return;
         }
         if(this.#open) {
-            this.close();
+            this.#close();
             return;
         }
         this.#select.querySelector('.select-list').classList.add('visible');
@@ -47,7 +47,9 @@ export class SelectManager {
 
         this.#open = true;
 
-        this.#closeHandler = new CloseHandler(this.#select.querySelector('.select-list'), this);
+        this.#closeHandler = new CloseHandler(this.#select.querySelector('.select-list'));
+        await this.#closeHandler.start();
+        this.#close();
     }
 
     #listenChoice() {
@@ -64,7 +66,6 @@ export class SelectManager {
      */
     onChoice(e) {
         e.stopPropagation();
-        console.log(e.currentTarget.cloneNode(true).innerHTML);
         this.#select.querySelector('.current-choice-label').innerHTML = e.currentTarget.cloneNode(true).innerHTML;
 
         this.#select.dataset.currentchoicevalue = e.currentTarget.dataset.value;
@@ -76,13 +77,13 @@ export class SelectManager {
             this.#select.querySelector('.default').classList.remove('default');
         }
         e.currentTarget.classList.add('default');
-        this.close();
+        this.#close();
     }
 
-    close() {
+    #close() {
         this.#select.querySelector('.select-list').classList.remove('visible');
         this.#open = false;
-        this.#closeHandler.delete();
+        this.#closeHandler.stop();
         this.#select.classList.remove('focus');
     }
 

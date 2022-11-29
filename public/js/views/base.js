@@ -29,3 +29,40 @@ document.querySelectorAll('.js-select').forEach(function(select) {
 document.querySelector('.dev-todo-closer').addEventListener('click', function(e) {
     document.querySelector('.dev-todo').remove();
 })
+
+
+
+class ClickListener {
+
+    elt;
+    onclick;
+
+    constructor(elt) {
+        this.elt = elt;
+    }
+    start() {
+        return new Promise((resolve, reject) => {
+            this.resolve = resolve;
+        });
+    }
+    stop() {
+        this.elt.removeEventListener('click', this.onclick);
+    }
+
+}
+
+
+const clickListener = new ClickListener(document.querySelector('.icon.i-logo'));
+clickListener.start()
+            .then(function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log(e.currentTarget);
+            })
+            .catch(function(error) {
+                console.log('on capture cette erreur', error);
+            })
+            .finally(function() {
+                clickListener.stop();
+            })
+ 
