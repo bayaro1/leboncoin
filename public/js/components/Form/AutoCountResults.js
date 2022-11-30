@@ -41,7 +41,7 @@ export class AutoCountResults {
                 method: 'GET',
                 headers: {
                     "Accept": "application/json",
-                    "Content-type": "application/json"
+                    "Content-Type": "application/json"
                 }
             });
             countElt.innerText = new Intl.NumberFormat('fr-FR').format(value);

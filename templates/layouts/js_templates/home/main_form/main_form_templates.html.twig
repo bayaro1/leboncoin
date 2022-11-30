@@ -220,7 +220,7 @@
         {% include "main_form/_form_start.html.twig" %}
         {% include "main_form/fields/_location.html.twig" %}
 
-        <ul class="location-choices-list">
+        {# <ul class="location-choices-list">
             <li class="location-choices-item">
                 <div class="location-bubble">
                     <span>Morcenx (40110)</span>
@@ -287,9 +287,84 @@
                     <use xlink:href="/img/svg/sprite.svg#close"></use>
                 </svg>
             </li>
-        </ul>
+        </ul> #}
         {% include "main_form/_submit.html.twig" %}
         {% include "main_form/_form_end.html.twig" %}
     </div>
 </template>
 
+
+<template id="location-manager-template">
+    <div class="location-manager auto-suggest-list">
+       <div class="location-manager-body">
+             <ul class="location-choices-list">
+            </ul>
+            <div class="">
+                <p class="">
+                    Dans un rayon autour de <br>(a faire plus tard)<br>
+                </p>
+            </div>
+            <ul class="lasts-location-list">
+                <p class="lasts-location-list-title">Localisations récentes</p>
+                <li class="lasts-location-item slider-item">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#location-fill"></use>
+                    </svg>
+                    <span>Biarritz (64200) - 20 km</span>
+                    <svg class="icon i-right js-lasts-location-item-closer">
+                        <use xlink:href="/img/svg/sprite.svg#close"></use>
+                    </svg>
+                </li>
+                <li class="lasts-location-item slider-item">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#location-fill"></use>
+                    </svg>
+                    <span>Salon de Provence (13300)</span>
+                    <svg class="icon i-right js-lasts-location-item-closer">
+                        <use xlink:href="/img/svg/sprite.svg#close"></use>
+                    </svg>
+                </li>
+                <li class="lasts-location-item slider-item">
+                    <svg class="icon i-left">
+                        <use xlink:href="/img/svg/sprite.svg#location-fill"></use>
+                    </svg>
+                    <span>Lamanon (13330)</span>
+                    <svg class="icon i-right js-lasts-location-item-closer">
+                        <use xlink:href="/img/svg/sprite.svg#close"></use>
+                    </svg>
+                </li>
+            </ul>
+       </div>
+       <div class="location-manager-footer">
+            <button class="location-manager-button btn-grey js-remove-button" value="delete">Effacer</button>
+            <button class="location-manager-button btn-orange js-valid-button" value="valid">Valider les localisations</button>
+       </div>
+    </div>
+</template>
+
+<template id="location-choices-item-template">
+    <li class="location-choices-item">
+        <div class="location-bubble" data-label="" data-value="">
+            <span class="js-location-label"></span>
+            <svg class="icon js-location-bubble-closer">
+                <use xlink:href="/img/svg/sprite.svg#close"></use>
+            </svg>
+        </div>
+        <div class="location-ray">
+            <span>rayon</span>
+            <svg class="icon">
+                <use xlink:href="/img/svg/sprite.svg#expand-more"></use>
+            </svg>
+        </div>
+    </li>
+</template>
+
+
+<template id="location-bubble-template">
+    <div class="location-bubble" data-label="" data-value="">
+        <span class="js-location-label"></span>
+        <svg class="icon js-location-bubble-closer">
+            <use xlink:href="/img/svg/sprite.svg#close"></use>
+        </svg>
+    </div>
+</template>

@@ -3,6 +3,7 @@ import { InfoManager } from "../components/InfoManager.js";
 import { SliderManager } from "../components/SliderManager.js";
 import { AutoCountResults } from "../components/Form/AutoCountResults.js";
 import { AutoSuggestor } from "../components/Form/AutoSuggestor.js";
+import { LocationManager } from "../components/Form/LocationManager.js";
 
 /******main form input sliders*******/
 const inputSliderManager = new SliderManager('.main-form-slider[data-contain=input-slider]');
@@ -96,3 +97,16 @@ document.querySelectorAll('.js-auto-suggest')
         .forEach(function(elt) {
             new AutoSuggestor(elt);
         });
+
+
+
+
+/*traitement spécial on change sur le input location*/
+const inputLocation = document.querySelector('.main-form-input.main-form-location');
+//si on n'a pas sélectionné un item du autosuggestor, on vide le input
+inputLocation
+        .addEventListener('change', function(e) {
+            e.currentTarget.value = '';
+        });
+//si on a sélectionné un item du autosuggestor (event inputLocationChange renvoyé), on gère la sélection du rayon
+new LocationManager(inputLocation, 'inputLocationChange');

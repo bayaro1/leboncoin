@@ -94,7 +94,7 @@ export class AutoSuggestor {
             return myFetch(url, {
                 headers: {
                     "Accept": "application/json",
-                    "Content-type": "application/json"
+                    "Content-Type": "application/json"
                 },
                 signal: this.#controller.signal
             });
@@ -156,7 +156,9 @@ export class AutoSuggestor {
 
     #onChoice(e) {
         this.#inputElt.value = e.currentTarget.getAttribute('value');
-        this.#inputElt.dispatchEvent(new Event('change', {'bubbles': true}));
+        this.#inputElt.setAttribute('label', e.currentTarget.innerText);
+        this.#inputElt.dispatchEvent(new CustomEvent('inputLocationChange', {bubbles: false}));
+        this.#inputElt.dispatchEvent(new Event('change', {bubbles: true}));
         this.#close();
     }
 
