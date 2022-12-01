@@ -87,7 +87,7 @@ export class LocationManager {
                         break;
             
                     case this.#autoSuggestClose:
-                            this.#open();
+                            this.#open(false);
                             break;
                 
                         case this.#autoSuggestValidated:
@@ -103,17 +103,21 @@ export class LocationManager {
     }
 
     
-    async #open() {
-            for(const [label, _] of Object.entries(this.#selectedLocations)) {
-                this.#box.querySelector(this.#locationChoicesList).prepend(
-                    this.#createLocationItem(label)
-                );
-            }
-        this.#inputElt.value = '';
+    async #open(blank = true) {
+        for(const [label, _] of Object.entries(this.#selectedLocations)) {
+            this.#box.querySelector(this.#locationChoicesList).prepend(
+                this.#createLocationItem(label)
+            );
+        }
+        if(blank) {
+            this.#inputElt.value = '';
+        }
         this.#box.classList.add('visible');
         this.#status = 'open';
+        this.#startCloseHandler();
+    }
 
-        //on écoute un closeEvent
+    async #startCloseHandler() {
         const closeEvent = await (new CloseHandler(
             this.#box, 
             this.#box.querySelector(this.#validationButton), 
@@ -127,9 +131,10 @@ export class LocationManager {
      * @param {Event} closeEvent 
      * @returns 
      */
-    #onClose(closeEvent) {
-        //si on a cliqué sur le input, la box reste ouverte
+    async #onClose(closeEvent) {
+        //si on a cliqué sur le input, la box reste ouverte et on relance un closeHandler
         if(closeEvent.target === this.#inputElt) {
+            this.#startCloseHandler();
             return;
         }
         //si on a cliqué sur bouton supprimer, on vide les selectedLocations et on ferme la box

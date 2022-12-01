@@ -168,11 +168,11 @@ export class AutoSuggestor {
 
         this.#closeHandler = new CloseHandler(this.#suggestList);
         await this.#closeHandler.start();
-        this.#inputElt.dispatchEvent(new CustomEvent('autoSuggestClose'));
         this.#close();
     }
 
     #close() {
+        this.#inputElt.dispatchEvent(new CustomEvent('autoSuggestClose'));
         this.#suggestList.innerHTML = '';
         this.#suggestList.classList.remove('visible');
         this.#closeHandler.stop();
