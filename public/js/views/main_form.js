@@ -101,12 +101,5 @@ document.querySelectorAll('.js-auto-suggest')
 
 
 
-/*traitement spécial on change sur le input location*/
-const inputLocation = document.querySelector('.main-form-input.main-form-location');
-//si on n'a pas sélectionné un item du autosuggestor, on vide le input
-inputLocation
-        .addEventListener('change', function(e) {
-            e.currentTarget.value = '';
-        });
-//si on a sélectionné un item du autosuggestor (event inputLocationChange renvoyé), on gère la sélection du rayon
-new LocationManager(inputLocation, 'inputLocationChange');
+/*Location manager*/
+new LocationManager(document.querySelector('.main-form-input.main-form-location'));

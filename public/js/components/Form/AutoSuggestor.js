@@ -70,6 +70,7 @@ export class AutoSuggestor {
             }
             return;
         }
+        this.#inputElt.dispatchEvent(new CustomEvent('autoSuggestOpen'));
         this.#container.classList.add('loading');
 
         const data = await this.#callApi(q);
@@ -157,8 +158,7 @@ export class AutoSuggestor {
     #onChoice(e) {
         this.#inputElt.value = e.currentTarget.getAttribute('value');
         this.#inputElt.setAttribute('label', e.currentTarget.innerText);
-        this.#inputElt.dispatchEvent(new CustomEvent('inputLocationChange', {bubbles: false}));
-        this.#inputElt.dispatchEvent(new Event('change', {bubbles: true}));
+        this.#inputElt.dispatchEvent(new CustomEvent('autoSuggestValidated', {bubbles: false}));
         this.#close();
     }
 
@@ -168,7 +168,7 @@ export class AutoSuggestor {
 
         this.#closeHandler = new CloseHandler(this.#suggestList);
         await this.#closeHandler.start();
-        this.#inputElt.dispatchEvent(new Event('autoSuggestCloseWithoutChoice'));
+        this.#inputElt.dispatchEvent(new CustomEvent('autoSuggestClose'));
         this.#close();
     }
 

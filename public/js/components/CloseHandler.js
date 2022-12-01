@@ -39,7 +39,6 @@ export class CloseHandler {
         //on écoute le body et on appelle onBodyClick en cas de click
         //pour pouvoir appeler le removeEventListener, on utilise un callable
         this.#onBodyClick = (e) => {
-            console.log('bodyclick');
             if(!clickIsOnElement(e, this.#eltToClose)) {
                 this.#closingProcess(e);
                 }

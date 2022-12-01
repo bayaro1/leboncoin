@@ -1125,7 +1125,7 @@ body.homepage {
     overflow: hidden;
     overflow-wrap: nowrap;
 }
-.locations-bubbles-container {
+.location-bubbles-container {
     display: none;
 }
 .location-bubbles-container.visible {
@@ -1136,6 +1136,12 @@ body.homepage {
     right: 0;
     bottom: 0;
     cursor: pointer;
+}
+.main-form-input.main-form-location.full {
+    color: transparent;
+}
+.main-form-input.main-form-location.full::placeholder {
+    color: transparent;
 }
 
  /*location-manager -> lasts-location*/
