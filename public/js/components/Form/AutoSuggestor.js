@@ -168,6 +168,7 @@ export class AutoSuggestor {
 
         this.#closeHandler = new CloseHandler(this.#suggestList);
         await this.#closeHandler.start();
+        this.#inputElt.dispatchEvent(new Event('autoSuggestCloseWithoutChoice'));
         this.#close();
     }
 

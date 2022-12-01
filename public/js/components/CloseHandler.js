@@ -8,8 +8,8 @@ export class CloseHandler {
     /** @type {HTMLElement} */
     #eltToClose;
 
-    /** @type {HTMLElement} */
-    #closerElt;
+    /** @type {HTMLElement[]} */
+    #closerElts = [];
 
     /** @type {callable} */
     #onBodyClick;
@@ -19,17 +19,21 @@ export class CloseHandler {
     
     /**
      * @param {HTMLElement} eltToClose
-     * @param {HTMLElement} closerElt
+     * @param {HTMLElement|HTMLElement[]} closerElt
      */
-    constructor(eltToClose, closerElt = null) {
+    constructor(eltToClose, ...closerElts) {
         this.#eltToClose = eltToClose;
-        this.#closerElt = closerElt;
+        for(const closer of closerElts) {
+            this.#closerElts.push(closer);
+        }
     }
     
     start() {
-        //on écoute le closer et on applique le closingProcess en cas de click
-        if(this.#closerElt !== null) {
-            this.#closerElt.addEventListener('click', e => this.#closingProcess(e));
+        //on écoute le(s) closer et on applique le closingProcess en cas de click
+        if(this.#closerElts.length !== 0) {
+            for(const closer of this.#closerElts) {
+                closer.addEventListener('click', e => this.#closingProcess(e));
+            }
         }
 
         //on écoute le body et on appelle onBodyClick en cas de click

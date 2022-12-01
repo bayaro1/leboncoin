@@ -295,7 +295,7 @@
 
 
 <template id="location-manager-template">
-    <div class="location-manager auto-suggest-list">
+    <div class="location-manager">
        <div class="location-manager-body">
              <ul class="location-choices-list">
             </ul>
@@ -306,37 +306,28 @@
             </div>
             <ul class="lasts-location-list">
                 <p class="lasts-location-list-title">Localisations récentes</p>
-                <li class="lasts-location-item slider-item">
+                <li class="lasts-location-item">
                     <svg class="icon i-left">
                         <use xlink:href="/img/svg/sprite.svg#location-fill"></use>
                     </svg>
                     <span>Biarritz (64200) - 20 km</span>
-                    <svg class="icon i-right js-lasts-location-item-closer">
-                        <use xlink:href="/img/svg/sprite.svg#close"></use>
-                    </svg>
                 </li>
-                <li class="lasts-location-item slider-item">
+                <li class="lasts-location-item">
                     <svg class="icon i-left">
                         <use xlink:href="/img/svg/sprite.svg#location-fill"></use>
                     </svg>
                     <span>Salon de Provence (13300)</span>
-                    <svg class="icon i-right js-lasts-location-item-closer">
-                        <use xlink:href="/img/svg/sprite.svg#close"></use>
-                    </svg>
                 </li>
-                <li class="lasts-location-item slider-item">
+                <li class="lasts-location-item">
                     <svg class="icon i-left">
                         <use xlink:href="/img/svg/sprite.svg#location-fill"></use>
                     </svg>
                     <span>Lamanon (13330)</span>
-                    <svg class="icon i-right js-lasts-location-item-closer">
-                        <use xlink:href="/img/svg/sprite.svg#close"></use>
-                    </svg>
                 </li>
             </ul>
        </div>
        <div class="location-manager-footer">
-            <button class="location-manager-button btn-grey js-remove-button" value="delete">Effacer</button>
+            <button class="location-manager-button btn-grey js-delete-button" value="delete">Effacer</button>
             <button class="location-manager-button btn-orange js-valid-button" value="valid">Valider les localisations</button>
        </div>
     </div>
@@ -350,10 +341,10 @@
                 <use xlink:href="/img/svg/sprite.svg#close"></use>
             </svg>
         </div>
-        <div class="location-ray">
+        <div class="location-radius-opener">
             <span>rayon</span>
-            <svg class="icon">
-                <use xlink:href="/img/svg/sprite.svg#expand-more"></use>
+            <svg class="icon location-radius-opener-icon">
+                <use xlink:href="/img/svg/sprite.svg#chevron-right"></use>
             </svg>
         </div>
     </li>
