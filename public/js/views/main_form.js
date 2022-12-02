@@ -13,7 +13,6 @@ document.querySelectorAll('.q-slider-opener, .location-slider-opener')
                     
                     if(window.innerWidth < 1050) {
                         inputSliderManager.onOpenerClick(e.currentTarget);
-                        document.querySelector('.main-form-slider .main-form-input').focus();
                         
                         /*auto-suggest*/
                         document.querySelectorAll('.main-form-slider .js-auto-suggest')
@@ -21,9 +20,30 @@ document.querySelectorAll('.q-slider-opener, .location-slider-opener')
                                     new AutoSuggestor(elt);
                                 });
                         
-                        
                         /*auto-count-results*/
-                        new AutoCountResults(document.querySelector('.main-form-slider .js-form'));
+                        new AutoCountResults(
+                            document.querySelector('.main-form-slider .js-form'),
+                            [
+                                'change',
+                                AutoSuggestor.autoSuggestValidated,
+                                LocationManager.locationValidation,
+                                LocationManager.locationRemove
+                            ]
+                            );
+
+                        /*location manager*/
+                        if(e.currentTarget.classList.contains('location-slider-opener')) {
+                            new LocationManager(document.querySelector('.main-form-slider .main-form-input.main-form-location'));
+                        }
+
+                        /*on met le focus sur l'input concerné*/
+                        if(document.querySelector('.main-form-slider .location-bubbles-container')) {
+                            if(!document.querySelector('.main-form-slider .location-bubbles-container').classList.contains('visible')) {
+                                document.querySelector('.main-form-slider .main-form-input').focus();
+                            }
+                        } else {
+                            document.querySelector('.main-form-slider .main-form-input').focus();
+                        }
                     }
                 })
             });
@@ -87,7 +107,15 @@ document.querySelector('.main-form').addEventListener('submit', function(e) {
 
 
 /*auto-count-results*/
-new AutoCountResults(document.querySelector('.js-form'));
+new AutoCountResults(
+    document.querySelector('.js-form'),
+    [
+        'change',
+        AutoSuggestor.autoSuggestValidated,
+        LocationManager.locationValidation,
+        LocationManager.locationRemove
+    ]
+    );
 
 
 
@@ -102,4 +130,7 @@ document.querySelectorAll('.js-auto-suggest')
 
 
 /*Location manager*/
-new LocationManager(document.querySelector('.main-form-input.main-form-location'));
+const locationManager = new LocationManager(
+    document.querySelector('.main-form-input.main-form-location'),
+    document.querySelector('.main-form-slider .main-form-input.main-form-location')
+    );

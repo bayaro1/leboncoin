@@ -91,6 +91,8 @@ class ProductRepository extends ServiceEntityRepository
     public function countFiltered(SearchFilter $searchFilter):?int 
     {
         $qb = $this->createQueryBuilder('p')
+                    ->join('p.location', 'l')
+                    ->select('p.id')
                     ;
         $this->filter($searchFilter, $qb);
         return count($qb->getQuery()->getResult());
@@ -114,10 +116,14 @@ class ProductRepository extends ServiceEntityRepository
         }
         if($searchFilter->location)
         {
-            $postalCode = explode(' ', $searchFilter->location);
-            $location = $this->locationRepository->findOneBy(['postalCode' => $postalCode]);
-            $qb->andWhere('p.location = :location')
-                ->setParameter('location', $location)
+            $locs = explode('_', $searchFilter->location);
+            $postcodes = [];
+            foreach($locs as $loc)
+            {
+                $postcodes[] = explode(' ', $loc)[1];
+            }
+            $qb->andWhere('l.postalCode IN(:postcodes)')
+                ->setParameter('postcodes', $postcodes)
                 ;
         }
         /*more-filters*/

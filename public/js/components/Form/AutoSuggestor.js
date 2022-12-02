@@ -4,6 +4,12 @@ import { UrlManager } from "../Tools/UrlManager.js";
 
 export class AutoSuggestor {
 
+    //type des events émis par le autoSuggestor
+    static autoSuggestValidated = 'autoSuggestValidated';
+    static autoSuggestClose = 'autoSuggestClose';
+    static autoSuggestOpen = 'autoSuggestOpen';
+
+
     /** @type {HTMLElement} */
     #inputElt;
 
@@ -70,7 +76,7 @@ export class AutoSuggestor {
             }
             return;
         }
-        this.#inputElt.dispatchEvent(new CustomEvent('autoSuggestOpen'));
+        this.#inputElt.dispatchEvent(new CustomEvent(AutoSuggestor.autoSuggestOpen));
         this.#container.classList.add('loading');
 
         const data = await this.#callApi(q);
@@ -158,7 +164,7 @@ export class AutoSuggestor {
     #onChoice(e) {
         this.#inputElt.value = e.currentTarget.getAttribute('value');
         this.#inputElt.setAttribute('label', e.currentTarget.innerText);
-        this.#inputElt.dispatchEvent(new CustomEvent('autoSuggestValidated', {bubbles: false}));
+        this.#inputElt.dispatchEvent(new CustomEvent(AutoSuggestor.autoSuggestValidated, {bubbles: true}));
         this.#close();
     }
 
@@ -172,7 +178,7 @@ export class AutoSuggestor {
     }
 
     #close() {
-        this.#inputElt.dispatchEvent(new CustomEvent('autoSuggestClose'));
+        this.#inputElt.dispatchEvent(new CustomEvent(AutoSuggestor.autoSuggestClose));
         this.#suggestList.innerHTML = '';
         this.#suggestList.classList.remove('visible');
         this.#closeHandler.stop();

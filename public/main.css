@@ -1123,7 +1123,7 @@ body.homepage {
 }
 .location-bubble .js-location-label {
     overflow: hidden;
-    overflow-wrap: nowrap;
+    line-height: 1.5;
 }
 .location-bubbles-container {
     display: none;

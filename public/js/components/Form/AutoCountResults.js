@@ -1,18 +1,28 @@
 import { myFetch } from "../../functions/api.js";
 import { UrlManager } from "../Tools/UrlManager.js";
+import { AutoSuggestor } from "./AutoSuggestor.js";
+import { LocationManager } from "./LocationManager.js";
 
 export class AutoCountResults {
 
+    /** @type {HTMLElement} */
     #formElt;
 
+    /** @type {HTMLElement} */
     #countElt;
 
+    /** @type {string} */
     #countApi;
 
+    /** @type {array} */
     #mapping;
 
-
-    constructor(formElt) {
+    /**
+     * 
+     * @param {HTMLElement} formElt 
+     * @param {array} eventsToListen 
+     */
+    constructor(formElt, eventsToListen) {
         this.#formElt = formElt;
         this.#countApi = this.#formElt.dataset.countapi;
         this.#mapping = JSON.parse(this.#formElt.dataset.mapping);
@@ -23,11 +33,14 @@ export class AutoCountResults {
             this.#countElt = document.querySelector(this.#formElt.dataset.countresults);
         }
 
-        this.#formElt.addEventListener('change', e => this.#onChange(e))
+        for(const changeEvent of eventsToListen) {
+            this.#formElt.addEventListener(changeEvent, e => this.#onChange(e))
+        }
     }
 
     async #onChange(e) {
         const formData = new FormData(this.#formElt);
+
         const urlManager = new UrlManager(this.#countApi);
         for(const fieldSelector of this.#mapping) {
             const elt = document.querySelector(fieldSelector);
