@@ -28,7 +28,13 @@ export class LocationManager {
     #locationBubble = '.location-bubble';
     #locationBubbleCloser = '.js-location-bubble-closer';
     #locationBubbleLabel = '.js-location-label';
+    #locationRadiusBall = '.location-radius-ball';
+    #locationManagerRadius = '.location-manager-radius';
+    #locationRadiusLine = '.location-radius-line';
+    #locationRadiusActiveLine = '.location-radius-active-line';
 
+    //taille d'un caractère du label de la bubbleLocation
+    #bubbleLabelCaracterWidth = 6.5;
 
 
     /** @type {HTMLElement} */
@@ -147,8 +153,63 @@ export class LocationManager {
         this.#box.classList.add('visible');
         this.#status = 'open';
         this.#inputElt.focus();
+        this.#box.querySelector(this.#locationRadiusBall).addEventListener('mousedown', e => this.#onLocationRadiusBallMouseDown(e));
         this.#inputElt.setAttribute('placeholder', 'Saisissez une autre localisation');
         this.#startCloseHandler();
+    }
+
+    /**
+     * 
+     * @param {MouseEvent} e 
+     */
+    #onLocationRadiusBallMouseDown(e) {
+        const activeLine = this.#box.querySelector(this.#locationRadiusActiveLine);
+        const line = this.#box.querySelector(this.#locationRadiusLine);
+        this.#box.querySelector(this.#locationRadiusBall).classList.add('active');
+
+        console.log(e.type);
+        this.onLocationRadiusMouseMove = e => {
+            const width = this.#box.querySelector(this.#locationRadiusLine).getBoundingClientRect().width;
+            const mousePos = e.offsetX * 100 / width;
+            if(mousePos <= 10) {
+                activeLine.style.width = '0';
+                line.style.width = '96%';
+                return;
+            } else if(mousePos >= 10 && mousePos < 30) {
+                activeLine.style.width = '20%';
+                line.style.width = '76%';
+                return;
+            } else if(mousePos >= 30 && mousePos < 50) {
+                activeLine.style.width = '40%';
+                line.style.width = '56%';
+                return;
+            } else if(mousePos >= 50 && mousePos < 70) {
+                activeLine.style.width = '60%';
+                line.style.width = '36%';
+                return;
+            } else if(mousePos >= 70 && mousePos < 90) {
+                activeLine.style.width = '80%';
+                line.style.width = '16%';
+                return;
+            } else if(mousePos >= 90) {
+                activeLine.style.width = 'calc(100% - 28px)';
+                line.style.width = '0';
+                return;
+            }
+        };
+        document.body.addEventListener('mousemove', this.onLocationRadiusMouseMove);
+        document.body.addEventListener('mouseup', e => this.#onLocationRadiusBallMouseUp(e));
+    }
+
+
+    /**
+     * 
+     * @param {MouseEvent} e 
+     */
+     #onLocationRadiusBallMouseUp(e) {
+        console.log(e.type);
+        this.#box.querySelector(this.#locationRadiusBall).classList.remove('active');
+        document.body.removeEventListener('mousemove', this.onLocationRadiusMouseMove);
     }
 
     async #startCloseHandler() {
@@ -257,33 +318,37 @@ export class LocationManager {
 
     #createBubble(label, moreLocationsValue = null) {
         const bubble = document.querySelector(this.#locationBubbleTemplate).content.cloneNode(true).firstElementChild;
-        if(label.length > 20) {
-           bubble.querySelector(this.#locationBubbleLabel).innerText = label.substring(0, 17) + '...';                      // A REFACTORISER ***
-        } else {
-            bubble.querySelector(this.#locationBubbleLabel).innerText = label;
-        }
+        this.#bubbleLabelInnerText(bubble.querySelector(this.#locationBubbleLabel), label);
+        bubble.setAttribute('title', label);
         bubble.dataset.label = label;
         if(moreLocationsValue !== null) {
             bubble.dataset.morevalue = moreLocationsValue;
         }
         bubble.querySelector(this.#locationBubbleCloser).addEventListener('click', e => this.#onBubbleClose(e));
-        bubble.setAttribute('title', label);
         return bubble;
     }
 
     #createLocationItem(label) {
         const locationItem = document.querySelector(this.#locationItemTemplate).content.cloneNode(true).firstElementChild;
-        if(label.length > 20) {
-            console.log(label.substring(0, 17) + '...');
-            locationItem.querySelector(this.#locationBubbleLabel).innerText = label.substring(0, 17) + '...';                       //A REFACTORISER ***
-         } else {
-            locationItem.querySelector(this.#locationBubbleLabel).innerText = label;
-         }
+        this.#bubbleLabelInnerText(locationItem.querySelector(this.#locationBubbleLabel), label);
+        locationItem.querySelector(this.#locationBubble).setAttribute('title', label);
         locationItem.querySelector(this.#locationBubble).dataset.label = label;
         locationItem.querySelector(this.#locationBubbleCloser).addEventListener('click', e => this.#onLocationItemClose(e));
-
-        locationItem.querySelector(this.#locationBubble).setAttribute('title', label);
         return locationItem;
+    }
+
+    /**
+     * 
+     * @param {HTMLElement} elt 
+     * @param {string} text 
+     * @returns {string}
+     */
+    #bubbleLabelInnerText(elt, text) {
+        const max_cars = (this.#container.getBoundingClientRect().width - 157) / this.#bubbleLabelCaracterWidth;
+        if(text.length > max_cars) {
+            text = text.substring(0, (max_cars - 3)) + '...';
+        }
+        elt.innerText = text;
     }
 
     #onLocationItemClose(e) {

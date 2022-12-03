@@ -1096,7 +1096,6 @@ body.homepage {
 }
 .location-bubble {
     display: inline-block;
-    max-width: 180px;
     height: 32px;
     overflow: hidden;
     color: var(--black);
@@ -1122,6 +1121,7 @@ body.homepage {
     background-color: rgb(156, 156, 156);
 }
 .location-bubble .js-location-label {
+    white-space: nowrap;
     overflow: hidden;
     line-height: 1.5;
 }
@@ -1142,6 +1142,70 @@ body.homepage {
 }
 .main-form-input.main-form-location.full::placeholder {
     color: transparent;
+}
+
+/*location-manager -> location-radius */ 
+.location-manager-radius {
+    margin: 10px 0 15px;
+}
+.location-radius-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+.location-radius-active-line {
+    display: inline-block;
+    width: 0;
+    background-color: var(--orange);
+    height: 4px;
+    margin: 0;
+}
+.location-radius-line {
+    display: inline-block;
+    width: 100%;
+    background-color: var(--input-border-color);
+    height: 4px;
+    position: relative;
+    margin: 0;
+}
+.location-radius-ball {
+    cursor: grab;
+    display: inline-block;
+    position: absolute;
+    background-color: white;
+    width: 24px;
+    height: 24px;
+    border: solid 1px var(--input-border-color);
+    border-radius: 24px;
+    top: calc(50% - 12px);
+    left: 0;
+}
+.location-radius-ball.active {
+    cursor: grabbing;
+}
+.location-radius-ball::before {
+    position: absolute;
+    top: -30px;
+    left: 12px;
+    transform: translateX(-50%);
+    content: '0 km';
+    background-color: var(--orange);
+    padding: 0 4px;
+    font-size: 1.2rem;
+    height: 20px;
+    white-space: nowrap;
+    color: white;
+    font-weight: 600;
+}
+.location-radius-ball:hover {
+    border: solid 2px var(--input-border-color);
+    box-shadow: 0 0 10px var(--shadow);
+}
+.location-radius-subtext {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
 }
 
  /*location-manager -> lasts-location*/

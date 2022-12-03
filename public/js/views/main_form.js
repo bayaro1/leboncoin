@@ -134,3 +134,8 @@ const locationManager = new LocationManager(
     document.querySelector('.main-form-input.main-form-location'),
     document.querySelector('.main-form-slider .main-form-input.main-form-location')
     );
+
+
+
+
+
