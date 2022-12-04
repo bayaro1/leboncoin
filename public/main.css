@@ -1074,6 +1074,7 @@ body.homepage {
 .location-choices-item {
     display: flex;
     justify-content: space-between;  
+    flex-wrap: wrap;
     margin-bottom: 15px; 
 }
 .location-bubble, .location-radius-opener {
@@ -1145,8 +1146,24 @@ body.homepage {
 }
 
 /*location-manager -> location-radius */ 
+.radius-opener-alert {
+    width: 100%;
+    font-size: 1.1rem;
+    color: red;
+    text-align: right;
+}
+.location-radius-opener-icon {
+    transition: transform .3s;
+}
+.location-radius-opener.open .location-radius-opener-icon {
+    transform: rotate(90deg);
+}
 .location-manager-radius {
+    display: none;
     margin: 10px 0 15px;
+}
+.location-manager-radius.visible {
+    display: block;
 }
 .location-radius-title {
     font-size: 1.4rem;
@@ -1159,6 +1176,7 @@ body.homepage {
     background-color: var(--orange);
     height: 4px;
     margin: 0;
+    margin-right: -4px;
 }
 .location-radius-line {
     display: inline-block;
@@ -1179,16 +1197,13 @@ body.homepage {
     border-radius: 24px;
     top: calc(50% - 12px);
     left: 0;
+    margin: 0;
 }
-.location-radius-ball.active {
-    cursor: grabbing;
-}
-.location-radius-ball::before {
+.location-radius-ball-label {
     position: absolute;
     top: -30px;
     left: 12px;
     transform: translateX(-50%);
-    content: '0 km';
     background-color: var(--orange);
     padding: 0 4px;
     font-size: 1.2rem;

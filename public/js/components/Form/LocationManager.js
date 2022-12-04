@@ -29,12 +29,24 @@ export class LocationManager {
     #locationBubbleCloser = '.js-location-bubble-closer';
     #locationBubbleLabel = '.js-location-label';
     #locationRadiusBall = '.location-radius-ball';
+    #locationRadiusBallLabel = '.location-radius-ball-label';
     #locationManagerRadius = '.location-manager-radius';
     #locationRadiusLine = '.location-radius-line';
     #locationRadiusActiveLine = '.location-radius-active-line';
+    #locationRadiusOpener = '.location-radius-opener';
 
     //taille d'un caractère du label de la bubbleLocation
     #bubbleLabelCaracterWidth = 6.5;
+
+    //radius mapping
+    #radiusMapping = {
+        0: 0,
+        20: 10,
+        40: 20,
+        60: 50,
+        80: 100,
+        100: 200
+    }
 
 
     /** @type {HTMLElement} */
@@ -51,8 +63,13 @@ export class LocationManager {
 
     /** @type {Object} {label: value, label: value, etc...} */
     #selectedLocations = {};
+    
+    /** @type {number} */
+    #radius = 0;
 
     #status = 'close';
+
+    #locationRadiusStatus = 'close';
 
     constructor(inputElt) {
         this.#inputElt = inputElt;
@@ -72,6 +89,10 @@ export class LocationManager {
         ]) {
             this.#inputElt.addEventListener(eventType, e => this.#onEvent(e));
         }
+        /*location radius*/
+        this.#box.querySelector(this.#locationRadiusBall).addEventListener('mousedown', e => this.#onLocationRadiusBallMouseDown(e));
+        this.activeLine = this.#box.querySelector(this.#locationRadiusActiveLine);
+        this.line = this.#box.querySelector(this.#locationRadiusLine);
     }
 
     #autocomplete() {
@@ -80,7 +101,12 @@ export class LocationManager {
             for(const value of values) {
                 const city = value.split(' ')[0];
                 const postcode = value.split(' ')[1];
-                const label = city + ' (' + postcode + ')';
+                let label = city + ' (' + postcode + ')';
+
+                if(value.includes('r')) {
+                    this.#radius = value.split('r')[1];
+                    label = city + ' (' + postcode + ') + ' + this.#radius + ' km';
+                }
                 this.#addSelectedLocation(label, value);
             }
             this.#insertBubbles();
@@ -140,7 +166,7 @@ export class LocationManager {
                 .forEach((locationLabel) => {
                     existingLabels.push(locationLabel.innerText);
                 });
-        for(const [label, _] of Object.entries(this.#selectedLocations)) {
+        for(const [label, value] of Object.entries(this.#selectedLocations)) {
             if(!existingLabels.includes(label)) {
                 this.#box.querySelector(this.#locationChoicesList).prepend(
                     this.#createLocationItem(label)
@@ -153,63 +179,13 @@ export class LocationManager {
         this.#box.classList.add('visible');
         this.#status = 'open';
         this.#inputElt.focus();
-        this.#box.querySelector(this.#locationRadiusBall).addEventListener('mousedown', e => this.#onLocationRadiusBallMouseDown(e));
+        if(Object.values(this.#selectedLocations).length === 1) {
+            this.#openLocationRadius();
+        } else {
+            this.#closeLocationRadius();
+        }
         this.#inputElt.setAttribute('placeholder', 'Saisissez une autre localisation');
         this.#startCloseHandler();
-    }
-
-    /**
-     * 
-     * @param {MouseEvent} e 
-     */
-    #onLocationRadiusBallMouseDown(e) {
-        const activeLine = this.#box.querySelector(this.#locationRadiusActiveLine);
-        const line = this.#box.querySelector(this.#locationRadiusLine);
-        this.#box.querySelector(this.#locationRadiusBall).classList.add('active');
-
-        console.log(e.type);
-        this.onLocationRadiusMouseMove = e => {
-            const width = this.#box.querySelector(this.#locationRadiusLine).getBoundingClientRect().width;
-            const mousePos = e.offsetX * 100 / width;
-            if(mousePos <= 10) {
-                activeLine.style.width = '0';
-                line.style.width = '96%';
-                return;
-            } else if(mousePos >= 10 && mousePos < 30) {
-                activeLine.style.width = '20%';
-                line.style.width = '76%';
-                return;
-            } else if(mousePos >= 30 && mousePos < 50) {
-                activeLine.style.width = '40%';
-                line.style.width = '56%';
-                return;
-            } else if(mousePos >= 50 && mousePos < 70) {
-                activeLine.style.width = '60%';
-                line.style.width = '36%';
-                return;
-            } else if(mousePos >= 70 && mousePos < 90) {
-                activeLine.style.width = '80%';
-                line.style.width = '16%';
-                return;
-            } else if(mousePos >= 90) {
-                activeLine.style.width = 'calc(100% - 28px)';
-                line.style.width = '0';
-                return;
-            }
-        };
-        document.body.addEventListener('mousemove', this.onLocationRadiusMouseMove);
-        document.body.addEventListener('mouseup', e => this.#onLocationRadiusBallMouseUp(e));
-    }
-
-
-    /**
-     * 
-     * @param {MouseEvent} e 
-     */
-     #onLocationRadiusBallMouseUp(e) {
-        console.log(e.type);
-        this.#box.querySelector(this.#locationRadiusBall).classList.remove('active');
-        document.body.removeEventListener('mousemove', this.onLocationRadiusMouseMove);
     }
 
     async #startCloseHandler() {
@@ -235,6 +211,7 @@ export class LocationManager {
         //si on a cliqué sur bouton supprimer, on vide les selectedLocations et on ferme la box
         if(closeEvent.target.classList.contains(this.#deleteButton.replace('.', ''))) {
             this.#selectedLocations = {};
+            this.#radius = 0;
         }
         //si on a cliqué sur valider, ou hors de la box, on valide les selectedLocations
         else {
@@ -246,7 +223,12 @@ export class LocationManager {
     #onValidation() {
         //on remplit l'input avec les données
         let values = Object.values(this.#selectedLocations).join('_');
-        this.#inputElt.value = values;
+        if(Object.values(this.#selectedLocations).length === 1 && this.#radius !== 0) {
+            this.#inputElt.value = values + ' r' + this.#radius;
+        }
+        else {
+            this.#inputElt.value = values;
+        }
         this.#inputElt.dispatchEvent(new CustomEvent(LocationManager.locationValidation, {bubbles: true}));
         //on ajoute les bubbles correspondantes
         this.#insertBubbles();
@@ -260,7 +242,7 @@ export class LocationManager {
         if(labels.length > 0) {
             const moreLocationsLabel = '+ '+ (labels.length);
             const moreLocationsValue = labels.join('_');
-            this.#locationBubblesContainer.append(this.#createBubble(moreLocationsLabel, moreLocationsValue));
+            this.#locationBubblesContainer.append(this.#createBubble(moreLocationsLabel, null, moreLocationsValue));
         }
         this.#locationBubblesContainer.classList.add('visible');
         this.#inputElt.classList.add('full');
@@ -312,15 +294,20 @@ export class LocationManager {
             this.#onValidation();
         } else {
             this.#inputElt.value = '';
+            this.#radius = 0;
         }
         this.#inputElt.dispatchEvent(new CustomEvent(LocationManager.locationRemove, {bubbles: true}));
     }
 
     #createBubble(label, moreLocationsValue = null) {
+        const labelWithoutRadius = label;
+        if(Object.values(this.#selectedLocations).length === 1 && this.#radius !== 0) {                     //A REFACTORISER DANS UNE SEULE FCT POUR CREER UNE BUBBLE
+            label += ' + ' + this.#radius + ' km';
+        }
         const bubble = document.querySelector(this.#locationBubbleTemplate).content.cloneNode(true).firstElementChild;
         this.#bubbleLabelInnerText(bubble.querySelector(this.#locationBubbleLabel), label);
         bubble.setAttribute('title', label);
-        bubble.dataset.label = label;
+        bubble.dataset.label = labelWithoutRadius;
         if(moreLocationsValue !== null) {
             bubble.dataset.morevalue = moreLocationsValue;
         }
@@ -329,11 +316,16 @@ export class LocationManager {
     }
 
     #createLocationItem(label) {
+        const labelWithoutRadius = label;
+        if(Object.values(this.#selectedLocations).length === 1 && this.#radius !== 0) {         //A REFACTORISER DANS UNE SEULE FCT POUR CREER UNE BUBBLE
+            label += ' + ' + this.#radius + ' km';
+        }
         const locationItem = document.querySelector(this.#locationItemTemplate).content.cloneNode(true).firstElementChild;
         this.#bubbleLabelInnerText(locationItem.querySelector(this.#locationBubbleLabel), label);
         locationItem.querySelector(this.#locationBubble).setAttribute('title', label);
-        locationItem.querySelector(this.#locationBubble).dataset.label = label;
+        locationItem.querySelector(this.#locationBubble).dataset.label = labelWithoutRadius;
         locationItem.querySelector(this.#locationBubbleCloser).addEventListener('click', e => this.#onLocationItemClose(e));
+        locationItem.querySelector(this.#locationRadiusOpener).addEventListener('click', e => this.#onLocationRadiusOpenerClick(e));
         return locationItem;
     }
 
@@ -365,6 +357,7 @@ export class LocationManager {
         locationBubble.parentElement.remove();
         if(Object.values(this.#selectedLocations).length === 0) {
             this.#close();
+            this.#radius = 0;
         }
     }
 
@@ -379,5 +372,97 @@ export class LocationManager {
         });
         this.#status = 'closed';
         this.#inputElt.setAttribute('placeholder', 'Saisissez une ville et un rayon');
+    }
+
+    //LOCATION RADIUS
+
+    #onLocationRadiusOpenerClick(e) {
+        if(this.#locationRadiusStatus === 'close') {
+            if(Object.values(this.#selectedLocations).length > 1) {
+                const alertMessage = document.createElement('div');
+                alertMessage.classList.add('radius-opener-alert');
+                alertMessage.innerText = 'Vous ne pouvez mettre un rayon que sur une seule localisation';
+                e.currentTarget.parentElement.append(alertMessage);
+                //on supprime l'alerte au premier click n'importe ou
+                setTimeout(function() {
+                    document.body.addEventListener('click', function(e) {
+                        alertMessage.remove();
+                    })
+                }, 100);
+                return;
+            }
+            this.#openLocationRadius();
+        } else {
+            this.#closeLocationRadius();
+        }
+    }
+    #openLocationRadius() {
+        this.#box.querySelector(this.#locationManagerRadius).classList.add('visible');
+        this.#box.querySelector(this.#locationRadiusOpener).classList.add('open');
+        this.#locationRadiusStatus = 'open';
+        for(const [key, value] of Object.entries(this.#radiusMapping)) {
+            if(value === this.#radius) {
+                this.activeLine.style.width = key + '%';
+                this.line.style.width = (100 - key) + '%';
+                this.#box.querySelector(this.#locationRadiusBallLabel).innerText = this.#radius + ' km';
+                return;
+            }
+        }
+    }
+    #closeLocationRadius() {
+        this.#box.querySelector(this.#locationManagerRadius).classList.remove('visible');
+        this.#box.querySelector(this.#locationRadiusOpener).classList.remove('open');
+        this.#locationRadiusStatus = 'close';
+    }
+
+     /**
+     * 
+     * @param {MouseEvent} e 
+     */
+      #onLocationRadiusBallMouseDown(e) {
+        document.body.style.cursor = 'grabbing';
+
+        this.callOnLocationRadiusMouseMove = e => this.#onLocationRadiusMouseMove(e);
+        document.body.addEventListener('mousemove', this.callOnLocationRadiusMouseMove);
+        document.body.addEventListener('mouseup', e => this.#onLocationRadiusBallMouseUp(e));
+    }
+
+    /**
+     * 
+     * @param {MouseEvent} e 
+     */
+     #onLocationRadiusBallMouseUp(e) {
+        this.#box.querySelector(this.#locationRadiusBall).classList.remove('active');
+        document.body.removeEventListener('mousemove', this.callOnLocationRadiusMouseMove);
+        document.body.style.cursor = 'default';
+    }
+
+    #onLocationRadiusMouseMove(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        const width = this.#box.querySelector(this.#locationManagerRadius).getBoundingClientRect().width;
+        const mousePos = e.offsetX * 100 / width;
+
+        if(mousePos < 10) {
+            this.activeLine.style.width = '0';
+            this.line.style.width = '100%';
+            this.#radius = this.#radiusMapping[0];
+            this.#box.querySelector(this.#locationRadiusBallLabel).innerText = this.#radius + ' km';
+            return;
+        } else if(mousePos >= 90) {
+            this.activeLine.style.width = 'calc(100% - 24px)';
+            this.line.style.width = '0';
+            this.#radius = this.#radiusMapping[100];
+            this.#box.querySelector(this.#locationRadiusBallLabel).innerText = this.#radius + ' km';
+            return;
+        }
+        for (let index = 20; index <= 80; index+= 20) {
+            if(mousePos >= (index - 10) && mousePos < (index + 10)) {
+                this.activeLine.style.width = index + '%';
+                this.line.style.width = (100 - index) + '%';
+                this.#radius = this.#radiusMapping[index];
+            }
+        }
+        this.#box.querySelector(this.#locationRadiusBallLabel).innerText = this.#radius + ' km';
     }
 }
