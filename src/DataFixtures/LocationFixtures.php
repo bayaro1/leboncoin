@@ -49,6 +49,7 @@ class LocationFixtures extends Fixture
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             // $output contains the output string
             $data = json_decode(curl_exec($curl));
+            curl_close($curl);
             if(!empty($data->features))
             {
                 $properties = $data->features[0]->properties;

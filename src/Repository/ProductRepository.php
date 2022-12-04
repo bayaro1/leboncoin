@@ -12,6 +12,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @extends ServiceEntityRepository<Product>
@@ -114,18 +115,7 @@ class ProductRepository extends ServiceEntityRepository
                 ->setParameter('q', '%'.$searchFilter->q.'%')
                 ;
         }
-        if($searchFilter->location)
-        {
-            $locs = explode('_', $searchFilter->location);
-            $postcodes = [];
-            foreach($locs as $loc)
-            {
-                $postcodes[] = explode(' ', $loc)[1];
-            }
-            $qb->andWhere('l.postalCode IN(:postcodes)')
-                ->setParameter('postcodes', $postcodes)
-                ;
-        }
+        $this->locationFilter($searchFilter, $qb);
         /*more-filters*/
         if($searchFilter->offersOrNeeds)
         {
@@ -172,6 +162,60 @@ class ProductRepository extends ServiceEntityRepository
             $qb->orderBy('p.createdAt', 'desc');
         }
     }
+
+    private function locationFilter(SearchFilter $searchFilter, QueryBuilder $qb)
+    {
+        if($searchFilter->location)
+        {
+            $locs = explode('_', $searchFilter->location);
+            //si une seule location et un rayon est définit
+            if(count($locs) === 1 && isset(explode(' ', $locs[0])[2])) {
+                $loc_parts = explode(' ', $locs[0]);
+                $postcode = $loc_parts[1];
+                $radius = (int)(str_replace('r', '', $loc_parts[2])) * 1000;  //rayon en m
+                // create curl resource
+                $curl = curl_init('https://api-adresse.data.gouv.fr/search?q='.$postcode.'&limit=1&type=municipality');
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                // $output contains the output string
+                $data = json_decode(curl_exec($curl));
+                curl_close($curl);
+                
+                $properties = $data->features[0]->properties;
+
+                $qb->andWhere('l.posX > :min_pos_x')
+                    ->andWhere('l.posX < :max_pos_x')
+                    ->andWhere('l.posY > :min_pos_y')
+                    ->andWhere('l.posY < :max_pos_y')
+                    ->setParameter('min_pos_x', ($properties->x - $radius) * 100)
+                    ->setParameter('max_pos_x', ($properties->x + $radius) * 100)
+                    ->setParameter('min_pos_y', ($properties->y - $radius) * 100)
+                    ->setParameter('max_pos_y', ($properties->y + $radius) * 100)
+                    ;
+            }
+
+            else
+            {
+                $postcodes = [];
+                foreach($locs as $loc)
+                {
+                    $loc_parts = explode(' ', $loc);
+                    if(count($loc_parts) > 2)
+                    {
+                        //traitement spécial puis return;
+                    }
+                    $postcodes[] = explode(' ', $loc)[1];
+                }
+                $qb->andWhere('l.postalCode IN(:postcodes)')
+                    ->setParameter('postcodes', $postcodes)
+                    ;
+            }
+            
+        }
+
+        
+    }
+
 
 //    /**
 //     * @return Product[] Returns an array of Product objects

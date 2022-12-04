@@ -105,7 +105,7 @@ export class LocationManager {
 
                 if(value.includes('r')) {
                     this.#radius = value.split('r')[1];
-                    label = city + ' (' + postcode + ') + ' + this.#radius + ' km';
+                    console.log(this.#radius);
                 }
                 this.#addSelectedLocation(label, value);
             }
@@ -242,7 +242,8 @@ export class LocationManager {
         if(labels.length > 0) {
             const moreLocationsLabel = '+ '+ (labels.length);
             const moreLocationsValue = labels.join('_');
-            this.#locationBubblesContainer.append(this.#createBubble(moreLocationsLabel, null, moreLocationsValue));
+
+            this.#locationBubblesContainer.append(this.#createBubble(moreLocationsLabel, moreLocationsValue));
         }
         this.#locationBubblesContainer.classList.add('visible');
         this.#inputElt.classList.add('full');
@@ -401,7 +402,7 @@ export class LocationManager {
         this.#box.querySelector(this.#locationRadiusOpener).classList.add('open');
         this.#locationRadiusStatus = 'open';
         for(const [key, value] of Object.entries(this.#radiusMapping)) {
-            if(value === this.#radius) {
+            if(value === parseInt(this.#radius)) {
                 this.activeLine.style.width = key + '%';
                 this.line.style.width = (100 - key) + '%';
                 this.#box.querySelector(this.#locationRadiusBallLabel).innerText = this.#radius + ' km';
@@ -413,6 +414,7 @@ export class LocationManager {
         this.#box.querySelector(this.#locationManagerRadius).classList.remove('visible');
         this.#box.querySelector(this.#locationRadiusOpener).classList.remove('open');
         this.#locationRadiusStatus = 'close';
+        this.#radius = 0;
     }
 
      /**
